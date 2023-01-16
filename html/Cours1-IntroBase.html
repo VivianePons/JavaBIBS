@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Viviane Pons" />
+  <title>Programmation Orientée Objet – Java</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+   href="slidy/custom.css" />
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Programmation Orientée Objet – Java</h1>
+  <p class="subtitle">Cours 1 : Intro et bases du langage</p>
+  <p class="author">
+Viviane Pons
+  </p>
+  <p class="date">Master BIBS Université Paris-Saclay</p>
+</div>
+<div id="introduction-la-programmation-objet" class="slide section level1">
+<h1>Introduction : la programmation objet</h1>
+<p>Quoi, comment, pourquoi</p>
+<h2 id="que-signifie-programmation-orientée-objet">Que signifie “Programmation Orientée Objet” ?</h2>
+<div class="incremental">
+<p>C’est un <strong>paradigme de programmation</strong> c’est à dire une façon d’approcher la programmation informatique et la résolution de problèmes</p>
+</div>
+<div class="incremental">
+<p>Exemples d’autres paradigme : programmation impérative (C, Pascal, Basic, …) , programmation fonctionnelle (Lisp, Haskell, OCaml, …)</p>
+</div>
+</div>
+<div class="slide section level1">
+
+<h2 id="quand">Quand ?</h2>
+<p>Vers la fin des années 60, sur les travaux d’<a href="https://fr.wikipedia.org/wiki/Alan_Kay">Alan Kay</a> et avec l’apparition du langage <a href="https://fr.wikipedia.org/wiki/Smalltalk">Smalltalk</a> rendu public en 1980</p>
+<p><img src="media/Alan_Kay.jpg" class="image" height="50" alt="Picture of Alan Kay" /> <img src="media/Dan_Ingalls.jpg" class="image" height="50" alt="Picture of Dan Ingalls" /> <img src="media/Adele_Goldberg.jpg" class="image" height="50" alt="Picture of Adele Goldberg" /></p>
+<p>3 des créateurs-trices du langage Smalltalk : Alan Kay, Dan Ingalls et Adele Goldberg</p>
+<div class="small">
+<p><em><a href="https://commons.wikimedia.org/wiki/File:Alan_Kay_-_Receiving_the_Kyoto_Prize.jpg">Alan Kay receiving the Kyoto Prize</a> by Ryan Johnson under <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC-BY-SA-4.0</a> – <a href="https://commons.wikimedia.org/wiki/File:Dan_Ingalls.jpg">Dan Ingalls</a> under <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">CC-BY-SA-3.0</a> – <a href="https://commons.wikimedia.org/wiki/File:Adele_Goldberg_at_PyCon_2007.jpg">Adele Goldberg at PyCon 2007</a> by Terry Hancock under <a href="https://creativecommons.org/licenses/by-sa/2.5/deed.en">CC-BY-SA-2.5</a></em></p>
+</div>
+</div>
+<div class="slide section level1">
+
+<h2 id="pourquoi">Pourquoi ?</h2>
+<ul>
+<li>Organisation de l’information</li>
+<li>Une conception proche de l’humain (plus haut niveau)</li>
+<li><strong>encapsulation</strong> : séparée la structure interne de la donnée et sa manipulation externe</li>
+</ul>
+</div>
+<div class="slide section level1">
+
+<h2 id="exemple">Exemple</h2>
+<p>Problème : manipuler des nombres rationnels</p>
+<pre><code>?? add_rat(int n1, int d1, int n2, int d2) {
+    int n = n1 * d2 + n2 * d1
+    int d = d1 * d2
+        
+    return ??
+}</code></pre>
+<p>Quel type de valeur renvoyer ? Comment s’assurer de la cohérence du programme ? Où faire la simplification ?</p>
+</div>
+<div class="slide section level1">
+
+<h2 id="exemple-1">Exemple</h2>
+<p>Première idée : utilisée un type structuré.</p>
+<pre><code>rat add_rat(rat r1, rat r2) {
+    rat r;
+    r.n = r1.n * r2.d + r2.n * r1.d
+    r.d = r1.d * r2.d; 
+        
+    return r;
+}</code></pre>
+<p>Mais ça ne résout pas tous les problèmes !</p>
+</div>
+<div class="slide section level1">
+
+<p>La solution objet</p>
+<p><a href="code/Rational.java">le fichier code ici</a></p>
+<p><img src="media/rational.png" style="height:50.0%" /></p>
+</div>
+<div class="slide section level1">
+
+<h2 id="quels-langages">Quels Langages ?</h2>
+<p>Smalltalk (1980), Common List (1984), C++ (1985), Object Pascal (1986), Python (1991), PHP (1994), <strong>Java (1995)</strong>, JavaScript (1996), C# (2001), …</p>
+</div>
+<div id="java" class="slide section level1">
+<h1>Java</h1>
+<h2 id="petit-historique">Petit historique</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><img src="media/java.png" style="width:50.0%" alt="Logo Java" /><br />
+</p>
+</div><div class="column" style="width:70%;">
+<ul>
+<li>Développé en 1995 par Sun pour répondre à des questions de <strong>portabilité</strong> et <strong>sécurité</strong> puis racheté par Oracle (2009)</li>
+<li>Langage de programmation libre depuis 2006</li>
+<li>Syntaxe inspirée du C</li>
+<li>Un des langages les plus utilisés d’après le <a href="https://redmonk.com/sogrady/2022/10/20/language-rankings-6-22/">classement RedMonk</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="slide section level1">
+
+<h2 id="comment-ça-marche">Comment ça marche ?</h2>
+<p>Rappel : un processeur ne sait exécuter que des <strong>fichiers binaires</strong> qui correspondent à des instructions machines</p>
+<p><strong>Comment passer d’un programme à des instructions machines ?</strong></p>
+<div class="incremental">
+<ul>
+<li>En compilant ! (Cobol, Fortran, C, C++, Pascal, OCaml)</li>
+<li>En interprétant ! (Langages de scripts tels que : bash, pearl, python, PHP)</li>
+</ul>
+</div>
+<div class="incremental">
+<p><strong>Et Java alors ?</strong></p>
+</div>
+</div>
+<div class="slide section level1">
+
+<h2 id="java-est-un-langage-intermédiaire">Java est un langage intermédiaire :</h2>
+<ul>
+<li>le code (écrit dans un fichier .java) est d’abord <strong>compilé</strong> par le compilateur <em>javac</em> et transformé en un fichier binaire <strong>Byte Code</strong> (fichier .class) qui n’est cependant PAS un exécutable.</li>
+<li>Ensuite, la <strong>machine Java</strong> va <strong>interpréter</strong> le byte code et exécuter le programme</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Code Source</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>fichier.java</td>
+<td><span class="math inline">→</span></td>
+</tr>
+<tr class="even">
+<td>—————–</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

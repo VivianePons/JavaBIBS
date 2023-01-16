@@ -1,0 +1,16 @@
+.subtitle {
+	font-size:2em;
+}
+
+img.image {
+	height: 200px;
+}
+
+.small {
+	font-size:.8em;
+	color: #555;
+}
+
+.small a {
+	color: #555;
+}
