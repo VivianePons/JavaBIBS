@@ -78,7 +78,7 @@ Mais ça ne résout pas tous les problèmes !
 
 La solution objet
 
-[le fichier code ici](code/Rational.java)
+[le fichier code ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/code/Rational.java)
 
 ![](media/rational.png){height=50%}
 
@@ -123,15 +123,141 @@ Rappel : un processeur ne sait exécuter que des **fichiers binaires** qui corre
 
 ----
 
-## Java est un langage intermédiaire : 
+## Java est un langage intermédiaire :
 
-* le code (écrit dans un fichier .java) est d'abord **compilé** par le compilateur *javac* et transformé en un fichier binaire **Byte Code** (fichier .class) qui n'est cependant PAS un exécutable. 
-* Ensuite, la **machine Java** va **interpréter** le byte code et exécuter le programme
+::: incremental 
 
-| Code Source     |                |
-|-----------------|----------------|
-| fichier.java    | $\rightarrow$  |
-|-----------------|
+* Étape 1 : code écrit dans un fichier `mycode.java`
+* Étape 2 : code **compilé** par `javac`
+  
+  `javac mycode.java`
+  
+  Le compilateur produit un fichier `mycode.class` en **Byte code** (spécifique à Java). Ce n'est pas un exécutable
+* Étape 3 : Byte code **interprété** par la **machine Java**
+
+  `java mycode`
+  
+
+:::
+
+---- 
+
+## Avantages / inconvénients
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+### Avantages : portabilité
+
+* **langage interprété** : Un code unique quelque soit la plateforme : allocations mémoires, sécurité, spécificités des plateformes gérées par la machine java
+* **langage interprété** : Des fichiers "compilés" `.class` similaires d'une plateforme à l'autre
+* **langage compilé** : contrairement à un langage purement interprété, on ne partage cependant pas le code
+* **langage compilé** : vérification statique de la cohérence du code
+:::
+::: {.column width="50%"}
+### Inconvénients :
+
+* **langage interprété** : moins de contrôle bas niveau
+* **langage interprété** : moins rapide qu'un langage directement compilé
+* **langage interprété** : nécessite une installation sur la machine cliente
+* **langage compilé** : pas la souplesse d'un langage interprété
+
+:::
+::::::::::::::
+
+----
+
+## Démo : mon premier code Java 
+
+~~~~{ .java}
+public class HelloWorld {
+
+    public static void main(String[] args) {
+
+        System.out.println("Hello World !");
+    }
+}
+~~~~
+
+---
+
+## Environnement d'exécution / de développement
+
+. . .
+
+### Pour exécuter du Java
+
+Il faut **JRE** = "Java Runtime Environnement": contient la machine Java (JVM) et l'API Java de base que nous verrons plus en détail
+
+. . .
+
+### Pour compiler du java (développer en Java)
+
+Il faut **JDK** = Java Development Kit : contient compilateur `javac`, javadoc, JRE, ...
+
+---
+
+## Quel IDE ?
+
+Integrated Development Environment
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+![Eclispe](media/eclipse.png){width=70%} \
+
+:::
+::: {.column width="50%"}
+On utilisera **Eclipse**
+
+* tout en un : édition, compilation, exécution
+* analyse syntaxique à la volée
+* libre
+* très courant (existe depuis 2001)
+:::
+::::::::::::::
+
+---
+
+## Refaisons "Hello World" avec Eclipse
+
+![Ouvrir eclispe et créer un projet Java](media/screen_eclipse.png){width=40%} 
+
+---
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+![On choisit de ne PAS créer le fichier module](media/screen_module.png){width=50%}
+
+
+:::
+::: {.column width="50%"}
+![Créer une nouvelle classe HelloWorld](media/screen_class.png){width=50%}
+:::
+::::::::::::::
+
+---
+
+![On écrit le code restant de la classe HelloWorld et on exécute avec le bouton vert](media/screen_helloWorld.png){width=40%} 
+
+---
+
+## Codons en Java !
+
+Quelle Syntaxe ? ... Comme le C
+
+Principes de base :
+
+* on doit déclarer les variables
+* les blocs de code sont entre \{ \}
+* il y a des ; à la fin des lignes
+
+Pour le reste... Apprenons par l'exemple, [faisons le TP](TP1.html) ! 
+
+
+
+
+
+
+
 
 
 
