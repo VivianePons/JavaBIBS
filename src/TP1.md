@@ -6,7 +6,7 @@ title: 'TP1 POO: premiers programmes en Java'
 ## Exercice 1 : les variables
 
 1. Dans Eclipse, créez un nouveau Projet appelé "TP1_Variables". Puis faites bouton droit dans le "Package Explorer" puis cliquez sur "New >> Class". Créez une classe du nom de "Variables" (attention à la majuscule et au s)
-2. Copiez le code présent [ici](TO DO) dans votre classe `Variables` : c'est un code java très simple avec des commentaires. Suivez les instructions et faites l'exercice. Vous trouverez ci-dessous des petits blocs d'explications à lire au fur et à mesure.
+2. Copiez le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP1_Variables/src/Variables.java) dans votre classe `Variables` : c'est un code java très simple avec des commentaires. Suivez les instructions et faites l'exercice. Vous trouverez ci-dessous des petits blocs d'explications à lire au fur et à mesure.
 
 ::::: {.explication}
 ### Variables de type simples
@@ -45,7 +45,7 @@ System.out.println(a + " / " + b  + " = " + z);
 
 ## Exercice 2 : Conditionnelles
 
-Créez un nouveau projet dans Eclipse appelé "TP1_Conditionnelle" puis créez une nouvelle classe appelée "Conditionnelle" dans ce projet et copier le code présent [ici](TO DO).
+Créez un nouveau projet dans Eclipse appelé "TP1_Conditionnelle" puis créez une nouvelle classe appelée "Conditionnelle" dans ce projet et copier le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP1_Conditionnelles/src/Condionnelles.java).
 
 ::::: {.explication}
 ### Tests et connecteurs logiques
@@ -68,7 +68,7 @@ Opérarateurs logiques :
 
 ## Exercice 3 : Fonctions
 
-Créez un nouveau projet dans Eclipse appelé "TP1_Fonctions" puis créez une nouvelle classe appelée "Fonctions" dans ce projet et copier le code présent [ici](TO DO).
+Créez un nouveau projet dans Eclipse appelé "TP1_Fonctions" puis créez une nouvelle classe appelée "Fonctions" dans ce projet et copier le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP1_Fonctions/src/Fonctions.java).
 
 ::::: {.explication}
 ### Méthodes de classe
@@ -104,7 +104,7 @@ public static String renvoieChaine() {
 
 ## Exercice 4 : Boucles while
 
-Créez un nouveau projet dans Eclipse appelé "TP1_BouclesWhile" puis créez une nouvelle classe appelée "BoucleWhile" dans ce projet et copier le code présent [ici](TO DO).
+Créez un nouveau projet dans Eclipse appelé "TP1_BouclesWhile" puis créez une nouvelle classe appelée "BoucleWhile" dans ce projet et copier le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP1_BouclesWhile/src/BouclesWhile.java).
 
 ::::: {.explication}
 ### While et do while
@@ -129,7 +129,7 @@ while(condition) {
 
 ## Exercice 5 : Boucles for
 
-Créez un nouveau projet dans Eclipse appelé "TP1_BouclesFor" puis créez une nouvelle classe appelée "BoucleFor" dans ce projet et copier le code présent [ici](TO DO).
+Créez un nouveau projet dans Eclipse appelé "TP1_BouclesFor" puis créez une nouvelle classe appelée "BoucleFor" dans ce projet et copier le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP1_BouclesFor/src/BouclesFor.java).
 
 ::::: {.explication}
 ### Boucle for
