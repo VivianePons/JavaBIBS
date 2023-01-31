@@ -9,3 +9,7 @@ Toutes les sources (en partciluer les codes java et les exercices corrigés) son
   - [Slides version html](Cours1-IntroBase.html)
   - [Slides en version pdf](pdf/Cours1-IntroBase.pdf)
   - [TP1](TP1.html)
+* Semaine 2 : Premiers objets, API Java et Collections
+  - [Slides version html](Cours2-Collections.html)
+  - [Slides en version pdf](pdf/Cours2-Collections.pdf)
+  - [TP1](TP2.html)

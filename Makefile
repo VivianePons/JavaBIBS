@@ -13,7 +13,7 @@ CODE = code
 
 CoursesNames=Cours1-IntroBase Cours2-Collections
 
-TPNames=TP1
+TPNames=TP1 TP2
 
 CoursesHTML=$(foreach course, $(CoursesNames), $(OUTPUTDIR)/$(course).html)
 CoursesPDF = $(foreach course, $(CoursesNames), $(OUTPUTDIR)/pdf/$(course).pdf)

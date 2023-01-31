@@ -38,6 +38,11 @@ public class ExempleCollections {
 		
 		exempleEgalite();
 		
+		/*
+		List<Integer> maListe4 = null;
+		maListe4.add(0);
+		*/
+		
 	}
 	
 	public static void exempleReference() {

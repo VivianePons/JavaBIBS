@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>TP2 POO: premiers objets et Collections</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="css/TP.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">TP2 POO: premiers objets et Collections</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#exercice-1-une-liste-de-chaîne-de-caractères">Exercice 1 : Une liste de chaîne de caractères</a>
+<ul>
+<li><a href="#exception-java">Exception Java</a></li>
+<li><a href="#char-et-string">char et String</a></li>
+<li><a href="#chacracter-et-char-les-wrappers">Chacracter et char : les wrappers</a></li>
+</ul></li>
+<li><a href="#exercice-2">Exercice 2 :</a>
+<ul>
+<li><a href="#lecture-de-fichier">Lecture de fichier</a></li>
+<li><a href="#try-catch-et-filenotfoundexception">try … catch et <code>FileNotFoundException</code></a></li>
+<li><a href="#création-de-la-liste-des-étudiants">Création de la liste des étudiants</a></li>
+<li><a href="#méthode-sort-et-interface-comparable">Méthode <code>sort</code> et interface <code>Comparable</code></a></li>
+<li><a href="#création-dun-nouveau-fichier">Création d’un nouveau fichier</a></li>
+<li><a href="#aller-plus-loin">Aller plus loin</a></li>
+</ul></li>
+</ul>
+</nav>
+<section class="content">
+<h2 id="exercice-1-une-liste-de-chaîne-de-caractères">Exercice 1 : Une liste de chaîne de caractères</h2>
+<p>Créez un nouveau projet appelé <code>TP2_ListString</code> puis créez une nouvelle classe ‘ListString’ et copiez et complétez le code présent <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2_ListString/src/ListString.java">ici</a>.</p>
+<ul>
+<li>Pensez à regardez les <a href="https://github.com/VivianePons/JavaBIBS/tree/main/code">exemples du cours</a> comme <a href="https://github.com/VivianePons/JavaBIBS/blob/main/code/ExempleCollections/src/ExempleCollections.java">l’exemple d’utilisation des listes</a></li>
+<li>Ainsi que <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html">la Javadoc pour la class String</a></li>
+</ul>
+<section id="exception-java" class="explication">
+<h3>Exception Java</h3>
+<p>Lors de l’exécution d’un programme Java, les erreurs rencontrées sont gérées grâce à un système spécial de classes appellées <code>Exception</code>. Nous verrons ce système plus en détail plus tard. Ici voyez simplement que je “lève une exception” car la fonction n’est pas encore implantée.</p>
+</section>
+<section id="char-et-string" class="explication">
+<h3>char et String</h3>
+<p><code>char</code> est le type simple Java pour les caractères. Un objet chaînes de caractères de type <code>String</code> ressemble à un tableau de <code>char</code> mais n’est cependant ni un tableau, ni une collection. On peut parcourir les caractères de la chaîne grâce à une boucle for en utilisant :</p>
+<ul>
+<li>la méthode <code>length()</code> de la chaîne de caractère</li>
+<li>la méthode <code>charAt(i)</code> pour récupérer un caractère particulier.</li>
+</ul>
+</section>
+<section id="chacracter-et-char-les-wrappers" class="explication">
+<h3>Chacracter et char : les wrappers</h3>
+<p>Comme on l’a vu en cours, tous les types simples (<code>int</code>, <code>char</code>, <code>double</code>, etc.) ont une classe correspondante qu’on appelle “Wrapper” (to wrap = englober, car un objet Wrapper englobe son type simple). Ces classes contiennent aussi de <strong>nombreuses méthodes statiques</strong> sur les types simples <strong>très utiles</strong>. Par exemple, dans cet exercice, vous voulez utiliser la méthode <code>isLetter</code> à votre disposition dans la <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Character.html">classe Character</a>, le wrapper de <code>char</code>.</p>
+</section>
+<h2 id="exercice-2">Exercice 2 :</h2>
+<ol type="1">
+<li>Créez un nouveau projet appelé <code>TP2_Fichiers</code> puis créez une nouvelle classe <code>Fichiers</code> et copiez et complétez le code présent <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2_Fichiers/src/Fichiers.java">ici</a>.</li>
+<li>Avec Eclipse, faites bouton droit sur votre projet puis “New &gt;&gt; Folder” et créez un répertoire appelé <code>resources</code>. Dans ce repertoire, faites “New &gt;&gt; File” et créez un fichier <code>names.txt</code> et copiez le contenu présent <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2_Fichiers/resources/names.txt">ici</a>.</li>
+<li>Vérifiez que que vous arrivez à exécuter la classe principale et que le contenu du fichier s’affiche sur la sortie standard.</li>
+</ol>
+<p>Le but de l’exercice est de traiter un fichier contenant une liste d’étudiants. Le fichier contenant la liste est celui que vous avez créé dans le dossier <code>resources</code>. Regardez en détail le code des méthodes <code>main</code> et <code>printFile</code> et lisez les explications ci-dessous</p>
+<section id="lecture-de-fichier" class="explication">
+<h3>Lecture de fichier</h3>
+<p>L’API Java offre différentes façons de manipuler des fichiers extérieurs. Nous voyons ici la méthode la plus basique. Les classes qui servent à ménipuler les fichiers sont dans le package <code>java.io</code> qui s’occupe de la gestion des entrées (input) et sorties (output).</p>
+<p>Quelque soit le langage, la lecture d’un fichier se déroule plus ou moins de la même façon : un fichier est un <em>stream</em> (courant) dont on <em>tire</em> les informations une par une. Imaginez un petit tube qui va de votre fichier à votre programme et où vous pouvez aspirer les mots les uns après les autres.</p>
+<p>En Java, on crée d’abord un objet de type <code>File</code> (avec le chemin d’accès au fichier) puis on se sert de cet objet pour créer un objet de type<code>Scanner</code>. Le <code>Scanner</code> que l’on récupère fonctionne de la même façon que les scanners que nous avions créés à partir de <code>System.in</code>. Ici, dans <code>printFile</code> on utilise les méthodes <code>hasNextLine</code> et <code>nextLine</code> pour parcourir le fichier ligne à ligne. Regardez la <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html">documentation de la classe <code>Scanner</code></a> pour voir les différentes méthodes disponibles.</p>
+</section>
+<section id="try-catch-et-filenotfoundexception" class="explication">
+<h3>try … catch et <code>FileNotFoundException</code></h3>
+<p>Voilà une nouvelle utilisation des Exceptions Java ! Si on s’est trompé dans le chemin d’accès du fichier ou si le fichier qu’on souhaite lire n’est pas accessible, on va rencontrer une erreur au moment de l’exécution et une exception de type <code>FileNotFoundException</code> sera <em>levée</em>. Java oblige le ou la programmeuse à <em>gérer les exceptions</em>. Nous verrons cela en détail un peu plus tard. Pour l’instant, il suffit de comprendre le fonctionnement suivant :</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">try</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>    <span class="co">// code exécuté normalement</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>} <span class="kw">catch</span>(<span class="bu">FileNotFoundException</span> e) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>    <span class="co">// code exécuté au moment où une erreur de type `FileNotFoundException` est rencontrée</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>    <span class="co">// s&#39;il n&#39;y a pas d&#39;erreur, ce code n&#39;est pas exécuté</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>}</span></code></pre></div>
+</section>
+<p>Le fichier <code>names.txt</code> contient la liste des étudiants avec sur chaque ligne le prénom suivi du nom. Parfois le nom est en majuscule mais pas toujours et l’ordre est aléatoire. On souhaite créer un fichier tel que le nom soit écrit <strong>en premier en majuscule</strong> suivi du prénom et où les étudiants sont par ordre alphabétique des noms.</p>
+<h3 id="création-de-la-liste-des-étudiants">Création de la liste des étudiants</h3>
+<ol type="1">
+<li><p>Complétez la méthode <code>formatNOMPrenom</code> en lisant la documentation fournie. Cette méthode s’occupe simplement de manipuler une chaîne de caractère, on n’utilise pas le fichier. Vous pouvez tester votre fonction dans le main avec la ligne suivante :</p>
+<pre><code> System.out.println(formatNOMPrenom(&quot;Godefroy de Montmirail&quot;));</code></pre>
+<p>qui doit vous afficher “DE MONTMIRAIL Godefroy”. Utiliser la <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html">documentation de la classe <code>String</code></a> pour trouver les méthodes dont vous avez besoin, en particulier <code>indexOf</code> et <code>substring</code>.</p></li>
+<li><p>Complétez la méthode <code>listeEtudiants</code> en vous inspirant de <code>printFile</code> sauf qu’ici, vous devez créez un objet de type <code>List</code> qui contient la liste des étudiant <strong>au bon format</strong> (en utilisant la méthode précédente). La liste doit être <strong>triée par ordre alphabétique</strong>, pour cela vous pouvez utiliser <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html#sort(java.util.Comparator)">la méthode <code>sort</code></a> de l’interface <code>List</code>. Lisez l’explication ci-dessous.</p></li>
+</ol>
+<section id="méthode-sort-et-interface-comparable" class="explication">
+<h3>Méthode <code>sort</code> et interface <code>Comparable</code></h3>
+<p>La documentation de la méthode <code>sort</code> est difficile à comprendre car elle prend en paramètre un objet de type <code>Comparator</code>. Cependant, il est possible de laisser ce paramètre à <code>null</code> : dans ce cas, la méthode utilisera la comparaison implantée pour les objets de la liste. La classe <code>String</code> implémente l’interface <code>Comparable</code> : cela signifie qu’il y a bien une comparaison par défaut qui est l’ordre lexicographique, justement celui dont on a besoin ici. Pour obtenir la liste triée, il suffit donc d’exécuter cette ligne après avoir ajouté tous les éléments dans la liste (ici appelée <code>etudiants</code>)</p>
+<pre><code>etudiants.sort(null);</code></pre>
+</section>
+<ol start="3" type="1">
+<li><p>Vérfiez que votre méthode fonctionne en appelant</p>
+<pre><code> List&lt;String&gt; etudiants = listeEtudiants(scan);
+ System.out.println(etudiants);</code></pre>
+<p>depuis la fonction <code>main</code>.</p></li>
+</ol>
+<h3 id="création-dun-nouveau-fichier">Création d’un nouveau fichier</h3>
+<ol type="1">
+<li><p>Complétez la méthode <code>afficheEtudiants</code> : cette méthode prend en paramètre un objet de type <code>PrintStream</code>, c’est un <em>flux de sortie</em>. Par exemple <code>System.out</code> est un objet de type <code>PrintStream</code> (c’est la sortie standard). Vous pouvez regarder <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/PrintStream.html">la documentation de <code>PrintStream</code></a> pour voir les méthodes disponibles tel que <code>print</code> ou <code>println</code>.</p>
+<p>Une fois la méthode écrite, l’appel suivant doit afficher la liste des étudiants (ligne par ligne) sur la sortie standard.</p>
+<pre><code> afficheEtudiants(System.out, etudiants);</code></pre></li>
+<li><p>Avec Eclipse, créez un dossier <code>output</code> dans votre projet, puis rajouter les lignes suivantes dans la fonction <code>main</code></p>
+<pre><code> File output = new File(&quot;output/names.txt&quot;);
+ PrintStream out = new PrintStream(output);
+ afficheEtudiants(out, etudiants);
+ out.close();</code></pre>
+<p>L’exécution du projet doit maintenant créer un nouveau fichier dans le dossier <code>output</code> avec la liste des étudiants. (Pour actualiser l’affichage d’Eclipse, sélectionner le dossier et appuyez sur F5).</p></li>
+</ol>
+<h3 id="aller-plus-loin">Aller plus loin</h3>
+<ol type="1">
+<li><p>Utilisez <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html">l’interface <code>Set</code></a> qui représente un ensemble où chaque élément apparaît une unique fois et son <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/HashSet.html">implémentation <code>HashSet</code></a> pour compter le nombre de prénoms distincs dans la liste.</p>
+<p>Vous pouvez rajouter des méthodes supplémentaire, par exemple une méthode <code>extractPrenoms</code> qui prend en paramètre la liste des étudiants et renvoie le <code>Set</code> des prénoms.</p></li>
+<li><p>Ajoutez un fichier <code>grades.txt</code> dans le dossier <code>resources</code> en copiant le contenu présent <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2_Fichiers/resources/grades.txt">ici</a>. Cette fois le fichier contient une note en plus du nom. Effectuez le même traitement que précédemment (création d’un nouveau fichier <code>output/grades.txt</code> au format “NOM prénom note”). Vous pouvez utilisez <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html">l’interface <code>Map</code></a> et son <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/TreeMap.html">implantation <code>TreeMap</code></a>. Ici, les “clés” seront les chaînes “NOM prénom” et les valeurs les notes en type <code>Double</code>. L’utilisation de <code>TreeMap</code> permet que les clés soient triées au fur et à mesure qu’elles sont ajoutées.</p></li>
+<li><p>Calculez la moyenne des notes ainsi que la liste des étudiant et étudiantes ayant obtenu la meilleure note. Pour calculer la note maximale, vous pouvez utiliser la méthode statique <code>Collections.max</code> disponible dans <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Collections.html">la bibliothèque <code>Collections</code></a> avec de nombreuses autres méthodes.</p></li>
+</ol>
+</section>
+</body>
+</html>

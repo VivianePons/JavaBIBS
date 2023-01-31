@@ -413,10 +413,26 @@ System.out.println(maListe.equals(maListe2));
 
 ----
 
+**Que se passe-t-il quand on ne crée pas l'objet ?**
+
+~~~~{ .java}
+List<Integer> maListe;
+~~~~
+
+Par défaut, `maListe` est une "référence vide", c'est un pointeur vers rien du tout qui en Java prend la valeur `null`. Si vous essayez de l'utiliser, une erreur `NullPointerException` apparaîtra.
+
+
+----
+
 ## D'autres Interfaces utiles :
 
 * Les interfaces `Set` et `SortedSet` (sous-interfaces de `Collection`) implantées par exemple avec `HashSet` et `TreeSet` : les ensembles contenants les objets une unique fois. 
 * L'interface `Map<K,V>` souvent implémentée par `HashMap` : pour stocker des "dictionnaires" clés -- valeurs. 
 
+----
+
+## Assez discuter, au travail !
+
+[Le TP](TP2.html)
 
  
