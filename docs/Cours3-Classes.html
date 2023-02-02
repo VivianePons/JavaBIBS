@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Viviane Pons" />
+  <title>Programmation Orientée Objet – Java</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+   href="slidy/custom.css" />
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Programmation Orientée Objet – Java</h1>
+  <p class="subtitle">Cours 3 : Création de classes</p>
+  <p class="author">
+Viviane Pons
+  </p>
+  <p class="date">Master BIBS Université Paris-Saclay</p>
+</div>
+<div id="créer-une-classe" class="slide section level1">
+<h1>Créer une classe</h1>
+<p>Comment créer nos propres classes ?</p>
+<p>Dans ce cours, on va voir les étapes de création d’une classe en suivant étape par étape <a href="https://github.com/VivianePons/JavaBIBS/tree/main/code/RationalPackage">l’exemple suivant</a>.</p>
+<h2 id="où-les-packages">Où ? Les packages</h2>
+<div class="incremental">
+<p>On a vu que les classes de l’API Java étaient organisées en <strong>package</strong>. En fait le vrai nom de la classe <code>Scanner</code> est :</p>
+<pre><code>java.util.Scanner</code></pre>
+<p>La classe <code>Scanner</code> appartient au package <code>java.util</code>. En effectuant un <code>import</code> on s’autorise simplement à oublier la partie du nom qui relève du package.</p>
+<p>Il pourrait tout à fait exister une autre classe appelée <code>Scanner</code> dans un autre package : l’utilisation des packages évite les conflits de noms.</p>
+<pre><code>com.myorg.Scanner // exemple factice</code></pre>
+</div>
+</div>
+<div class="slide section level1">
+
+<h2 id="créer-nos-propres-packages">Créer nos propres packages</h2>
+<p>Jusqu’à présent, nous avons toujours créé une <strong>unique classe</strong> (contenant le main) dans le “default package” (pas de package). <strong>On va arrêter !</strong></p>
+<div class="incremental">
+<p>Traditionnellement, le nom du package reflète la provenance de la classe (par exemple, avec le nom de l’entreprise) et ressemble à une url à l’envers. On imagine qu’on crée nos classes de façon unique dans <strong>le grand univers qui contient toutes les classes Java</strong>.</p>
+<p>Pour nos classes à nous, on utilisera le nom de base suivant :</p>
+<pre><code>fr.upsaclay.bibs</code></pre>
+<p>Que l’on déclinera ensuite en fonction des packages créés.</p>
+<pre><code>fr.upsaclay.bibs.monpackagebla
+fr.upsaclay.bibs.encoreunpackage</code></pre>
+</div>
+</div>
+<div class="slide section level1">
+
+<h2 id="démo">Démo</h2>
+<p>Création des packages</p>
+<pre><code>fr.upsaclay.bibs
+fr.upsaclay.bibs.rational</code></pre>
+<p>avec Eclipse.</p>
+<p>On remarque que la structure de package crée l’équivalent en arborescence de fichier.</p>
+</div>
+<div class="slide section level1">
+
+<h2 id="comment-créer-une-classe">Comment créer une classe ?</h2>
+<h3 id="le-fichier">Le fichier</h3>
+<p>Dans le dossier du package correspondant, on va créé un <strong>fichier par classe</strong></p>
+<ul>
+<li>le nom du fichier doit être le même que le nom de la classe</li>
+<li>le nom de la classe commence toujours par une majuscule <code>MaSuperJolieClasse</code></li>
+<li>le package est indiqué en haut du fichier (et doit correspondre à l’emplacement de la classe)</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">package</span><span class="im"> fr.upsaclay.bibs;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RationnalExample {</span></code></pre></div>
+<p><strong>Démo :</strong> création des classes <code>RationalExample</code> dans <code>fr.upsaclay.bibs</code> et <code>Rational</code> dans <code>fr.upsaclay.bibs.rational</code>.</p>
+</div>
+<div class="slide section level1">
+
+<h3 id="public-or-not-public">Public or not public ?</h3>
+<p>La présence (ou non) du <em>modificateur</em> <code>public</code> avant le mot <code>class</code> indique la <strong>visibilité de la classe</strong> :</p>
+<ul>
+<li>si on écrit <code>public</code> : la classe est visible (utilisable) par les classes en dehors du package</li>
+<li>si on écrit rien : la classe n’est visible que dans le package</li>
+</ul>
+<p>Il existe d’autres modificateurs que l’on peut rajouter en plus de <code>public</code> avant le mot <code>class</code> : <code>abstract</code> et <code>final</code>, nous verrons leur signification quand nous traiterons de la question de <strong>l’héritage</strong>.</p>
+</div>
+<div id="champs-méthodes-et-constructeurs" class="slide section level1">
+<h1>Champs, méthodes et constructeurs</h1>
+<h2 id="ajoutons-des-champs-et-un-constructeur">Ajoutons des champs et un constructeur</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">final</span> <span class="dt">int</span> n;</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">final</span> <span class="dt">int</span> d;</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a><span class="kw">public</span> <span class="fu">Rational</span>(<span class="dt">int</span> n, <span class="dt">int</span> d) {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>    <span class="kw">this</span>.<span class="fu">n</span> = n;</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>    <span class="kw">this</span>.<span class="fu">d</span> = d;</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>}</span></code></pre></div>
+<p><strong>Visibilité (des champs et des méthodes) :</strong></p>
+<ul>
+<li><code>public</code> tout le monde peut voir le champ (et le modifier !)</li>
+<li><code>protected</code> : les éléments du package ainsi que les classes héritées ont accès au champ</li>
+<li>rien : les éléments du package ont accès au champ</li>
+<li><code>private</code> : seule la classe a accès au champ</li>
+</ul>
+</div>
+<div class="slide section level1">
+
+<h2 id="que-signifie-final-pour-un-champ">Que signifie <code>final</code> pour un champ ?</h2>
+<p><strong>Le champ est fixé à la création de l’objet et ne pourra plus être modifié</strong></p>
+<p>Le mot clé a aussi une signification pour les méthodes que l’on verra plus tard.</p>
+</div>
+<div class="slide section level1">
+
+<h2 id="les-constructeurs">Le(s) constructeur(s)</h2>
+<ul>
+<li>Une méthode spéciale pour construire l’objet</li>
+<li>En Java : porte le nom de la classe et n’a pas de valeur de retour</li>
+<li>Les mêmes paramètres de visibilité <code>public / protected / private</code> s’applique</li>
+</ul>
+<p>Quel est son rôle ? Initialiser les champs (en particulier, les champs de type <code>final</code> et effectuer les vérifications / calculs initiaux nécessaires au fonctionnement de l’objet créé)</p>
+</div>
+<div class="slide section level1">
+
+<h2 id="illustration">Illustration</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="kw">public</span> <span class="fu">Rational</span>(<span class="dt">long</span> n, <span class="dt">long</span> d) {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>    <span class="kw">if</span>(d == <span class="dv">0</span>) {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>        <span class="kw">throw</span> <span class="kw">new</span> <span class="bu">IllegalArgumentException</span>();       </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a>    }</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a>    </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a>    <span class="dt">long</span> div = <span class="fu">gcd</span>(n, d);</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a>    n = n / div;</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a>    d = d / div;</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a>    </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a>    <span class="kw">if</span>(n &gt; max_operand || n &lt; min_operand || d &gt; max_operand || d &lt; min_operand) {</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a>        <span class="kw">throw</span> <span class="kw">new</span> <span class="bu">IllegalArgumentException</span>(<span class="st">&quot;Exceeds operand capacity&quot;</span>);</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a>    }</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true"></a>    <span class="kw">this</span>.<span class="fu">n</span> = (<span class="dt">int</span>)n;</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true"></a>    <span class="kw">this</span>.<span class="fu">d</span> = (<span class="dt">int</span>)d;</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<h2 id="plusieurs-constructeurs">Plusieurs constructeurs</h2>
+<p>En Java, il est possible de définir plusieurs fonctions portant le même nom si les paramètres (nombre / type) sont différents.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="kw">protected</span> <span class="fu">Rational</span>(<span class="dt">long</span> n, <span class="dt">long</span> d, <span class="dt">boolean</span> check) {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>    ...</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>}</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a><span class="kw">public</span> <span class="fu">Rational</span>(<span class="dt">long</span> n, <span class="dt">long</span> d) {</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a>    <span class="kw">this</span>(n, d, <span class="kw">true</span>);</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a>}</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a>    </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true"></a><span class="kw">public</span> <span class="fu">Rational</span>(<span class="dt">long</span> n) {</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true"></a>    <span class="kw">this</span>(n,<span class="dv">1</span>, <span class="kw">false</span>);</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true"></a>}</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true"></a><span class="kw">public</span> <span class="fu">Rational</span>() {</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true"></a>    <span class="kw">this</span>(<span class="dv">0</span>);</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true"></a>}</span></code></pre></div>
+<p>L’appel à un autre constructeur de la classe se fait par <code>this(...)</code> et doit toujours être fait en premier.</p>
+</div>
+<div class="slide section level1">
+
+<h2 id="créons-des-méthodes">Créons des méthodes</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="co">/**</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="co">*</span> Adds rationals</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a><span class="co">* </span><span class="an">@param r2 </span>another rational object</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a><span class="co">*</span> <span class="an">@return </span>the Rational representing the sum of object and <span class="co">`</span>r2<span class="co">`</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a><span class="co">*/</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a><span class="kw">public</span> Rational <span class="fu">add</span>(Rational r2) {</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a>    <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Rational</span>((<span class="dt">long</span>)n*r2.<span class="fu">d</span> + (<span class="dt">long</span>)r2.<span class="fu">n</span> * d, (<span class="dt">long</span>)d * r2.<span class="fu">d</span>);</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a>}</span></code></pre></div>
+<h2 id="portées-des-variables">Portées des variables</h2>
+<ul>
+<li>Une variable existe à l’intérieur de son bloc <code>{ ... }</code> (classe, méthode, bloc <code>if</code> / <code>for</code></li>
+<li>On peut utiliser directement le nom d’un champ ou d’une méthode à la l’intérieur de la classe (statique ou non)</li>
+<li>Si conflit de nom (avec variable locale) on peut écrire <code>this.champ</code></li>
+</ul>
+</div>
+<div class="slide section level1">
+
+<h2 id="méthodes-spéciales">Méthodes spéciales</h2>
+<h3 id="représentation-sous-forme-de-chaîne-de-caractère">Représentation sous forme de chaîne de caractère</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="at">@Override</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a><span class="kw">public</span> <span class="bu">String</span> <span class="fu">toString</span>() {</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a>    <span class="kw">if</span>(d != <span class="dv">1</span>) {</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a>        <span class="kw">return</span> n + <span class="st">&quot;/&quot;</span> + d;     </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a>    } <span class="kw">else</span> {</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a>        <span class="kw">return</span> <span class="bu">String</span>.<span class="fu">valueOf</span>(n);</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a>    }</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<h3 id="égalité-dobjets">Égalité d’objets</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="co">/**</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a><span class="co">*</span> Return whether r2 is equal to object as rationals</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a><span class="co">* </span><span class="an">@param r2 </span>a rational</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a><span class="co">*</span> <span class="an">@return </span>true if this is equal to self</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a><span class="co">*/</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">equals</span>(Rational r2) {</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a>    <span class="kw">return</span> (r2.<span class="fu">n</span> == n &amp;&amp; r2.<span class="fu">d</span> == d);</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a>}</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a>    </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true"></a>    </span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true"></a><span class="at">@Override</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">equals</span>(<span class="bu">Object</span> obj) {</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true"></a>    <span class="kw">if</span>(obj == <span class="kw">null</span>) {</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true"></a>        <span class="kw">return</span> <span class="kw">false</span>;</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true"></a>    }</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true"></a>    <span class="kw">if</span>(!Rational.<span class="fu">class</span>.<span class="fu">isAssignableFrom</span>(obj.<span class="fu">getClass</span>())) {</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true"></a>        <span class="kw">return</span> <span class="kw">false</span>;</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true"></a>    }</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true"></a>    <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">equals</span>((Rational)obj);</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<h3 id="hachons">Hachons</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="at">@Override</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">int</span> <span class="fu">hashCode</span>() {</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a>    <span class="kw">return</span> <span class="fu">toString</span>().<span class="fu">hashCode</span>();</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>}</span></code></pre></div>
+<p>La valeur de hachage, ou “hash code” est une clé associée à l’objet.</p>
+<ul>
+<li>Quand deux objets sont égaux, ils doivent avoir la même clé</li>
+<li>Quand deux objets sont différents, ils doivent avoir autant que possible des clés différentes (mais le nombre de clés est fini et le nombre d’objets infini…)</li>
+</ul>
+<p>Cette valeur est utilisée par les structures de données type <code>Set</code> et <code>Map</code>.</p>
+</div>
+<div class="slide section level1">
+
+<h3 id="overide-quoi">Overide quoi ?</h3>
+<p>L’annotation <code>@Overide</code> est utilisée pour indiquer au compilateur que la méthode redéfinit une méthode définie précédemment (voir le prochain chapitre sur l’héritage). Les méthodes <code>toString</code> <code>equals</code> et <code>hashCode</code> sont héritées de la classe <code>Object</code> et utilisent l’adresse mémoire par défaut.</p>
+<p><strong>!! Quand on redéfinit <code>equals</code> on doit redéfinir <code>hashCode</code> !!</strong></p>
+</div>
+<div id="implémenter-des-interfaces" class="slide section level1">
+<h1>Implémenter des interfaces</h1>
+<p>Pourquoi faire ?</p>
+<div class="incremental">
+<p><strong>Pour utiliser des fonctionalités génériques</strong>. Par exemple, car je voudrais trier des listes de rationnels.</p>
+</div>
+</div>
+<div class="slide section level1">
+
+<h2 id="exemple-interface-comparable">Exemple : interface Comparable</h2>
+<p><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Comparable.html">Voir la Javadoc</a></p>
+<div class="incremental">
+<div class="sourceCode" id="cb14"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> Rational <span class="kw">implements</span> <span class="bu">Comparable</span>&lt;Rational&gt; {</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="at">@Override</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">int</span> <span class="fu">compareTo</span>(Rational r2) {</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a>    <span class="kw">if</span>(<span class="fu">equals</span>(r2)) {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a>        <span class="kw">return</span> <span class="dv">0</span>;</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a>    }</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true"></a>    <span class="kw">return</span> (<span class="fu">doubleValue</span>() &lt; r2.<span class="fu">doubleValue</span>())? -<span class="dv">1</span> : <span class="dv">1</span>;</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+</div>
+<div id="un-peu-de-static" class="slide section level1">
+<h1>Un peu de static</h1>
+<h2 id="quelques-méthodes">Quelques méthodes</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="co">/**</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a><span class="co">*</span> Value of given string as Rational</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a><span class="co">* </span><span class="an">@param s </span>a String value</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true"></a><span class="co">*</span> <span class="co">@</span>return</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true"></a><span class="co">*/</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">static</span> Rational <span class="fu">valueOf</span>(<span class="bu">String</span> s) {</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true"></a>    <span class="bu">String</span>[] parts = s.<span class="fu">split</span>(<span class="st">&quot;/&quot;</span>);</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true"></a>    <span class="kw">if</span> (parts.<span class="fu">length</span> == <span class="dv">1</span>) {</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true"></a>        <span class="kw">return</span> Rational.<span class="fu">valueOf</span>(<span class="bu">Integer</span>.<span class="fu">valueOf</span>(s));</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true"></a>    } <span class="kw">else</span> <span class="kw">if</span> (parts.<span class="fu">length</span> == <span class="dv">2</span>) {</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true"></a>        <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Rational</span>(<span class="bu">Integer</span>.<span class="fu">valueOf</span>(parts[<span class="dv">0</span>]), <span class="bu">Integer</span>.<span class="fu">valueOf</span>(parts[<span class="dv">1</span>]));</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true"></a>    } <span class="kw">else</span> {</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true"></a>        <span class="kw">throw</span> <span class="kw">new</span> <span class="bu">NumberFormatException</span>(<span class="st">&quot;For input string: </span><span class="sc">\&quot;</span><span class="st">&quot;</span> + s + <span class="st">&quot;</span><span class="sc">\&quot;</span><span class="st">&quot;</span>);</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true"></a>    }</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<div class="sourceCode" id="cb17"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a><span class="co">/**</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true"></a><span class="co">*</span> Sums the given rationals</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true"></a><span class="co">* </span><span class="an">@param args </span>a list of Rational</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true"></a><span class="co">*</span> <span class="an">@return </span>the sum as a Rational</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true"></a><span class="co">*/</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">static</span> Rational <span class="fu">sum</span>(Rational<span class="kw">... </span>args) {</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true"></a>    Rational s = <span class="kw">new</span> <span class="fu">Rational</span>();</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true"></a>    <span class="kw">for</span>(Rational r : args) {</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true"></a>        s = s.<span class="fu">add</span>(r);</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true"></a>    }</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true"></a>    <span class="kw">return</span> s;</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<h2 id="une-variable-static-privée">Une variable static privée ?</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="co">/*</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a><span class="co">* the minimal Rational that has been instantiated</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true"></a><span class="co">*/</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true"></a><span class="kw">private</span> <span class="dt">static</span> Rational minimal_created;</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true"></a>    </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true"></a><span class="co">/*</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true"></a><span class="co">* the maximal Rational that has been instantiated</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true"></a><span class="co">*/</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true"></a><span class="kw">private</span> <span class="dt">static</span> Rational maximal_created;</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<div class="sourceCode" id="cb19"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a><span class="kw">protected</span> <span class="fu">Rational</span>(<span class="dt">long</span> n, <span class="dt">long</span> d, <span class="dt">boolean</span> check) {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true"></a>    ...</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true"></a>    <span class="kw">if</span> (minimal_created == <span class="kw">null</span> || <span class="kw">this</span>.<span class="fu">compareTo</span>(minimal_created) &lt; <span class="dv">0</span>) {</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true"></a>        minimal_created = <span class="kw">this</span>;</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true"></a>    }</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true"></a>    <span class="kw">if</span> (maximal_created == <span class="kw">null</span> || <span class="kw">this</span>.<span class="fu">compareTo</span>(maximal_created) &gt; <span class="dv">0</span>) {</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true"></a>        maximal_created = <span class="kw">this</span>;</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true"></a>    }</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">static</span> Rational <span class="fu">getMinimalCreated</span>() {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a>    <span class="kw">return</span> minimal_created;</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a>}</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true"></a>    </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">static</span> Rational <span class="fu">getMaximalCreated</span>() {</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true"></a>    <span class="kw">return</span> maximal_created;</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+<div id="les-tests" class="slide section level1">
+<h1>Les Tests</h1>
+<p>Pour l’instant, on a testé notre programme en faisant des essais dans la fonction <code>main</code>. Mais “dans la vraie vie”, la fonction <code>main</code> sert à écrire le coeur de l’application : toutes les fonctionnalités et les cas de figure ne sont pas appelés.</p>
+<p>On veut créer des tests de façon séparée, indépendants d’une application particulière.</p>
+</div>
+<div class="slide section level1">
+
+<h2 id="junit-une-application-de-test-pour-java">JUnit : une application de test pour Java</h2>
+<p>Un <strong>test unitaire</strong> est une procédure permettant de tester le bon fonctionnement une partie spécifique d’un programme.</p>
+<p><a href="https://junit.org/junit5/">JUnit</a> est un “framework” (un “cadre”, une “infrastructure”, un “schéma”) permettant de réaliser simplement des tests unitaire en Java.</p>
+</div>
+<div class="slide section level1">
+
+<h2 id="mise-en-oeuvre">Mise en oeuvre</h2>
+<p>On crée un package</p>
+<pre><code>fr.upsaclay.bibs.rational.test</code></pre>
+<p>Dans ce package on crée une classe <code>RationalTest</code> en faisant (avec Eclipse) “New &gt;&gt; JUnit Test Case”</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a><span class="kw">import static</span><span class="im"> org.junit.jupiter.api.Assertions.*;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true"></a><span class="kw">import</span><span class="im"> org.junit.jupiter.api.Assertions;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true"></a><span class="kw">import</span><span class="im"> org.junit.jupiter.api.Test;</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true"></a><span class="kw">import</span><span class="im"> fr.upsaclay.bibs.rational.Rational;</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true"></a><span class="kw">class</span> RationalTest {</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<p>On crée des méthodes de test</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a><span class="at">@Test</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">final</span> <span class="dt">void</span> <span class="fu">testRational</span>() {</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true"></a>    <span class="fu">assertEquals</span>(<span class="kw">new</span> <span class="fu">Rational</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="kw">new</span> <span class="fu">Rational</span>(<span class="dv">2</span>,<span class="dv">4</span>));</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true"></a>    <span class="fu">assertEquals</span>(<span class="kw">new</span> <span class="fu">Rational</span>(<span class="dv">2</span>), <span class="kw">new</span> <span class="fu">Rational</span>(<span class="dv">4</span>,<span class="dv">2</span>));</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true"></a>    <span class="fu">assertEquals</span>(<span class="kw">new</span> <span class="fu">Rational</span>(-<span class="dv">2</span>,<span class="dv">4</span>), <span class="kw">new</span> <span class="fu">Rational</span>(<span class="dv">2</span>,-<span class="dv">4</span>));</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true"></a>    ...</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<p>On lance les tests en faisant “Run as &gt;&gt; JUnit Test”</p>
+<p>Junit nous indique :</p>
+<ul>
+<li>quels tests passent et quels tests ne passent pas</li>
+<li>la partie du code qui est “couverte” par les tests</li>
+</ul>
+</div>
+<div class="slide section level1">
+
+<h2 id="quels-tests">Quels tests ?</h2>
+<p>Pour faire les tests, on utilise les <a href="https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api/Assertions.html">méthodes statiques de la classe Assertions</a></p>
+<ul>
+<li><code>assertEquals</code></li>
+<li><code>assertNotEquals</code></li>
+<li><code>assertThrows</code></li>
+</ul>
+</div>
+<div class="slide section level1">
+
+<h2 id="que-faut-il-tester">Que faut-il tester ?</h2>
+<p>Typiquement, on crée une méthode de test par méthode de la classe testée et on teste … tout ce à quoi on pense.</p>
+<p>Les tests unitaires ne pourront <strong>jamais vous assurer</strong> que votre programme fonctionne. Ils peuvent être complétés par des <strong>tests fonctionnels</strong> ou de la <strong>vérification formelle</strong>.</p>
+<p>Cependant, ils permettent de détecter de nombreuses erreurs et facilitent la maintenance du code.</p>
+</div>
+</body>
+</html>
