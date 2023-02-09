@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Viviane Pons" />
+  <title>Programmation Orientée Objet – Java</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+   href="slidy/custom.css" />
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Programmation Orientée Objet – Java</h1>
+  <p class="subtitle">Cours 4 : Héritage</p>
+  <p class="author">
+Viviane Pons
+  </p>
+  <p class="date">Master BIBS Université Paris-Saclay</p>
+</div>
+<div id="quest-ce-que-lhéritage" class="slide section level1">
+<h1>Qu’est-ce que l’héritage ?</h1>
+<p>Une notion essentielle de la programmation objet : permet de “récupérer” et d’augmenter la structure d’une autre classe</p>
+</div>
+<div class="slide section level1">
+
+<h2 id="exemple">Exemple</h2>
+<p><a href="https://github.com/VivianePons/JavaBIBS/tree/main/code/ExempleHeritage">Voir l’exemple ici</a></p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><img src="media/diagrams/SimplePerson.png" style="width:70.0%" alt="UML diagram: a class Person with private fields id and name and method toString. A class PersonWithEmail extending Person with extra field email" /><br />
+</p>
+</div><div class="column" style="width:70%;">
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> Person {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>    </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">static</span> <span class="dt">int</span> count = <span class="dv">0</span>;</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="dt">int</span> id;</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">final</span> <span class="bu">String</span> name;</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>    </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>    ...</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> PersonWithEmail <span class="kw">extends</span> Person {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>    </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    <span class="kw">private</span> <span class="bu">String</span> email;</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>    ...</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+</div>
+</div>
+<div class="slide section level1">
+
+<h2 id="constructeurs">Constructeurs</h2>
+<ul>
+<li>S’il n’y a pas de constructeur sans paramètre, la classe fille doit implanter un constructeur explicite.</li>
+<li>On peut aussi <strong>rajouter</strong> un ou des constructeurs</li>
+<li>L’appel au constructeur de la classe mère se fait avec <code>super(...)</code>. Tout comme <code>this(...)</code>, il doit être appelé en première commande</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>    <span class="kw">public</span> <span class="fu">PersonWithEmail</span>(<span class="bu">String</span> name) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>        <span class="kw">super</span>(name);</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>    }</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>    </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>    <span class="kw">public</span> <span class="fu">PersonWithEmail</span>(<span class="bu">String</span> name, <span class="bu">String</span> email) {</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>        <span class="kw">this</span>(name);</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>        <span class="fu">setEmail</span>(email);</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>    }</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<h2 id="rajouter-et-redéfinir-des-méthodes">Rajouter et redéfinir des méthodes</h2>
+<p>La classe fille peut <strong>rajouter</strong> des méthodes supplémentaires et <strong>redéfinir</strong> (Override) les méthodes de la classe mère</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> PersonWithEmail <span class="kw">extends</span> Person {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>    </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>    ...</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>    </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">getEmail</span>() {</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>        <span class="kw">return</span> email;</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>    }</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a>    </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">toString</span>() {</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a>        <span class="kw">return</span> <span class="kw">super</span>.<span class="fu">toString</span>() + <span class="st">&quot; -- email : &quot;</span> + <span class="fu">getEmail</span>();</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a>    }</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a>}</span></code></pre></div>
+<p><strong>Accès à la classe mère avec <code>super</code></strong></p>
+</div>
+<div class="slide section level1">
+
+<h2 id="polymorphisme">Polymorphisme</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>Person p1 = <span class="kw">new</span> <span class="fu">Person</span>(<span class="st">&quot;Bob&quot;</span>);</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>        </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(p1);</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>        </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>Person p2 = <span class="kw">new</span> <span class="fu">PersonWithEmail</span>(<span class="st">&quot;Alice&quot;</span>, <span class="st">&quot;alice@mail.com&quot;</span>);</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>        </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a><span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(p2);</span></code></pre></div>
+<div class="incremental">
+<pre><code>Person 1 : Bob
+Person 2 : Alice -- email : alice@mail.com</code></pre>
+<p>La classe <strong>déclarée</strong> décide ce <strong>qui se voit</strong>. La classe instanciée décide <strong>ce qui se fait</strong>.</p>
+</div>
+</div>
+<div class="slide section level1">
+
+<h2 id="héritage-unique-multiples">Héritage unique / multiples</h2>
+<p>En Java une classe ne peut héritée que d’une seule autre classe. (Ce n’est pas le cas dans d’autres langages comme le python ou le C++)</p>
+<p><strong>Avantage :</strong> la superclasse est toujours bien définie</p>
+<p><strong>Inconvénient :</strong> moins de souplesse, potentielle duplication de code, compensé en partie par l’utilisation de multiples interfaces</p>
+</div>
+<div class="slide section level1">
+
+<h2 id="final-pour-les-classes-et-méthodes"><code>final</code> pour les classes et méthodes</h2>
+<ul>
+<li><p><code>final</code> pour une classe (<code>public final class MyCLass</code>) : ne peut pas être étendue (pas de classes filles). Exemple, la classe <code>System</code> de l’API Java</p></li>
+<li><p><code>final</code> pour une méthode : ne peut pas être redéfinie.</p></li>
+</ul>
+</div>
+<div id="classes-abstraites-et-structure-classique" class="slide section level1">
+<h1>Classes Abstraites et structure classique</h1>
+<h2 id="quest-ce-quune-classe-abstraite">Qu’est-ce qu’une classe abstraite ?</h2>
+<p>C’est une classe qui ne peut pas être instanciée ! Mais pourquoi ??</p>
+<ul>
+<li>Elle correspond à un socle commun partagé par plusieurs classes filles mais pas à un objet concret.</li>
+<li>Si elle implémente une interface, elle n’a pas besoin d’implémenter toutes les méthodes</li>
+<li>De la même façon, elle peut définir des <em>méthodes abstraites</em> (comme une interface) qui devront être implantées par les classes filles.</li>
+</ul>
+</div>
+<div class="slide section level1">
+
+<h2 id="un-schéma-classique">Un schéma classique</h2>
+<p><a href="https://github.com/VivianePons/JavaBIBS/tree/main/code/ExempleAbstract">Voir l’exemple ici</a></p>
+<p><img src="media/diagrams/AbstractAnimal.png" style="height:80.0%" alt="UML diagram: a interface Animal with subclass AstractAnimal implementing some of the methods and adding some protected methods. Two subclasses of AbstrastAnimal : sheep and wolf implementing the canEat method of the interface" /><br />
+</p>
+</div>
+</body>
+</html>

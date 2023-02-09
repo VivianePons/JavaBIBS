@@ -123,5 +123,32 @@ class StudentTest {
 		assertEquals(st1.getInstanceId() + 1, st2.getInstanceId());
 		/// END COMMENTEE
 	}
+	
+	@Test
+	void testGetGradeList() {
+		/// BEGIN COMMENTEE
+		Student st = new Student("Ada", "Lovelace");
+		assertEquals(st.getGradeList().numberOfGrades(), 0);
+		st.getGradeList().add(new fr.upsaclay.bibs.students.Grade(15,20));
+		assertEquals(st.getGradeList().numberOfGrades(), 1);
+		/// END COMMENTEE
+	}
+	
+	@Test
+	void testDefaultCoefficient() {
+		/// BEGIN COMMENTEE
+		assertEquals(new Student("Ada", "Lovelace").getCoefficient(), 1);
+		/// END COMMENTEE
+	}
+	
+	@Test
+	void testGradeOver() {
+		/// BEGIN COMMENTEE
+		Student st = new Student("Ada", "Lovelace");
+		assertThrows(IllegalStateException.class, () -> st.gradeOver(20));
+		st.getGradeList().add(new fr.upsaclay.bibs.students.Grade(15,20));
+		assertEquals(st.gradeOver(20), 15);
+		/// END COMMENTEE
+	}
 
 }

@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  *
  */
 /// BEGIN SOLUTION
-public class Student implements Comparable<Student> {
+public class Student implements Comparable<Student>, Gradable {
 /// END SOLUTION
 /* BEGIN UNCOMMENT
 public class Student {
@@ -36,6 +36,8 @@ END UNCOMMENT */
 	private int instanceId;
 	
 	private static int count = 0;
+	
+	private final GradeList<Gradable> gradeList = new GradeList<Gradable>();
 	/// END SOLUTION
 	
 	public Student(String firstName, String lastName) {
@@ -136,10 +138,21 @@ END UNCOMMENT */
 	public int getInstanceId() {
 		return instanceId;
 	}
-	/// END SOLUTION
+	
+	public GradeList<Gradable> getGradeList() {
+		return gradeList;
+	}
 
+	@Override
+	public double gradeOver(double max_grade) {
+		return getGradeList().gradeOver(max_grade);
+	}
+	
+	
 
 	
+	/// END SOLUTION
+
 	
 	
 }
