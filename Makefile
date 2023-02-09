@@ -11,7 +11,7 @@ SRC = src
 EXERCICES = exercices
 CODE = code
 
-CoursesNames=Cours1-IntroBase Cours2-Collections Cours3-Classes
+CoursesNames=Cours1-IntroBase Cours2-Collections Cours3-Classes Cours4-Heritage
 
 TPNames=TP1 TP2 TP3
 

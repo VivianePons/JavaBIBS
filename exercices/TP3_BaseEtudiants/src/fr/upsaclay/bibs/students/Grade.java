@@ -8,7 +8,7 @@ package fr.upsaclay.bibs.students;
  * @author viviane
  *
  */
-public class Grade implements Gradable {
+public class Grade implements Gradable, Comparable<Gradable> {
 
 	/**
 	 * The grade 
@@ -20,6 +20,9 @@ public class Grade implements Gradable {
 	 */
 	private double max_grade;
 	
+	/**
+	 * The grade coefficient in a grade list (default: 1)
+	 */
 	private int coefficient = 1;
 	
 	/**
@@ -104,6 +107,6 @@ public class Grade implements Gradable {
 	
 	@Override
 	public int compareTo(Gradable g) {
-		throw new UnsupportedOperationException("Not implemented yet");
+		return Gradable.compares(this, g);
 	}
 }

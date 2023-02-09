@@ -98,18 +98,7 @@ public class GradeList <E extends Gradable> implements Gradable, Iterable<E>, Co
 		if(grades.size() == 0) {
 			throw new IllegalStateException("Undefined grade (0 grades)");
 		}
-		/// BEGIN SOLUTION
-		int div = 0;
-		double sum = 0;
-		for(Gradable g : grades) {
-			div += g.getCoefficient();
-			sum += g.gradeOver(max_grade) * g.getCoefficient(); 
-		}
-		return sum / div;
-		/// END SOLUTION
-		/* BEGIN UNCOMMENT
 		throw new UnsupportedOperationException("Not implemented yet");
-		END UNCOMMENT */
 	}
 
 	@Override

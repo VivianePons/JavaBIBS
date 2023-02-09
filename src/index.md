@@ -17,3 +17,6 @@ Toutes les sources (en partciluer les codes java et les exercices corrigés) son
   - [Slides version html](Cours3-Classes.html)
   - [Slides en version pdf](pdf/Cours3-Classes.pdf)
   - [TP3](TP3.html)
+* Cours 4 : Héritage (séance 4 et 5)
+  - [Slides version html](Cours4-Heritage.html)
+  - [Slides en version pdf](pdf/Cours4-Heritage.pdf)

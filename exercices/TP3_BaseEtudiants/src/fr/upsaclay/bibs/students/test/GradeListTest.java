@@ -55,23 +55,17 @@ class GradeListTest {
 	
 	@Test
 	void testGradeOver() {
-		/// BEGIN COMMENTEE
+		/*
 		GradeList<Grade> gl = new GradeList<Grade>(new Grade(10,20), new Grade(5,20,2), new Grade(15,20,2));
 		assertEquals(gl.gradeOver(100), 50);
 		assertEquals(gl.gradeOver(20), 10);
 		GradeList<Grade> gl2 = new GradeList<Grade>();
 		assertThrows(IllegalStateException.class, () -> gl2.gradeOver(10));
-		/// END COMMENTEE
+		*/
 	}
 	
 	@Test 
 	void testSetGetCoefficient() {
-		/// BEGIN SOLUTION
-		GradeList<Grade> gl = new GradeList<Grade>();
-		assertEquals(gl.getCoefficient(), 1);
-		gl.setCoefficient(2);
-		assertEquals(gl.getCoefficient(), 2);
-		/// END SOLUTION
 	}
 
 }
