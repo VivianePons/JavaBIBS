@@ -248,6 +248,7 @@ private static int count = 0;</code></pre></li>
 </section>
 <ol start="27" type="1">
 <li><p>La plupart des méthodes de <code>GradeList</code> sont déjà implantées (regardez par exemple les constructeurs et le champ privé pour stocker la liste). Il ne reste que la méthode <code>gradeOver</code> à implanter : cette méthode renvoie la moyenne des notes stockées. Ne vous laissez pas impressionner par le type générique <code>E</code>, vous avez un exemple juste au dessus de parcours de la liste avec la méthode <code>max</code>. Implantez la méthode <code>gradeOver</code> de telle sorte que les tests à décommenter passent.</p></li>
+<li><p>Complétez les tests de la méthode <code>testSetGetCoefficient</code> dans <code>GradeListTest</code></p></li>
 <li><p>On va maintenant éditer la classe <code>Student</code> pour qu’on puisse stocker pour chaque étudiant une liste de note. Ajoutez un champ privé final dans la classe <code>Student</code> :</p>
 <pre><code>private final GradeList&lt;Gradable&gt; gradeList = new GradeList&lt;Gradable&gt;();</code></pre></li>
 <li><p>Ajoutez une méthode dans la classe <code>Student</code></p>

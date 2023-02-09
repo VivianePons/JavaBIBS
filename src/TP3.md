@@ -168,6 +168,8 @@ Cette classe sert à stocker une liste de notes et est elle-même une implantati
 
 27. La plupart des méthodes de `GradeList` sont déjà implantées (regardez par exemple les constructeurs et le champ privé pour stocker la liste). Il ne reste que la méthode `gradeOver` à implanter : cette méthode renvoie la moyenne des notes stockées. Ne vous laissez pas impressionner par le type générique `E`, vous avez un exemple juste au dessus de parcours de la liste avec la méthode `max`. Implantez la méthode `gradeOver` de telle sorte que les tests à décommenter passent. 
 
+28. Complétez les tests de la méthode `testSetGetCoefficient` dans `GradeListTest`
+
 28. On va maintenant éditer la classe `Student` pour qu'on puisse stocker pour chaque étudiant une liste de note. Ajoutez un champ privé final dans la classe `Student` :
         
         private final GradeList<Gradable> gradeList = new GradeList<Gradable>();
