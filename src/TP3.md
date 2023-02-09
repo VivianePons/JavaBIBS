@@ -182,7 +182,7 @@ Cette classe sert à stocker une liste de notes et est elle-même une implantati
          
    pour récupérer la liste de note. Vérifiez que les tests de `testGetGradeList` fonctionnent.
    
-30. Modifiez votre déclaration de classe `Student` pour qu'elle implémente l'interface `Gradable` en plus de `Comparable` (on écrit les différentes interfaces implémentées en séparant par des virgules). La seule méthode à implanter est `gradeOver` qui doit renvoyer la note calculée par `gradeList` (c'est-à-dire la moyenne de l'étudiant). Vérifiez que les tests de `testDefaultCoefficient` et `testGradeOver` fonctionnent.
+31. Modifiez votre déclaration de classe `Student` pour qu'elle implémente l'interface `Gradable` en plus de `Comparable` (on écrit les différentes interfaces implémentées en séparant par des virgules). La seule méthode à implanter est `gradeOver` qui doit renvoyer la note calculée par `gradeList` (c'est-à-dire la moyenne de l'étudiant). Vérifiez que les tests de `testDefaultCoefficient` et `testGradeOver` fonctionnent.
 
 :::: {.explication}
 ### Polymorphisme
@@ -194,7 +194,7 @@ En fonction du type déclaré `Student` ou `Gradable` on aura accès à plus ou 
 
 ## Exercice 4 : une fonction `main`
 
-28. Récupérez le nouveau fichier `grades.txt` [présent ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP3_BaseEtudiants/resources/grades.txt). Chaque ligne suit le format suivant
+32. Récupérez le nouveau fichier `grades.txt` [présent ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP3_BaseEtudiants/resources/grades.txt). Chaque ligne suit le format suivant
 
         NOM, Prénom, note, note, note
         
@@ -202,7 +202,7 @@ En fonction du type déclaré `Student` ou `Gradable` on aura accès à plus ou 
    
    Écrivez une fonction main qui crée à partir du fichier une liste d'étudiants de type `GradeList<Student>` : chaque étudiant contiendra à son tour la liste de notes qui lui ait associée avec les bons coefficients. 
    
- 29. Affichez : 
+ 33. Affichez : 
     
      - la liste des étudiants avec leur moyenne
      - la moyenne générale de la classe (la moyenne des moyennes des étudiants) (Vous devez trouver 15.079)
