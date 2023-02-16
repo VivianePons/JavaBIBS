@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>TP4 POO: Héritage – Création d’un système dynamique</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="css/TP.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">TP4 POO: Héritage – Création d’un système dynamique</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#objectif">Objectif</a></li>
+<li><a href="#récupération-du-code">Récupération du code</a></li>
+<li><a href="#architecture-générale">Architecture générale</a>
+<ul>
+<li><a href="#organisation-des-packages">Organisation des packages</a></li>
+<li><a href="#linterface-fieldelement">L’interface <code>FieldElement</code></a></li>
+</ul></li>
+<li><a href="#avant-de-commencer-quelques-nouveauté">Avant de commencer : quelques nouveauté</a>
+<ul>
+<li><a href="#les-classes-enum">Les classes enum</a></li>
+<li><a href="#les-classes-record">Les classes record</a></li>
+<li><a href="#du-java-un-peu-avancé">Du Java un peu avancé</a></li>
+</ul></li>
+<li><a href="#exercice-1-la-classe-grass">Exercice 1 : La classe <code>Grass</code></a>
+<ul>
+<li><a href="#la-classe-abstractfieldelement">La classe <code>AbstractFieldElement</code></a></li>
+<li><a href="#méthodes-abstraites">Méthodes abstraites</a></li>
+<li><a href="#méthodes-protected">Méthodes protected</a></li>
+<li><a href="#implémentation-des-constructeurs">Implémentation des constructeurs</a></li>
+<li><a href="#autres-méthodes">Autres méthodes</a></li>
+</ul></li>
+<li><a href="#exercice-2-les-moutons">Exercice 2 : Les moutons</a>
+<ul>
+<li><a href="#fonctionnement-des-animaux">Fonctionnement des animaux</a></li>
+<li><a href="#constructeurs">Constructeurs</a></li>
+<li><a href="#état">État</a></li>
+<li><a href="#évolution">Évolution</a></li>
+<li><a href="#nourriture">Nourriture</a></li>
+<li><a href="#reproduction">Reproduction</a></li>
+<li><a href="#mouvement">Mouvement</a></li>
+<li><a href="#un-champ-de-mouton">Un champ de mouton</a></li>
+</ul></li>
+<li><a href="#les-loups">Les Loups</a></li>
+<li><a href="#aller-plus-loin">Aller plus loin</a></li>
+</ul>
+</nav>
+<section class="content">
+<h2 id="objectif">Objectif</h2>
+<p>L’objectif de ce TP est d’implanter un <strong>système dynamique</strong>, c’est-à-dire un système dont l’état évolue par étape successive. Nous allons programmer une simulation d’un champ contenant des moutons et des loups.</p>
+<p><img src="media/illustration_TP4.png" width="300" alt="Une image du système dynamique : un grand rectangle blanc avec des petits carrés vers et des petits ronds blancs et noirs" /><br />
+</p>
+<h2 id="récupération-du-code">Récupération du code</h2>
+<p>L’ensemble du code est disponible dans un <a href="https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP4_Heritage">repo indépendant</a>. Vous pouvez le récupérer en cliquant sur le bouton de téléchargement à côté de “Clone” (on en effectuant un clone avec <em>git</em> si vous savez faire).</p>
+<p>Ensuite, avec Eclipse, vous pouvez créer un nouveau projet en utilisant le dossier téléchargé comme source. Ainsi, l’ensmeble de l’architecture de classes et packages seront déjà créés.</p>
+<h2 id="architecture-générale">Architecture générale</h2>
+<p>L’architecture du projet est déjà fournie et de nombreuses classes et interfaces sont écrites. Votre travail sera de compléter le code fourni.</p>
+<h3 id="organisation-des-packages">Organisation des packages</h3>
+<ul>
+<li>le package <code>fr.upsaclay.bibs.fieldsystem.view</code> concerne la partie graphique de l’application. Nous n’avons pas encore abordé cet aspect : vous n’aurez rien à modifier.</li>
+<li>le package <code>fr.upsaclay.bibs.fieldsystem.test</code> contient l’ensemble des tests que les classes devront satisfaire.</li>
+<li>la classe <code>FieldSystem</code> dans le package <code>fr.upsaclay.bibs.fieldsystem</code> contient une fonction <code>main</code> déjà écrite (et très simple à comprendre) que vous pourrez utiliser quand vous aurez complété l’application.</li>
+<li>Le travail à faire réside dans le package <code>fr.upsaclay.bibs.fieldsystem.sheepfield</code> qui correspond au modèle du système dynamique. Le système lui-même est déjà écrit dans la classe <code>Field</code> : cette une grille rectangulaire où chaque case contient une liste de d’objets de type <code>FieldElement</code>, ce sont ces objets que vous allez écrire (l’herbe, les moutons et les loups)</li>
+</ul>
+<h3 id="linterface-fieldelement">L’interface <code>FieldElement</code></h3>
+<p>Cette interface vous ait donnée : elle permet de représenter tous les éléments évoluant dans le champ. Vous allez compléter les différentes classes implémentant l’interface en utilisant l’héritage et les classes abstraites.</p>
+<p>Il y a 3 types de <code>FieldElement</code> : l’herbe (classe <code>Grass</code>), les moutons (classe <code>Sheep</code>) et les loups (classe <code>Wolf</code>). Les classes suivent la structure d’héritage suivante :</p>
+<figure>
+<img src="media/diagrams/FieldElement.png" alt="" /><figcaption>La classe abstraite AbstractFieldElement implémente l’interface. Grass et AbstractAnimal héritent de AbstractFieldElement. Sheep et Wolf héritent de AbstractAnimal.</figcaption>
+</figure>
+<p>La classe <code>AbstractFieldElement</code> est déjà implantée, on reviendra sur son rôle et son fonctionnement. Vous implanterez (dans cet ordre) : la classe <code>Grass</code>, puis les classes <code>Sheep</code> et <code>AbstractAnimal</code> et enfin la classe <code>Wolf</code>. Le TP vous indiquera les étapes et vous donnera les explications nécessaires.</p>
+<h2 id="avant-de-commencer-quelques-nouveauté">Avant de commencer : quelques nouveauté</h2>
+<section id="les-classes-enum" class="explication">
+<h3>Les classes enum</h3>
+<p>La classe <code>FieldElementType</code> est une classe particulière de type <code>enum</code> : cela reproduit le type enum du C. Les éléments de cette classes sont des objets comme les autres mais les seules instances possibles sont celles énumérées <code>GRASS</code> <code>SHEEP</code> et <code>WOLF</code> qui sont en réalité des constantes statiques. Pour les utiliser, on écrit par exemple</p>
+<pre><code>FieldElementType type = FieldElementType.SHEEP</code></pre>
+<p>La variable <code>type</code> est ensuite un objet de type <code>FieldElementType</code>. Elle possède la méthode <code>getLevel</code> qui pour le mouton renvoie 1.</p>
+<p>Le type enum permet de facilement tester l’ensemble des posibilités avec une conditions de type <code>switch</code>. Un exemple vous est donné dans la classe <code>DrawPanel</code> du package <code>fr.upsaclay.bibs.fieldsystem.view</code> :</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">switch</span>(element.<span class="fu">getType</span>()) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>    <span class="kw">case</span> GRASS:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>        <span class="fu">paintGrass</span>(g, i, j);</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>        <span class="kw">break</span>;</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>    <span class="kw">case</span> SHEEP:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>        <span class="fu">paintAnimal</span>(g, i, j, <span class="bu">Color</span>.<span class="fu">WHITE</span>, element.<span class="fu">isWeak</span>());</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>        <span class="kw">break</span>;</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>    <span class="kw">case</span> WOLF:</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>        <span class="fu">paintAnimal</span>(g, i, j, <span class="bu">Color</span>.<span class="fu">BLACK</span>, element.<span class="fu">isWeak</span>());</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>        <span class="kw">break</span>;</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>}</span></code></pre></div>
+</section>
+<section id="les-classes-record" class="explication">
+<h3>Les classes record</h3>
+<p>Les classes record sont des classes particulières qui correspondent plus ou moins aux structures du C (sauf qu’on ne peut pas les modifier). L’objectif de ces classes est simplement de stocker un ensemble de variables dans une structure. C’est le cas ici de la classe <code>Position</code> et de la classe <code>FieldMove</code> : les paramètres déclarés du record sont stockés comme des champs privé et finaux. Le constructeur et les méthodes d’accès sont créées automatiquement. Par exemple, dans le cas de la classe <code>Position</code>, on pourra créer un objet de cette façon :</p>
+<pre><code>Position pos = new Position(1,2);</code></pre>
+<p>puis accéder aux champs <code>x</code> et <code>y</code></p>
+<pre><code>pos.x();
+pos.y();</code></pre>
+</section>
+<h3 id="du-java-un-peu-avancé">Du Java un peu avancé</h3>
+<p>La classe <code>Field</code> contient des éléments de Java avancés : interface fonctionnels et lambda fonctions, classes internes, implémentation d’itérateur, etc. Vous pouvez regarder son fonctionnement par curiosité et intérêt mais on ne vous demande pas de tout comprendre !</p>
+<h2 id="exercice-1-la-classe-grass">Exercice 1 : La classe <code>Grass</code></h2>
+<h3 id="la-classe-abstractfieldelement">La classe <code>AbstractFieldElement</code></h3>
+<p>La classe <code>Grass</code> hérite de la classe <code>AbstractFieldElement</code> et implémente donc les méthodes déclarées dans l’interface <code>FieldElement</code>. Ces méthodes représentent les actions, évolution et état des différents éléments du champ qui vont permettre à la classe <code>Field</code> de faire évoluer le système.</p>
+<p>La classe <code>AbstractFieldElement</code> donne une implémentation par défaut de toutes ces méthodes ce qui va permettre à chaque élément de réécrire les méthodes qui lui sont propres. Par défaut, les éléments sont vivants, inactifs, ne mangent pas, ne se reproduisent pas et ne se déplacent pas.</p>
+<p>Par ailleurs, la classe implémente le fonctionnement général des éléments. Son constructeur prend en paramètre une variable <code>FieldElementType type</code> qui va stocker le type d’élément (dans notre cas, chaque implémentation d’élément correspond à un type différent mais ça n’est pas forcément le cas en général).</p>
+<p>On trouve aussi une première implémentation des méthodes <code>activate</code> et <code>evolve</code> : au moment de leur activation, les éléments reçoivent un certain <code>lifespan</code> qui diminue à chaque évolution. Lorsque le <code>lifespan</code> arrive à 0, la classe appelle la méthode <code>actionZeroLifeSpan</code> qui va dépendre de chaque élément</p>
+<section id="méthodes-abstraites" class="explication">
+<h3>Méthodes abstraites</h3>
+<p>Les méthodes <code>actionZeroLifeSpan</code> et <code>getInitialLifeSpan</code> sont déclarées dans la classe abstraite comme <code>abstract</code> mais le code sera écrit dans les classes filles.</p>
+</section>
+<section id="méthodes-protected" class="explication">
+<h3>Méthodes protected</h3>
+<p>La classe <code>AbstractFieldElement</code> déclare des méthodes de visibilité <code>protected</code> comme <code>setLifeSpan</code> et <code>increaseLifeSpan</code>: ces méthodes n’appartiennent pas à l’interface <code>FieldElement</code> mais peuvent être utilisées par les classes filles pour interagir avec la super classe. En effet, le champ <code>lifespan</code> étant privé, il ne pourra pas être modifié par les classes filles.</p>
+</section>
+<h3 id="implémentation-des-constructeurs">Implémentation des constructeurs</h3>
+<p>On a implanté pour vous le constructeur suivant</p>
+<pre><code>public Grass(boolean active, double grassProba)</code></pre>
+<p>Ce constructeur appelle le constructeur de la super classe en lui passant le bon type puis mets à jour les paramètres de la classe <code>Grass</code> avec les méthodes <code>setGrassProba</code> et <code>activate</code>.</p>
+<ol type="1">
+<li><p>Implantez la méthode <code>setGrassProba</code> : cette méthode doit lever une exception</p>
+<pre><code> throw new IllegalArgumentException();</code></pre>
+<p>si la probabilité est inférieure stricte à 0 ou supérieure stricte à 1. Ensuite, le champ <code>grassProba</code> est mis à jour avec la valeur envoyée.</p></li>
+<li><p>Implantez la méthode <code>activate</code> : elle doit appelée la méthode de la super classe avec <code>super.activate()</code> puis passer le champ <code>active</code> à <code>true</code>.</p></li>
+<li><p>Implantez la méthode <code>getInitialLifeSpan</code> qui renvoie la valeur statique par défaut <code>Grass.defaultLifeSpan</code> (ce qui signifie que si l’on modifie la valeur statique, on modifie en temps réel toutes les valeurs pour tous les objets <code>Grass</code>)</p></li>
+<li><p>Ouvrez le fichier <code>GrassTest</code> et lancez les tests. Les premiers tests de <code>testCreation</code> doivent passer.</p></li>
+<li><p>Implantez les autres constructeurs de la classe <code>Grass</code> : ils appellent le constructeur principal avec les bons paramètres puis effectuent les actions nécessaires :</p>
+<ul>
+<li>Si <code>grassProba</code> n’est pas envoyé, on doit utiliser la valeur statique par défaut <code>Grass.defaultProba</code></li>
+<li>Si l’état de départ (<code>active</code>) n’est pas spécifié, on doit lancer la méthode <code>randomActivate</code> (déjà implantée) pour activer l’hervbe de façon aléatoire.</li>
+</ul></li>
+<li><p>Lancez les tests : tous les tests de <code>testCreation</code>doivent passer.</p></li>
+</ol>
+<h3 id="autres-méthodes">Autres méthodes</h3>
+<p>Le fonctionnement des éléments <code>Grass</code> est le suivant : les éléments ne meurent jamais (on garde la méthode par défaut <code>isDead</code> de <code>AbstractFieldElement</code> qui renvoie toujours <code>false</code>). L’herbe peut cependant être active ou inactive. Lorsqu’elle est activée, elle reste active un certains nombre de tour puis devient inactive. Lorsqu’elle est inactive, elle peut être activée aléatoirement à chaque tour (en utilisant <code>grassProba</code>)</p>
+<ol start="7" type="1">
+<li><p>Implantez la méthode <code>actionZeroLifeSpan</code> : cette méthode est appelée par la super classe quand le <code>lifespan</code> d’un élément actif arrive à 0. Pour l’herbe, il s’agit juste de passer le champ <code>active</code> à <code>false</code>.</p></li>
+<li><p>Implantez la méthode <code>evolve</code> : cette méthode doit appelée la méthode <code>evolve</code> de la super classe puis, si l’herbe est inactive, appeler la méthode <code>randomActivate</code> pour l’activer de façon aléatoire.</p></li>
+<li><p>Lancez les tests : tout doit passer sauf <code>testEaten</code></p></li>
+<li><p>La méthode <code>eaten</code> représente ce qui doit être fait quand l’herbe est “mangée” : dans ce cas l’herbe devient inactive</p></li>
+<li><p>Lancez les tests : tout doit maintenant passer !</p></li>
+<li><p>Lancez la fonction main de la classe <code>FieldSystem</code> : les éléments herbes sont ajoutés automatiquement à la création de champ (avec une probabilité aléatoire d’activation). Vous devriez voir aparaitre un grand rectangle avec des petits carrés verts qui apparaissent et disparaissent. C’est notre champ !</p></li>
+</ol>
+<h2 id="exercice-2-les-moutons">Exercice 2 : Les moutons</h2>
+<p>On va maintenant implantez les animaux qui héritent tous de la classe <code>AbstractAnimal</code>. L’objectif est de compléter les classes <code>AbstractAnimal</code> et <code>Sheep</code> de telle sorte à ce que tous les tests de <code>SheepTest</code> passent.</p>
+<h3 id="fonctionnement-des-animaux">Fonctionnement des animaux</h3>
+<p>Contrairement aux éléments <code>Grass</code>, les animaux peuvent être vivants ou morts (les animaux morts sont en fait retirés du champ, alors que les éléments inactifs comme l’herbe restent présents mais invisibles). La classe <code>AbstractAnimal</code> stocke donc un champ <code>dead</code> : les animaux sont considérés comme actif s’ils ne sont pas morts.</p>
+<p>Par ailleurs, ils ont des fonctionnalités en plus comme le fait de pourvoir manger, se reproduire et se déplacer. La plupart des actions peuvent être traitées de façon uniforme pour tous les animaux et sont donc implémentées dans <code>AbstractAnimal</code> avec parfois l’utilisation de certaines méthodes abstraites qui correspondent au comportement spécifique de chaque type d’animal.</p>
+<h3 id="constructeurs">Constructeurs</h3>
+<ol start="13" type="1">
+<li><p>Le constructeur de la classe <code>AbstractAnimal</code> est déjà implanté. Implantez le constructeur de la classe <code>Sheep</code> : il y a seulement à appeler le super constructeur avec le bon type.</p></li>
+<li><p>Implantez les méthodes <code>isActive</code> et <code>isDead</code> de <code>AbstractAnimal</code> (en utilisant la valeur de <code>dead</code>)</p></li>
+<li><p>Vérifiez les que les tests de <code>testCreate</code> dans <code>SheepTest</code> fonctionnent</p></li>
+</ol>
+<h3 id="état">État</h3>
+<ol start="16" type="1">
+<li><p>Implantez la méthode <code>getWeakLevel</code> dans <code>Sheep</code> (elle renvoie la valeur statique par défaut de la classe <code>Sheep</code>). Vérifiez que les tests de <code>testGetWeakLevel</code> fonctionnent.</p></li>
+<li><p>Implantez la méthode <code>isWeak</code> de abstract animal qui renvoie true si le <code>lifespan</code> de l’animal est inférieur ou égal à son <code>weakLevel</code>. Vérifiez que les tests de <code>testIsWeak</code> passent.</p></li>
+</ol>
+<h3 id="évolution">Évolution</h3>
+<p>L’évolution des animaux est gérée par <code>AbstractElement</code>. La seule chose à implémenter est <code>actionZeroLifeSpan</code> : les animaux meurent (quand <code>lifespan</code> tombe à 0)</p>
+<ol start="18" type="1">
+<li>Implantez <code>actionZeroLifeSpan</code> dans <code>AbstractAnimal</code> et vérifiez que les tests <code>testEvolveDead</code> et <code>testEvolveWeak</code> passent bien.</li>
+</ol>
+<h3 id="nourriture">Nourriture</h3>
+<p>Les animaux peuvent manger mais seulement s’ils sont vivants et si le type de l’élément qu’ils souhaitent manger appartient au niveau juste en dessous du leur (le niveau est donné par le <code>getLevel</code> du type). Les moutons peuvent manger l’herbe pas ne peuvent pas manger les loups. Les loups peuvent manger les moutons mais pas l’herbe.</p>
+<p>Lorsqu’ils mangent, les animaux augmentent leur <code>lifespan</code> de la valeur donnée par <code>getIncreasePerEat</code>.</p>
+<p>Lorsqu’ils sont mangés, les animaux meurent.</p>
+<p>Ces actions sont gérées par trois méthodes <code>canEat</code> <code>eat</code> et <code>eaten</code> et sont implantées en partie dans <code>AbstractFieldElement</code>, <code>AbstractAnimal</code> et enfin <code>Sheep</code> qui n’implémente que <code>getIncreasePerEat</code>.</p>
+<ol start="19" type="1">
+<li>Implantez <code>getIncreasePerEat</code> dans <code>Sheep</code> ainsi que les méthodes nécessaires dans <code>AbstractAnimal</code> pour que les tests <code>testCanEat</code> <code>testEat</code> et <code>testEaten</code> fonctionnent. Pensez à regarder ce qui est implanté dans <code>AbstractFieldElement</code> et a appelé la méthode de la super classe quand c’est nécessaire.</li>
+</ol>
+<h3 id="reproduction">Reproduction</h3>
+<p>Chaque animal peut, à chaque tour, se “reproduire”, c’est à dire se dédoubler. Cette action est gérée par la méthode <code>conditionnalReproduce</code>. La méthode par défaut de <code>AbstractFieldElement</code> renvoie simplement <code>null</code> ce qui signifie qu’il n’y a pas eu de reproduction.</p>
+<ol start="20" type="1">
+<li><p>Dans <code>Sheep</code> implantez la méthode <code>testNewInstance</code> : cette méthode est définie comme abstraite dans <code>AbstractAnimal</code> , elle doit simplement renvoyer une nouvelle instance de la classe <code>Sheep</code>.</p></li>
+<li><p>Dans <code>AbstractAnimal</code>, implantez la méthode <code>conditionalReproduce</code> . Le fonctionnement est le suivant : si l’animal n’est pas faible (méthode <code>isWeak</code>) et si un nombre tiré au hasard (avec <code>Math.random</code>) est inférieur à la probabilité de reproduction, alors, on renvoie une nouvelle instance de l’animal. Sinon, on renvoie <code>null</code>.</p></li>
+<li><p>Vérifiez que les tests de <code>testConditionalReproduce</code> passent.</p></li>
+</ol>
+<h3 id="mouvement">Mouvement</h3>
+<p>Les animaux avancent avec une certaine vitesse déterminée par la méthode <code>getSpeed</code> : c’est le nombre de pas qu’ils peuvent faire en un tour. Un pas est un déplacement horizontal ou vertical d’une unité.</p>
+<ol start="23" type="1">
+<li><p>Implantez la méthode <code>getSpeed</code> de <code>Sheep</code> et vérifiez que les tests de <code>testGetSpeed</code> passent.</p></li>
+<li><p>Les animaux peuvent se dépcer s’ils sont vivants. Dans <code>AbstractAnimal</code>, implantez la méthode <code>canMove</code> et vérifiez que les tests de <code>testCanMove</code> passent.</p></li>
+<li><p>Enfin, implantez la méthode <code>nextMove</code> dans <code>abstractAnimal</code> (la documentation se trouve au niveau de l’interface <code>FieldElement</code>). Cette méthode prend en paramètre une position de départ et une position cible. Elle doit renvoyer un mouvement <code>FieldMove</code> c’est-à-dire un objet structuré contenant l’animal lui-même, sa position actuelle et sa nouvelle position calculée en fonction de sa cible et de sa vitesse. Un exemple vous ai donné dans le cas où l’animal a déjà atteint sa cible.</p></li>
+</ol>
+<p>Pour implanter cette méthode, vous devez :</p>
+<ul>
+<li>récupérer la vitesse de l’animal avec <code>getSpeed</code></li>
+<li>calculer une position qui se rapproche de la cible en faisant le bon nombre de pas. Les animaux avancent de façon horizontale ou verticale en choisissant la direction où ils ont le plus à parcourir. De nombreux tests vous sont proposés qui peuvent vous servir d’exemple.</li>
+</ul>
+<h3 id="un-champ-de-mouton">Un champ de mouton</h3>
+<ol start="26" type="1">
+<li><p>Vérifiez que l’ensemble des tests de <code>SheepTest</code> passent.</p></li>
+<li><p>Dans la fonction <code>main</code> de la classe <code>FieldSystem</code>, décommentez la ligne qui permet d’ajouter les moutons au champ et exécutez le programme. Vous devriez voir les moutons sous forme de points blancs se déplacer pour manger les zones d’herbes.</p></li>
+</ol>
+<h2 id="les-loups">Les Loups</h2>
+<p>Le même travaille est à effectuer pour la classe <code>Wolf</code> qui représente les loups. Mais une grande partie partie a déjà été faite dans la classe <code>AbstractAnimal</code> et il ne reste plus qu’à écrire les quelques méthodes spécifiques aux loups et nécessaires au bon fonctionnement de la classe.</p>
+<p>On vous fourni une classe <code>Wolf</code> qui contient, comme les classes <code>Sheep</code> et <code>Grass</code>, une liste de paramètres statiques avec des méthodes statiques de modification.</p>
+<ol start="28" type="1">
+<li><p>Modifiez la déclaration de la classe <code>Wolf</code> pour qu’elle hérite de la classe <code>AbstractAnimal</code> : des erreurs apparaissent car il faut maintenant implantez les méthdoes abstraites déclarées dans <code>AbstractAnimal</code></p></li>
+<li><p>En vous inspirant de la classe <code>Sheep</code> (c’est la même chose), implantez les méthodes de la classe <code>Wolf</code> . Décommentez les tests de <code>WolfTest</code> et faites en sorte que tous les tests passent.</p></li>
+<li><p>Dans la fonction <code>main</code> de la classe <code>FieldSystem</code>, décommentez la ligne qui permet d’ajouter les loups au champ et exécutez le programme. Vous devriez voir maintenant à la fois des moutons (blancs) et des loups (noirs) se déplacer dans le champ et interagir.</p></li>
+</ol>
+<h2 id="aller-plus-loin">Aller plus loin</h2>
+<p>On a maintenant un modèle complet de système dynamique qui fonctionne. Vous pouvez facilement l’étendre en ajoutant ou en modifiant certains éléments. Par exemple</p>
+<ul>
+<li><p>Ajoutez un prédateur pour les loups : il faut créer une nouvelle classe d’animaux ainsi que le type correspondant. Si vous ajoutez un type d’animal, il faut aussi modifier légèrement l’objet d’affichage pour que le nouvel animal puisse être dessiné.</p></li>
+<li><p>Créer des implantations différentes des moutons et des loups : d’autres classes peuvent implanter ces animaux, par exemple avec des paramètres différents. On pourrait avoir à la fois des moutons rapides et des moutons lents.</p></li>
+<li><p>Laissez jouer votre imagination : que souhaitez vous faire ? Le système permet beaucoup de choses. Le comportement par défaut de <code>AbstractAnimal</code> peut être modifier simplement en <em>héritant</em> de la classe et en surchargeant (Override) les méthodes nécessaires.</p></li>
+</ul>
+</section>
+</body>
+</html>

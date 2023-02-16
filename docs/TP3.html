@@ -257,7 +257,7 @@ private static int count = 0;</code></pre></li>
 }</code></pre></li>
 </ol>
 <p>pour récupérer la liste de note. Vérifiez que les tests de <code>testGetGradeList</code> fonctionnent.</p>
-<ol start="30" type="1">
+<ol start="31" type="1">
 <li>Modifiez votre déclaration de classe <code>Student</code> pour qu’elle implémente l’interface <code>Gradable</code> en plus de <code>Comparable</code> (on écrit les différentes interfaces implémentées en séparant par des virgules). La seule méthode à implanter est <code>gradeOver</code> qui doit renvoyer la note calculée par <code>gradeList</code> (c’est-à-dire la moyenne de l’étudiant). Vérifiez que les tests de <code>testDefaultCoefficient</code> et <code>testGradeOver</code> fonctionnent.</li>
 </ol>
 <section id="polymorphisme" class="explication">
@@ -266,13 +266,13 @@ private static int count = 0;</code></pre></li>
 <p>En fonction du type déclaré <code>Student</code> ou <code>Gradable</code> on aura accès à plus ou moins de fonctionnalités : c’est le polymorphisme.</p>
 </section>
 <h2 id="exercice-4-une-fonction-main">Exercice 4 : une fonction <code>main</code></h2>
-<ol start="28" type="1">
+<ol start="32" type="1">
 <li><p>Récupérez le nouveau fichier <code>grades.txt</code> <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP3_BaseEtudiants/resources/grades.txt">présent ici</a>. Chaque ligne suit le format suivant</p>
 <pre><code>NOM, Prénom, note, note, note</code></pre></li>
 </ol>
 <p>On considère que la première note <strong>a coefficient 2</strong> tandis que les 2 autres notes ont chacune <strong>coefficient 1</strong>.</p>
 <p>Écrivez une fonction main qui crée à partir du fichier une liste d’étudiants de type <code>GradeList&lt;Student&gt;</code> : chaque étudiant contiendra à son tour la liste de notes qui lui ait associée avec les bons coefficients.</p>
-<ol start="29" type="1">
+<ol start="33" type="1">
 <li><p>Affichez :</p>
 <ul>
 <li>la liste des étudiants avec leur moyenne</li>

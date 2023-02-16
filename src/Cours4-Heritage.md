@@ -149,6 +149,12 @@ C'est une classe qui ne peut pas être instanciée ! Mais pourquoi ??
 
 ![UML diagram: a interface Animal with subclass AstractAnimal implementing some of the methods and adding some protected methods. Two subclasses of AbstrastAnimal : sheep and wolf implementing the canEat method of the interface](media/diagrams/AbstractAnimal.png){height=80%} \
 
+----
+
+## Application
+
+Réalisation d'un système dynamique avec une structure de classe complexe : [Le TP](TP4.html)
+
 
 
 

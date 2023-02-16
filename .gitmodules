@@ -1,0 +1,3 @@
+[submodule "exercices/TP4_Heritage"]
+	path = exercices/TP4_Heritage
+	url = git@gitlab.dsi.universite-paris-saclay.fr:javabibs/TP4_Heritage.git
