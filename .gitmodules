@@ -1,3 +1,6 @@
 [submodule "exercices/TP4_Heritage"]
 	path = exercices/TP4_Heritage
 	url = git@gitlab.dsi.universite-paris-saclay.fr:javabibs/TP4_Heritage.git
+[submodule "exercices/TP5_MVC"]
+	path = exercices/TP5_MVC
+	url = git@gitlab.dsi.universite-paris-saclay.fr:javabibs/TP5_MVC.git

@@ -6,6 +6,8 @@ import re
 
 DEST = "exercices"
 
+NOTINC = "// NOT INCLUDED"
+
 IGNORES = {"bin", ".settings", "output"}
 SIMPLE_COPY = {"txt"}
 SOLUTION_COPY = {"java"}
@@ -83,7 +85,11 @@ def make_exercise(src, dest, path):
             cmd = f"cp {src_file} {dest_file}"
             os.system(cmd)
         elif ext in SOLUTION_COPY:
-            solution_copy(src_file, dest_file)
+            src_file_test = open(src_file, "r")
+            line = src_file_test.readline()
+            src_file_test.close()
+            if line.find(NOTINC) == -1:
+                solution_copy(src_file, dest_file)
     elif os.path.isdir(src_file):
         if not os.path.isdir(dest_file):
             os.mkdir(dest_file)

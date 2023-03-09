@@ -9,17 +9,25 @@ import javax.swing.JPanel;
 import fr.upsaclay.bibs.fieldsystem.sheepfield.Field;
 import fr.upsaclay.bibs.fieldsystem.sheepfield.FieldElement;
 
+/**
+ * A customized implementation of JPanel to draw the on going simulation
+ * 
+ * @author Viviane Pons
+ *
+ */
 public class DrawPanel extends JPanel{
-	
-	private final Dimension fieldDimension;
 	
 	private Field field;
 	
 	
-	public DrawPanel(int width, int height) {
+	public DrawPanel(int widthField, int heihtField) {
 		super();
-		this.fieldDimension = new Dimension(width, height);
+		setPreferredSize(new Dimension(widthField * SwingFieldView.PIXELS_PER_CELLS, heihtField * SwingFieldView.PIXELS_PER_CELLS));
 		
+	}
+	
+	public void initialize() {
+		setBackground(Color.WHITE);
 	}
 	
 	public void paintGrass(Graphics g, int i, int j) {
@@ -40,32 +48,31 @@ public class DrawPanel extends JPanel{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        for(int i = 0; i < field.getHeight(); i++) {
-        	for(int j = 0; j < field.getWidth(); j++) {
-        		for(FieldElement element : field.getElements(i, j)) {
-        			if(element.isActive()) {
-        				switch(element.getType()) {
-            			case GRASS:
-            				paintGrass(g, i, j);
-            				break;
-            			case SHEEP:
-            				paintAnimal(g, i, j, Color.WHITE, element.isWeak());
-            				break;
-            			case WOLF:
-            				paintAnimal(g, i, j, Color.BLACK, element.isWeak());
-            				break;
-            			}
-        				
-        			}
-        		}
-        	}
+        if(field != null) {
+	        for(int i = 0; i < field.getHeight(); i++) {
+	        	for(int j = 0; j < field.getWidth(); j++) {
+	        		for(FieldElement element : field.getElements(i, j)) {
+	        			if(element.isActive()) {
+	        				switch(element.getType()) {
+	            			case GRASS:
+	            				paintGrass(g, i, j);
+	            				break;
+	            			case SHEEP:
+	            				paintAnimal(g, i, j, Color.WHITE, element.isWeak());
+	            				break;
+	            			case WOLF:
+	            				paintAnimal(g, i, j, Color.BLACK, element.isWeak());
+	            				break;
+	            			}
+	        				
+	        			}
+	        		}
+	        	}
+	        }
         }
 
     }
-    @Override
-    public Dimension getPreferredSize(){
-        return fieldDimension;
-    }
+
 
 
 	public Field getField() {
