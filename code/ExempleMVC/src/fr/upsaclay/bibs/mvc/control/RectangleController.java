@@ -9,9 +9,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import fr.upsaclay.bibs.mvc.model.Rectangle;
-import fr.upsaclay.bibs.view.RectangleAppActionComponent;
-import fr.upsaclay.bibs.view.RectangleAppFrame;
-import fr.upsaclay.bibs.view.RectangleAppView;
+import fr.upsaclay.bibs.mvc.view.RectangleAppActionComponent;
+import fr.upsaclay.bibs.mvc.view.RectangleAppFrame;
+import fr.upsaclay.bibs.mvc.view.RectangleAppView;
 
 public class RectangleController implements ActionListener, KeyListener {
 	

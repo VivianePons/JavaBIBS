@@ -1,4 +1,4 @@
-package fr.upsaclay.bibs.view;
+package fr.upsaclay.bibs.mvc.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
