@@ -11,9 +11,9 @@ SRC = src
 EXERCICES = exercices
 CODE = code
 
-CoursesNames=Cours1-IntroBase Cours2-Collections Cours3-Classes Cours4-Heritage Cours5-Graphique
+CoursesNames=Cours1-IntroBase Cours2-Collections Cours3-Classes Cours4-Heritage Cours5-Graphique CoursProjet-git
 
-TPNames=TP1 TP2 TP3 TP4 TP5
+TPNames=TP1 TP2 TP3 TP4 TP5 TP-Projet
 
 CoursesHTML=$(foreach course, $(CoursesNames), $(OUTPUTDIR)/$(course).html)
 CoursesPDF = $(foreach course, $(CoursesNames), $(OUTPUTDIR)/pdf/$(course).pdf)

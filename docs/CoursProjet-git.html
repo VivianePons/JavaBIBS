@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Viviane Pons" />
+  <title>Programmation Orientée Objet – Java</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+   href="slidy/custom.css" />
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Programmation Orientée Objet – Java</h1>
+  <p class="subtitle">Projet : Minicours git</p>
+  <p class="author">
+Viviane Pons
+  </p>
+  <p class="date">Master BIBS Université Paris-Saclay</p>
+</div>
+<div id="quest-ce-que-git" class="slide section level2">
+<h1>Qu’est-ce que <code>git</code> ?</h1>
+<p>Réponse : un système de gestion de versions. A chaque étape, ce qui est sauvegardé est la <em>différence</em> par rapport à la version précédente. On peut donc <em>revenir en arrière</em>.</p>
+</div>
+<div id="quest-ce-que-permet-git" class="slide section level2">
+<h1>Qu’est-ce que permet <code>git</code> ?</h1>
+<ul>
+<li>revenir à une ancienne version</li>
+<li>collaboration</li>
+</ul>
+</div>
+<div id="comment-on-lutilise" class="slide section level2">
+<h1>Comment on l’utilise ?</h1>
+<p>Schéma habituel d’une collaboration :</p>
+<ul>
+<li>chaque personne installe <code>git</code> sur sa machine</li>
+<li>une personne crée un “repo” (= <em>repository</em>) sur une machine distante (par exemple sur <em>github</em> ou <em>gitlab</em>) et donne accès aux autres</li>
+<li>chaque membre effectue un “clone du repo” sur sa machine</li>
+<li>les membres font des modifications locales qu’ils et elles “poussent” ensuite sur le repo distant</li>
+<li>les membres récupèrent la dernière version depuis le repo distant</li>
+</ul>
+</div>
+<div id="info-importante" class="slide section level2">
+<h1>Info importante</h1>
+<p>La copie locale d’un projet contient <strong>les mêmes informations</strong> que la copie “principale” sur le serveur distant : c’est-à-dire qu’il y a bien tout l’historique et l’ensemble des versions du projet.</p>
+<p>On n’est donc pas <strong>dépendant</strong> du serveur distant : on peut en changer.</p>
+</div>
+<div id="a-quoi-sert-le-serveur-distant" class="slide section level2">
+<h1>A quoi sert le serveur distant ?</h1>
+<p>Il faut se mettre d’accord sur un serveur pour que tout le monde pousse et récupère les infos au même endroit. En général, on utilise un service en ligne comme <code>github</code> ou <code>gitlab</code>.</p>
+</div>
+<div id="cest-quoi-github-et-gitlab-cest-quoi-la-différence-avec-git" class="slide section level2">
+<h1>C’est quoi <code>github</code> et <code>gitlab</code> ? C’est quoi la différence avec <code>git</code> ?</h1>
+<p><code>git</code> est le logiciel de gestion de version qu’on installe sur sa machine. C’est un logiciel open source et il ne dépend d’aucune plateforme en particulier.</p>
+<p><code>github</code> est une plateforme privée (possédée par Microsoft) qui offre un <em>service</em> : des serveurs pour créer des repo <code>git</code> et d’autres choses liées à de la gestion de projet (les <code>issue</code>, les <code>pull request</code>, les groupes, la gestion des droits et des accès, les labels, etc.)</p>
+<p><code>gitlab</code> est à la fois un logiciel open-source qui propose des fonctionnalités de gestion de serveurs <code>git</code> et gestion de projet “comme <code>github</code>” ET une plateforme <code>gitlab.com</code> avec un service <code>gitlab</code>.</p>
+</div>
+<div id="une-plateforme-gitlab-à-luniversité" class="slide section level2">
+<h1>Une plateforme <code>gitlab</code> à l’université</h1>
+<p>L’université Paris-Saclay propose un accès à un serveur <code>gitlab</code> à l’ensemble de ses personnels et étutiant-es. La plateforme utilise le logiciel open-source <code>gitlab</code> mais est hébergée et gérée par l’université.</p>
+<p><a href="https://gitlab.dsi.universite-paris-saclay.fr">https://gitlab.dsi.universite-paris-saclay.fr</a></p>
+<p>Vous avez déjà utilisé cette plateforme pour récupérer certains TP. Nous allons l’utiliser pour le projet. <a href="TP-Projet.html">Pour les détails et les principales commandes git, voir ici</a></p>
+</div>
+</body>
+</html>

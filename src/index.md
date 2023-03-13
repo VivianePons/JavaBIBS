@@ -25,3 +25,8 @@ Toutes les sources (en partciluer les codes java et les exercices corrigés) son
   - [Slides version html](Cours5-Graphique.html)
   - [Slides en version pdf](pdf/Cours5-Graphique.pdf)
   - [TP5](TP5.html)
+  
+## Projet
+
+* [Minicours sur Git](CoursProjet-git.html)
+* [Récupération du projet et utilisation de git](TP-Projet.html)
