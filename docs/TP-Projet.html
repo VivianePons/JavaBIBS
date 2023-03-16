@@ -19,7 +19,94 @@
 <header id="title-block-header">
 <h1 class="title">Projet Programmation orientée objet</h1>
 </header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#pour-récupérer-le-projet">Pour récupérer le projet</a>
+<ul>
+<li><a href="#etape-1-se-connecter-sur-gitlab">Etape 1 : se connecter sur gitlab</a></li>
+<li><a href="#etape-2-fork">Etape 2 : fork</a></li>
+<li><a href="#etape-3-ajouter-les-membres-du-groupes">Etape 3 : Ajouter les membres du groupes</a></li>
+<li><a href="#etape-4-configuration-de-git">Etape 4 : configuration de git</a></li>
+<li><a href="#etape-5-cloner-votre-projet">Etape 5 : cloner votre projet</a></li>
+<li><a href="#etape-6">Etape 6 :</a></li>
+</ul></li>
+<li><a href="#les-principales-commandes-git-dont-on-a-besoin">Les principales commandes git dont on a besoin</a>
+<ul>
+<li><a href="#pour-récupérer-un-nouveau-projet">Pour récupérer un nouveau projet</a></li>
+<li><a href="#avant-chaque-séance-de-travail-récupérer-les-dernières-modification">Avant chaque séance de travail : récupérer les dernières modification</a></li>
+<li><a href="#voir-les-modifications-en-cours">Voir les modifications en cours</a></li>
+<li><a href="#après-chaque-séance-enregistrer-et-pusher-votre-travail">Après chaque séance : enregistrer et pusher votre travail</a></li>
+<li><a href="#si-le-pull-ne-marche-pas">Si le <code>pull</code> ne marche pas ?</a></li>
+<li><a href="#si-le-push-ne-marche-pas">Si le <code>push</code> ne marche pas</a></li>
+<li><a href="#pour-éviter-les-conflits-que-faire">Pour éviter les conflits, que faire ?</a></li>
+<li><a href="#il-y-a-tout-de-même-des-conflits-on-est-perdu">Il y a tout de même des conflits ! On est Perdu !</a></li>
+</ul></li>
+</ul>
+</nav>
 <section class="content">
+<h2 id="pour-récupérer-le-projet">Pour récupérer le projet</h2>
+<h3 id="etape-1-se-connecter-sur-gitlab">Etape 1 : se connecter sur gitlab</h3>
+<p>Se connecter sur <a href="https://gitlab.dsi.universite-paris-saclay.fr/">https://gitlab.dsi.universite-paris-saclay.fr/</a> en utilisant vos identifiant de l’université.</p>
+<h3 id="etape-2-fork">Etape 2 : fork</h3>
+<p><strong>Une personne par groupe</strong></p>
+<p><a href="https://gitlab.dsi.universite-paris-saclay.fr/javabibs/Projet_Tetris">Le sujet sur gitlab</a></p>
+<p>Cliquez en haut à droite sur “Fork”</p>
+<h3 id="etape-3-ajouter-les-membres-du-groupes">Etape 3 : Ajouter les membres du groupes</h3>
+<p>Project Informations &gt;&gt; Membres</p>
+<p>Ajouter : les autres membres du groupe ainsi que les deux enseignants</p>
+<ul>
+<li>Viviane Pons</li>
+<li>Balthazar Charles</li>
+</ul>
+<h3 id="etape-4-configuration-de-git">Etape 4 : configuration de git</h3>
+<p>Si vous n’avez pas git, <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">installer git</a></p>
+<p>Vous n’avez jamais utilisé git ? Confirguration avant la première utilisation <a href="https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Param%C3%A9trage-%C3%A0-la-premi%C3%A8re-utilisation-de-Git">Plus d’explications ici</a></p>
+<pre><code>$ git config --global user.name &quot;John Doe&quot;
+$ git config --global user.email johndoe@example.com
+$ git config --global core.editor nano</code></pre>
+<p>La dernière ligne est optionnelle : elle permet de configurer votre éditeur par défaut. Par défaut, c’est souvent <code>vim</code>. Si vous ne savez pas ce que c’est que <code>vim</code>, c’est que vous voulez le changer !</p>
+<h3 id="etape-5-cloner-votre-projet">Etape 5 : cloner votre projet</h3>
+<p>Ouvrir un terminal et se placer dans votre répertoire de travail. Puis lancer la commande suivante avec la bonne adresse</p>
+<pre><code>git clone http://l&#39;adresse.git</code></pre>
+<p>L’adresse à cloner se trouve dans <code>gitlab</code> dans le nouveau projet créé après le <code>fork</code></p>
+<h3 id="etape-6">Etape 6 :</h3>
+<p><strong>A faire par tous les membres du groupe, chacun son tour</strong></p>
+<ul>
+<li>Un membre modifie le fichier <code>README.md</code> en rajoutant son nom dans la liste des membres</li>
+<li>Puis lance les commandes <code>git</code> suivantes
+<ul>
+<li><code>git add README.md</code></li>
+<li><code>git commit -m "ajout de mon nom"</code></li>
+<li><code>git push</code></li>
+</ul></li>
+<li>Tous les autres membres lancent <code>git pull</code> et doivent ainsi récuperer le fichier modifié</li>
+</ul>
+<h2 id="les-principales-commandes-git-dont-on-a-besoin">Les principales commandes git dont on a besoin</h2>
+<h3 id="pour-récupérer-un-nouveau-projet">Pour récupérer un nouveau projet</h3>
+<p>(à faire là où on veut copier le projet)</p>
+<p><code>git clone projet</code> : va récupérer un projet sur un serveur distant et en fait une copie locale. Vous Récupérer l’ensemble de projet avec tout son histrique et ses versions.</p>
+<h3 id="avant-chaque-séance-de-travail-récupérer-les-dernières-modification">Avant chaque séance de travail : récupérer les dernières modification</h3>
+<p>(A faire dans le repo git)</p>
+<p><code>git pull</code> : va récupérer les dernières mises à jour sur le projet. Attention, si vous avez des modifications locales, ça ne va pas vouloir le faire !</p>
+<h3 id="voir-les-modifications-en-cours">Voir les modifications en cours</h3>
+<p><code>git status</code> : vous indique quels sont les fichiers que vous avez modifiés localement et si vous êtes à jour</p>
+<h3 id="après-chaque-séance-enregistrer-et-pusher-votre-travail">Après chaque séance : enregistrer et pusher votre travail</h3>
+<p><code>git add src</code> : ajoute toutes les modifications faites dans le repertoire <code>src</code> (à adapter si les modifications sont ailleurs !)</p>
+<p><code>git commit</code> ou <code>git commit -m "mon message"</code> : enregistre vos modifications dans <code>git</code> de façon locale. Un “commit” est toujours accompagné d’un message décrivant les modifications</p>
+<p><code>git push</code> : envoie le ou les commits au serveur principal.</p>
+<h3 id="si-le-pull-ne-marche-pas">Si le <code>pull</code> ne marche pas ?</h3>
+<p>Peut-être avez-vous des modifications locales ? Que dit <code>git status</code> ?</p>
+<ul>
+<li><p>OUI et vous voulez GARDER vos modifs : ajouter vos modifications (avec <code>git add</code>) et faites un commit, puis essayez de nouveau de faire un pull : <code>git</code> va tenter de fusionner les différentes modifications</p></li>
+<li><p>OUI et vous ne voulez PAS les garder : faites <code>git stash</code></p></li>
+<li><p>Non ? Que dit le message d’erreur ? Vous êtes bloqués ? On peut vous aider !</p></li>
+</ul>
+<h3 id="si-le-push-ne-marche-pas">Si le <code>push</code> ne marche pas</h3>
+<p>Peut-être qu’il y a eu des modifications sur le repo que vous n’avez pas récupérées, essayez de faire <code>git pull</code></p>
+<h3 id="pour-éviter-les-conflits-que-faire">Pour éviter les conflits, que faire ?</h3>
+<p>Répartissez vous les tâches et ne travaillez pas en même temps sur le même fichier.</p>
+<h3 id="il-y-a-tout-de-même-des-conflits-on-est-perdu">Il y a tout de même des conflits ! On est Perdu !</h3>
+<p>On est là pour vous aider !!</p>
 </section>
 </body>
 </html>

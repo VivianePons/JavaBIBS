@@ -21,12 +21,29 @@ Toutes les sources (en partciluer les codes java et les exercices corrigés) son
   - [Slides version html](Cours4-Heritage.html)
   - [Slides en version pdf](pdf/Cours4-Heritage.pdf)
   - [TP4](TP4.html)
+* TP Noté : (séance 6)
+  - [Le sujet est disponible ici](https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TPNote_Tamagoshi)
+  - (Un lien sera fourni sous peu pour le TP corrigé)
 * Cours 5 : Applications graphiques et design MVC (séances 7 et 8)
   - [Slides version html](Cours5-Graphique.html)
   - [Slides en version pdf](pdf/Cours5-Graphique.pdf)
   - [TP5](TP5.html)
+* Cours 6 : Gestion des erreurs "Exceptions" (Séance 8)
+  - [Slides en version html](Cours6-Exceptions.html)
+  - [Slides en version pdf](pdf/Cours6-Exceptions.pdf)
+  
   
 ## Projet
 
 * [Minicours sur Git](CoursProjet-git.html)
 * [Récupération du projet et utilisation de git](TP-Projet.html)
+
+## Autrice 
+
+Le cours, les TP, l'ensemble du code présenté en exemple et les exercices corrigés ont été entièrement réalisé par Viviane Pons. Ils sont distribué sous [licence Creative Commons](https://github.com/VivianePons/JavaBIBS/blob/main/LICENSE).
+
+## Références et inspiration
+
+* Livre : *Java. Les fondamentaux du langage (avec exercices pratiques et corrigés)* de Thierry RICHARD. Editions ENI.
+* [Le Cours de Alice Jacquot](https://www.lri.fr/~jacquot/ipo/index.html)
+* [Le Cours de Nicolas Thiéry](https://nicolas.thiery.name/Enseignement/CCI-LO/)

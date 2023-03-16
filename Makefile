@@ -11,7 +11,7 @@ SRC = src
 EXERCICES = exercices
 CODE = code
 
-CoursesNames=Cours1-IntroBase Cours2-Collections Cours3-Classes Cours4-Heritage Cours5-Graphique CoursProjet-git
+CoursesNames=Cours1-IntroBase Cours2-Collections Cours3-Classes Cours4-Heritage Cours5-Graphique CoursProjet-git Cours6-Exceptions
 
 TPNames=TP1 TP2 TP3 TP4 TP5 TP-Projet
 
