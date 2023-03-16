@@ -32,6 +32,8 @@ Toutes les sources (en partciluer les codes java et les exercices corrigés) son
   - [Slides en version html](Cours6-Exceptions.html)
   - [Slides en version pdf](pdf/Cours6-Exceptions.pdf)
   
+Tout ce qu'on n'a pas vu : les modules, les classes et méthodes génériques, les itérateurs, les classes anonymes, les expressions lambdas, les streams
+  
   
 ## Projet
 
