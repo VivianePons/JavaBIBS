@@ -55,7 +55,7 @@ public class Rational {
 
 ~~~~{ .java}
 Rational r1 = new Rational(1,2);
-Rational r2 = new Rational(1,2);
+Rational r2 = new Rational(1,3);
 		
 Rational r3 = r1.add(r2);
 ~~~~
