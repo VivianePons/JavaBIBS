@@ -42,7 +42,7 @@ public class Fonctions {
         // Lisez l'explciation "Type de retour vide et affichage"
         // En vous inspirant de l'exemple "renvoieChaine" ainsi que
         // de la méthode sayHello,  écrivez une méthode
-        // helloString qui envoie la chaine de caractères à afficher
+        // helloString qui renvoie la chaine de caractères à afficher
         // pour que le code ci-dessous fonctionne
 
         // (supprimer les /* et */ pour supprimer le commentaire)
@@ -50,8 +50,8 @@ public class Fonctions {
         System.out.println(helloString(name));
         */
 
-        // Ajouter les nécessaires pour que le code ci-dessous fonctionne
-        // et affiche la réduction (comme dans l'exercice précédent
+        // Ajouter les méthodes nécessaires pour que le code ci-dessous fonctionne
+        // et affiche la réduction (comme dans l'exercice précédent)
 
         /*
         if (hasReduction(age)) {

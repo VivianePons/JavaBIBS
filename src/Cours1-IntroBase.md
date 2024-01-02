@@ -202,41 +202,27 @@ Integrated Development Environment
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
-![Eclispe](media/eclipse.png){width=70%} \
+![IntelliJ](media/IntelliJ.png){width=40%} \
 
 :::
 ::: {.column width="50%"}
-On utilisera **Eclipse**
+On utilisera **IntelliJ**
 
 * tout en un : édition, compilation, exécution
 * analyse syntaxique à la volée
-* libre
-* très courant (existe depuis 2001)
+* existe en version libre
+* spécifique à Java
+* de + en + courant
 :::
 ::::::::::::::
 
----
-
-## Refaisons "Hello World" avec Eclipse
-
-![Ouvrir eclispe et créer un projet Java](media/screen_eclipse.png){width=40%} 
+Autres possibilités : Eclipse, Netbeans
 
 ---
 
-:::::::::::::: {.columns}
-::: {.column width="50%"}
-![On choisit de ne PAS créer le fichier module](media/screen_module.png){width=50%}
+## Refaisons "Hello World" avec IntelliJ
 
-
-:::
-::: {.column width="50%"}
-![Créer une nouvelle classe HelloWorld](media/screen_class.png){width=50%}
-:::
-::::::::::::::
-
----
-
-![On écrit le code restant de la classe HelloWorld et on exécute avec le bouton vert](media/screen_helloWorld.png){width=40%} 
+*Démo*
 
 ---
 

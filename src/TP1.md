@@ -5,15 +5,15 @@ title: 'TP1 POO: premiers programmes en Java'
 <section class="content">
 ## Exercice 1 : les variables
 
-1. Dans Eclipse, créez un nouveau Projet appelé "TP1_Variables". Puis faites bouton droit dans le "Package Explorer" puis cliquez sur "New >> Class". Créez une classe du nom de "Variables" (attention à la majuscule et au s)
-2. Copiez le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP1_Variables/src/Variables.java) dans votre classe `Variables` : c'est un code java très simple avec des commentaires. Suivez les instructions et faites l'exercice. Vous trouverez ci-dessous des petits blocs d'explications à lire au fur et à mesure.
+1. Dans IntelliJ, créez un nouveau Projet appelé "TP1". Puis faites bouton droit sur le répertoire "src" à gauche puis cliquez sur "New >> Class". Créez une classe du nom de "Variables" (attention à la majuscule et au s)
+2. Copiez le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP1/src/Variables.java) dans votre classe `Variables` : c'est un code java très simple avec des commentaires. Suivez les instructions et faites l'exercice. Vous trouverez ci-dessous des petits blocs d'explications à lire au fur et à mesure.
 
 ::::: {.explication}
 ### Variables de type simples
 
 En Java, les variables doivent être déclarées. Il existe des types *simples* ou *pimitifs*  inspirés du C. Nous verrons plus tard les variables de type *objet*. Les types simples les plus courants sont : `int` (valeurs entières), `double` (valeurs flottantes = nombres à virgule), `float` (pareil avec moins de précision), `boolean` (booléens True / False).
 
-A noter : les types simples sont représentés sur un **nombre de bits fixés**. Les différents types permettent une plus large gamme de valeurs (`byte`, `short` `int`, `long` pour les entiers, `float`et `double` pour les flotants).
+A noter : les types simples sont représentés sur un **nombre de bits fixés**. Les différents types permettent une plus large gamme de valeurs (`byte`, `short` `int`, `long` pour les entiers, `float` et `double` pour les flotants).
 :::::
 
 ::::: {.explication}
@@ -34,7 +34,7 @@ les variables `a` et `b` sont ajoutées une à une à la chaîne de départ et d
 ::::: {.explication}
 ### Types entier
 
-Si l'on divise deux variables de type entier, le résultat reste un type entier : Java (tout comme C) ne fait pas conversion automatique et effectue donc une division entière. Il faut qu'au moins une des deux variables soit de type flottant,  par exemple
+Si l'on divise deux variables de type entier, le résultat reste un type entier : Java (tout comme C) ne fait pas conversion automatique et effectue donc une division entière. Pour effectuer une division "à virgule", il faut qu'au moins une des deux variables soit de type flottant,  par exemple
 
 ~~~~{ .java}
 z = (double) a / b;
@@ -45,7 +45,7 @@ System.out.println(a + " / " + b  + " = " + z);
 
 ## Exercice 2 : Conditionnelles
 
-Créez un nouveau projet dans Eclipse appelé "TP1_Conditionnelle" puis créez une nouvelle classe appelée "Conditionnelle" dans ce projet et copier le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP1_Conditionnelles/src/Condionnelles.java).
+Créez une nouvelle classe appelée "Conditionnelles" dans le projet TP1 et copiez le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP1/src/Conditionnelles.java). Suivez ensuite les instructions écrites en commentaire.
 
 ::::: {.explication}
 ### Tests et connecteurs logiques
@@ -68,7 +68,8 @@ Opérarateurs logiques :
 
 ## Exercice 3 : Fonctions
 
-Créez un nouveau projet dans Eclipse appelé "TP1_Fonctions" puis créez une nouvelle classe appelée "Fonctions" dans ce projet et copier le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP1_Fonctions/src/Fonctions.java).
+Créez une nouvelle classe appelée "Fonctions" dans le projet TP1 et copiez le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP1/src/Fonctions.java). Lisez les explications dans la méthode `main` et suivez les instructions.
+
 
 ::::: {.explication}
 ### Méthodes de classe
@@ -104,7 +105,8 @@ public static String renvoieChaine() {
 
 ## Exercice 4 : Boucles while
 
-Créez un nouveau projet dans Eclipse appelé "TP1_BouclesWhile" puis créez une nouvelle classe appelée "BoucleWhile" dans ce projet et copier le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP1_BouclesWhile/src/BouclesWhile.java).
+Créez une nouvelle classe appelée "BouclesWhile" dans le projet TP1 et copiez le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP1/src/BouclesWhile.java). Lisez les explications dans la méthode `main` et suivez les instructions.
+
 
 ::::: {.explication}
 ### While et do while
@@ -129,7 +131,7 @@ while(condition) {
 
 ## Exercice 5 : Boucles for
 
-Créez un nouveau projet dans Eclipse appelé "TP1_BouclesFor" puis créez une nouvelle classe appelée "BoucleFor" dans ce projet et copier le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP1_BouclesFor/src/BouclesFor.java).
+Créez une nouvelle classe appelée "BouclesFor" dans le projet TP1 et copiez le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP1/src/BouclesFor.java). Lisez les explications dans la méthode `main` et suivez les instructions.
 
 ::::: {.explication}
 ### Boucle for
