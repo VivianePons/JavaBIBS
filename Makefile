@@ -1,7 +1,7 @@
 
 OUTPUTDIR=docs
 
-SSH_HOST=pl-ssh.lri.fr
+SSH_HOST=serveur-galac.lisn.upsaclay.fr
 SSH_PORT=22
 SSH_USER=pons
 SSH_TARGET_DIR=WWW/static/JavaBIBS
