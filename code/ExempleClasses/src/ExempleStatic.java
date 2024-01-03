@@ -26,7 +26,4 @@ public class ExempleStatic {
 	public static double temperatureF() {
 		return temperature * 1.8 - 459.67;
 	}
-
-	
-
 }
