@@ -102,11 +102,12 @@
 </nav>
 <section class="content">
 <h2 id="exercice-1-une-liste-de-chaîne-de-caractères">Exercice 1 : Une liste de chaîne de caractères</h2>
-<p>Créez un nouveau projet appelé <code>TP2_ListString</code> puis créez une nouvelle classe ‘ListString’ et copiez et complétez le code présent <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2_ListString/src/ListString.java">ici</a>.</p>
+<p>Créez un nouveau projet appelé <code>TP2</code> puis créez une nouvelle classe ‘ListString’ et copiez et complétez le code présent <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2/src/ListString.java">ici</a>.</p>
 <ul>
 <li>Pensez à regardez les <a href="https://github.com/VivianePons/JavaBIBS/tree/main/code">exemples du cours</a> comme <a href="https://github.com/VivianePons/JavaBIBS/blob/main/code/ExempleCollections/src/ExempleCollections.java">l’exemple d’utilisation des listes</a></li>
 <li>Ainsi que <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html">la Javadoc pour la class String</a></li>
 </ul>
+<p>Lisez les instructions dans le fichier `ListString.java</p>
 <section id="exception-java" class="explication">
 <h3>Exception Java</h3>
 <p>Lors de l’exécution d’un programme Java, les erreurs rencontrées sont gérées grâce à un système spécial de classes appellées <code>Exception</code>. Nous verrons ce système plus en détail plus tard. Ici voyez simplement que je “lève une exception” car la fonction n’est pas encore implantée.</p>
@@ -125,16 +126,16 @@
 </section>
 <h2 id="exercice-2">Exercice 2 :</h2>
 <ol type="1">
-<li>Créez un nouveau projet appelé <code>TP2_Fichiers</code> puis créez une nouvelle classe <code>Fichiers</code> et copiez et complétez le code présent <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2_Fichiers/src/Fichiers.java">ici</a>.</li>
-<li>Avec Eclipse, faites bouton droit sur votre projet puis “New &gt;&gt; Folder” et créez un répertoire appelé <code>resources</code>. Dans ce repertoire, faites “New &gt;&gt; File” et créez un fichier <code>names.txt</code> et copiez le contenu présent <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2_Fichiers/resources/names.txt">ici</a>.</li>
-<li>Vérifiez que que vous arrivez à exécuter la classe principale et que le contenu du fichier s’affiche sur la sortie standard.</li>
+<li>Créez une nouvelle classe <code>Fichiers</code> et copiez et complétez le code présent <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2/src/Fichiers.java">ici</a>.</li>
+<li>Avec IntelliJ, faites bouton droit sur votre projet puis “New &gt;&gt; Directory” et créez un répertoire appelé <code>resources</code>. Dans ce repertoire, faites “New &gt;&gt; File” et créez un fichier <code>names.txt</code> et copiez le contenu présent <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2/resources/names.txt">ici</a>.</li>
+<li>Vérifiez que que vous arrivez à exécuter la méthode main et que le contenu du fichier s’affiche sur la sortie standard.</li>
 </ol>
 <p>Le but de l’exercice est de traiter un fichier contenant une liste d’étudiants. Le fichier contenant la liste est celui que vous avez créé dans le dossier <code>resources</code>. Regardez en détail le code des méthodes <code>main</code> et <code>printFile</code> et lisez les explications ci-dessous</p>
 <section id="lecture-de-fichier" class="explication">
 <h3>Lecture de fichier</h3>
 <p>L’API Java offre différentes façons de manipuler des fichiers extérieurs. Nous voyons ici la méthode la plus basique. Les classes qui servent à ménipuler les fichiers sont dans le package <code>java.io</code> qui s’occupe de la gestion des entrées (input) et sorties (output).</p>
 <p>Quelque soit le langage, la lecture d’un fichier se déroule plus ou moins de la même façon : un fichier est un <em>stream</em> (courant) dont on <em>tire</em> les informations une par une. Imaginez un petit tube qui va de votre fichier à votre programme et où vous pouvez aspirer les mots les uns après les autres.</p>
-<p>En Java, on crée d’abord un objet de type <code>File</code> (avec le chemin d’accès au fichier) puis on se sert de cet objet pour créer un objet de type<code>Scanner</code>. Le <code>Scanner</code> que l’on récupère fonctionne de la même façon que les scanners que nous avions créés à partir de <code>System.in</code>. Ici, dans <code>printFile</code> on utilise les méthodes <code>hasNextLine</code> et <code>nextLine</code> pour parcourir le fichier ligne à ligne. Regardez la <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html">documentation de la classe <code>Scanner</code></a> pour voir les différentes méthodes disponibles.</p>
+<p>En Java, on crée d’abord un objet de type <code>File</code> (avec le chemin d’accès au fichier) puis on se sert de cet objet pour créer un objet de type <code>Scanner</code>. Le <code>Scanner</code> que l’on récupère fonctionne de la même façon que les scanners que nous avions créés à partir de <code>System.in</code>. Ici, dans <code>printFile</code> on utilise les méthodes <code>hasNextLine</code> et <code>nextLine</code> pour parcourir le fichier ligne à ligne. Regardez la <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html">documentation de la classe <code>Scanner</code></a> pour voir les différentes méthodes disponibles.</p>
 </section>
 <section id="try-catch-et-filenotfoundexception" class="explication">
 <h3>try … catch et <code>FileNotFoundException</code></h3>
@@ -170,7 +171,7 @@
 <li><p>Complétez la méthode <code>afficheEtudiants</code> : cette méthode prend en paramètre un objet de type <code>PrintStream</code>, c’est un <em>flux de sortie</em>. Par exemple <code>System.out</code> est un objet de type <code>PrintStream</code> (c’est la sortie standard). Vous pouvez regarder <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/io/PrintStream.html">la documentation de <code>PrintStream</code></a> pour voir les méthodes disponibles tel que <code>print</code> ou <code>println</code>.</p>
 <p>Une fois la méthode écrite, l’appel suivant doit afficher la liste des étudiants (ligne par ligne) sur la sortie standard.</p>
 <pre><code> afficheEtudiants(System.out, etudiants);</code></pre></li>
-<li><p>Avec Eclipse, créez un dossier <code>output</code> dans votre projet, puis rajouter les lignes suivantes dans la fonction <code>main</code></p>
+<li><p>Avec IntelliJ, créez un dossier <code>output</code> dans votre projet, puis rajoutez les lignes suivantes dans la fonction <code>main</code></p>
 <pre><code> File output = new File(&quot;output/names.txt&quot;);
  PrintStream out = new PrintStream(output);
  afficheEtudiants(out, etudiants);

@@ -5,10 +5,12 @@ title: 'TP2 POO: premiers objets et Collections'
 <section class="content">
 ## Exercice 1 : Une liste de chaîne de caractères
 
-Créez un nouveau projet appelé `TP2_ListString` puis créez une nouvelle classe 'ListString' et copiez et complétez le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2_ListString/src/ListString.java).
+Créez un nouveau projet appelé `TP2` puis créez une nouvelle classe 'ListString' et copiez et complétez le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2/src/ListString.java).
 
 * Pensez à regardez les [exemples du cours](https://github.com/VivianePons/JavaBIBS/tree/main/code) comme [l'exemple d'utilisation des listes](https://github.com/VivianePons/JavaBIBS/blob/main/code/ExempleCollections/src/ExempleCollections.java)
 * Ainsi que [la Javadoc pour la class String](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html)
+
+Lisez les instructions dans le fichier `ListString.java
 
 ::::: {.explication}
 ### Exception Java
@@ -34,9 +36,9 @@ Comme on l'a vu en cours, tous les types simples (`int`, `char`, `double`, etc.)
 
 ## Exercice 2 : 
 
-1. Créez un nouveau projet appelé `TP2_Fichiers` puis créez une nouvelle classe `Fichiers` et copiez et complétez le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2_Fichiers/src/Fichiers.java).
-2. Avec Eclipse, faites bouton droit sur votre projet puis "New >> Folder" et créez un répertoire appelé `resources`. Dans ce repertoire, faites "New >> File" et créez un fichier `names.txt` et copiez le contenu présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2_Fichiers/resources/names.txt).
-3. Vérifiez que que vous arrivez à exécuter la classe principale et que le contenu du fichier s'affiche sur la sortie standard.
+1. Créez une nouvelle classe `Fichiers` et copiez et complétez le code présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2/src/Fichiers.java).
+2. Avec IntelliJ, faites bouton droit sur votre projet puis "New >> Directory" et créez un répertoire appelé `resources`. Dans ce repertoire, faites "New >> File" et créez un fichier `names.txt` et copiez le contenu présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2/resources/names.txt).
+3. Vérifiez que que vous arrivez à exécuter la méthode main et que le contenu du fichier s'affiche sur la sortie standard.
 
 Le but de l'exercice est de traiter un fichier contenant une liste d'étudiants. Le fichier contenant la liste est celui que vous avez créé dans le dossier `resources`. Regardez en détail le code des méthodes `main` et `printFile` et lisez les explications ci-dessous
 
@@ -47,7 +49,7 @@ L'API Java offre différentes façons de manipuler des fichiers extérieurs. Nou
 
 Quelque soit le langage, la lecture d'un fichier se déroule plus ou moins de la même façon : un fichier est un *stream* (courant) dont on *tire* les informations une par une. Imaginez un petit tube qui va de votre fichier à votre programme et où vous pouvez aspirer les mots les uns après les autres.
 
-En Java, on crée d'abord un objet de type `File` (avec le chemin d'accès au fichier) puis on se sert de cet objet pour créer un objet de type`Scanner`. Le `Scanner` que l'on récupère fonctionne de la même façon que les scanners que nous avions créés à partir de `System.in`.  Ici, dans `printFile` on utilise les méthodes `hasNextLine` et `nextLine` pour parcourir le fichier ligne à ligne. Regardez la [documentation de la classe `Scanner`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html) pour voir les différentes méthodes disponibles.
+En Java, on crée d'abord un objet de type `File` (avec le chemin d'accès au fichier) puis on se sert de cet objet pour créer un objet de type `Scanner`. Le `Scanner` que l'on récupère fonctionne de la même façon que les scanners que nous avions créés à partir de `System.in`.  Ici, dans `printFile` on utilise les méthodes `hasNextLine` et `nextLine` pour parcourir le fichier ligne à ligne. Regardez la [documentation de la classe `Scanner`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html) pour voir les différentes méthodes disponibles.
 :::::
 
 :::: {.explication}
@@ -102,14 +104,14 @@ La documentation de la méthode `sort` est difficile à comprendre car elle pren
    
         afficheEtudiants(System.out, etudiants);
 
-2. Avec Eclipse, créez un dossier `output` dans votre projet, puis rajouter les lignes suivantes dans la fonction `main`
+2. Avec IntelliJ, créez un dossier `output` dans votre projet, puis rajoutez les lignes suivantes dans la fonction `main`
 
         File output = new File("output/names.txt");
 		PrintStream out = new PrintStream(output);
 		afficheEtudiants(out, etudiants);
 		out.close();
 
-   L'exécution du projet doit maintenant créer un nouveau fichier dans le dossier `output` avec la liste des étudiants. (Pour actualiser l'affichage d'Eclipse, sélectionner le dossier et appuyez sur F5).
+   L'exécution du projet doit maintenant créer un nouveau fichier dans le dossier `output` avec la liste des étudiants.
    
 ### Aller plus loin
 
@@ -117,7 +119,7 @@ La documentation de la méthode `sort` est difficile à comprendre car elle pren
 
    Vous pouvez rajouter des méthodes supplémentaire, par exemple une méthode `extractPrenoms` qui prend en paramètre la liste des étudiants et renvoie le `Set` des prénoms.
    
-2. Ajoutez un fichier `grades.txt` dans le dossier `resources` en copiant le contenu présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2_Fichiers/resources/grades.txt). Cette fois le fichier contient une note en plus du nom. Effectuez le même traitement que précédemment (création d'un nouveau fichier `output/grades.txt` au format "NOM prénom note"). Vous pouvez utilisez [l'interface `Map`](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html) et son [implantation `TreeMap`](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/TreeMap.html). Ici, les "clés" seront les chaînes "NOM prénom" et les valeurs les notes en type `Double`. L'utilisation de `TreeMap` permet que les clés soient triées au fur et à mesure qu'elles sont ajoutées.
+2. Ajoutez un fichier `grades.txt` dans le dossier `resources` en copiant le contenu présent [ici](https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP2/resources/grades.txt). Cette fois le fichier contient une note en plus du nom. Effectuez le même traitement que précédemment (création d'un nouveau fichier `output/grades.txt` au format "NOM prénom note"). Vous pouvez utilisez [l'interface `Map`](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html) et son [implantation `TreeMap`](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/TreeMap.html). Ici, les "clés" seront les chaînes "NOM prénom" et les valeurs les notes en type `Double`. L'utilisation de `TreeMap` permet que les clés soient triées au fur et à mesure qu'elles sont ajoutées.
 
 3. Calculez la moyenne des notes ainsi que la liste des étudiant et étudiantes ayant obtenu la meilleure note. Pour calculer la note maximale, vous pouvez utiliser la méthode statique `Collections.max` disponible dans [la bibliothèque `Collections`](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Collections.html) avec de nombreuses autres méthodes.
 
