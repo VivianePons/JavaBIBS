@@ -41,12 +41,12 @@ public class Rational implements Comparable<Rational> {
 	
 	/**
 	 * Construct a rational number with given numerator and denominator by simplifying the fraction
-	 * the simplifying is done only if `check` is True
+	 * the simplifying is done only if `simplify` is True
 	 * @param n the numerator
 	 * @param d the denominator
-	 * @param check
+	 * @param simplify
 	 */
-	protected Rational(long n, long d, boolean check) {
+	protected Rational(long n, long d, boolean simplify) {
 		if(d == 0) {
 			throw new IllegalArgumentException("division by 0");
 		}
@@ -54,7 +54,7 @@ public class Rational implements Comparable<Rational> {
 			n = -n;
 			d = -d;
 		}
-		if(check) {
+		if(simplify) {
 			long div = n > 0 ? gcd(n, d): gcd(-n,d);
 			n = n / div;
 			d = d / div;

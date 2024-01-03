@@ -49,12 +49,11 @@ Que l'on déclinera ensuite en fonction des packages créés.
 
 ## Démo
 
-Création des packages
+Création du package
 
-    fr.upsaclay.bibs
     fr.upsaclay.bibs.rational
     
-avec Eclipse. 
+avec IntelliJ. 
 
 On remarque que la structure de package crée l'équivalent en arborescence de fichier.
 
@@ -89,10 +88,29 @@ La présence (ou non) du *modificateur* `public` avant le mot `class` indique la
 
 Il existe d'autres modificateurs que l'on peut rajouter en plus de `public` avant le mot `class` : `abstract` et `final`, nous verrons leur signification quand nous traiterons de la question de **l'héritage**.
 
+----
+
+### Import inter package
+
+Dans notre exemple, on a **2 classes** : La classe `Rational` pour créer les objets de type "nombres rationnels", la classe `RationalExample` qui ne contiendra qu'une méthode `main` et nous servira pour tester des exemples.
+
+    package fr.upsaclay.bibs;
+	
+	import fr.upsaclay.bibs.rational.Rational;
+
+	public class RationalExample {
+		
+		public static void main(String[] args) {
+		    Rational r;
+		}
+	}
+
 
 # Champs, méthodes et constructeurs
 
-## Ajoutons des champs et un constructeur
+## Ajoutons des champs et un constructeur à la classe `Rational`
+
+Dans la classe `Rational` :
 
 ~~~~{.java}
 public final int n;
@@ -103,6 +121,12 @@ public Rational(int n, int d) {
 	this.d = d;
 }
 ~~~~
+
+Qu'on utilise dans `RationalExample` :
+
+    Rational r = new Rational(1,2);
+
+----
 
 **Visibilité (des champs et des méthodes) :** 
 
@@ -125,30 +149,143 @@ Le mot clé a aussi une signification pour les méthodes que l'on verra plus tar
 
 * Une méthode spéciale pour construire l'objet
 * En Java : porte le nom de la classe et n'a pas de valeur de retour
-* Les mêmes paramètres de visibilité `public / protected / private` s'applique
+* Les mêmes paramètres de visibilité `public / protected / private` s'applique que pour les champs
 
-Quel est son rôle ? Initialiser les champs (en particulier, les champs de type `final` et effectuer les vérifications / calculs initiaux nécessaires au fonctionnement de l'objet créé)
+Quel est son rôle ? Initialiser les champs (en particulier, les champs de type `final`, et effectuer les vérifications / calculs initiaux nécessaires au fonctionnement de l'objet créé)
 
 ----
 
-## Illustration 
+## Illustration : tester la division par 0
 
 ~~~~{.java}
-public Rational(long n, long d) {
+public Rational(int n, int d) {
 	if(d == 0) {
 		throw new IllegalArgumentException();		
 	}
 	
-	long div = gcd(n, d);
-	n = n / div;
-	d = d / div;
-	
-	if(n > max_operand || n < min_operand || d > max_operand || d < min_operand) {
-		throw new IllegalArgumentException("Exceeds operand capacity");
-	}
-	this.n = (int)n;
-	this.d = (int)d;
+	this.n = n;
+	this.d = d;
 }
+~~~~
+
+----
+
+## Champs statiques 
+
+On voudrait vérifier le dépassement de capacité. On va définir la capacité de nos rationnels à l'aide de **champs statiques** : spécifiques à la classe et non à ses instances (objets).
+
+~~~~{.java}
+/*
+* the minimal rational that can be represented
+*/
+public static final int min_operand = Integer.MIN_VALUE;
+
+/*
+* the maximal rational that can be represented
+*/
+public static final int max_operand = Integer.MAX_VALUE;
+~~~~
+
+----
+
+On adapte notre constructeur :
+
+~~~~{.java}
+    public Rational(long n, long d) {
+        if(d == 0) {
+            throw new IllegalArgumentException("division by 0");
+        }
+
+        if(n > max_operand || n < min_operand || d > max_operand) {
+            throw new IllegalArgumentException("Exceeds operand capacity");
+        }
+        this.n = (int)n;
+        this.d = (int)d;
+    }
+~~~~
+
+----
+
+## Créons une méthode
+
+~~~~{.java}
+/**
+* Adds rationals
+* @param r2 another rational object
+* @return the Rational representing the sum of object and `r2`
+*/
+public Rational add(Rational r2) {
+	return new Rational((long)n*r2.d + (long)r2.n * d, (long)d * r2.d);
+}
+~~~~
+
+Je peux écrire directement `n` et `d` dans ma méthode : la méthode est **liée** à l'objet créé, ce sont dont les champs de l'objet.
+
+----
+
+## Portées des variables 
+
+* Une variable existe à l'intérieur de son bloc `{ ... }` (classe, méthode, bloc `if` / `for` 
+* On peut utiliser directement le nom d'un champ ou d'une méthode à la l'intérieur de la classe (statique ou non)
+* Si conflit de nom (avec variable locale) on peut écrire `this.champ` 
+
+
+----
+
+Exemple d'utilisation de la méthode `add`
+
+~~~~{.java}
+Rational r = new Rational(1,2);
+Rational r2 = new Rational(1,6);
+Rational r3 = r.add(r2);
+
+System.out.println(r3.n);
+System.out.println(r3.d);
+~~~~
+
+. . .
+
+Affiche 8 et 12. **Où et comment simplifier la fraction ?**
+
+. . .
+
+* Où : dans le constructeur
+* Comment : on a besoin d'un calcul spécifique, le pgcd, qui ne dépend pas de l'objet. On va créer une **méthode statique**
+
+----
+
+## Méthode statique 
+
+Une méthode qui ne dépend pas de chaque objet (comme `add`) mais qui est comme une "fonction globale" attachée à la classe. On ne peut pas **accéder aux champs de l'objet** depuis une méthode statique !
+
+~~~~{.java}
+    protected static long gcd(long a, long b) {
+        return b==0 ? a : gcd(b, a%b);
+    }
+~~~~
+
+Rappel : ici `protected` signifie que la méthode est visible depuis le package ou les classes héritées.
+
+----
+
+## On adapte notre constructeur
+
+~~~~{.java}
+    public Rational(long n, long d) {
+        if(d == 0) {
+            throw new IllegalArgumentException("division by 0");
+        }
+
+        long div = gcd(n,d);
+        n = n / div;
+        d = d / div;
+
+        if(n > max_operand || n < min_operand || d > max_operand) {
+            throw new IllegalArgumentException("Exceeds operand capacity");
+        }
+        this.n = (int)n;
+        this.d = (int)d;
+    }
 ~~~~
 
 ----
@@ -158,7 +295,7 @@ public Rational(long n, long d) {
 En Java, il est possible de définir plusieurs fonctions portant le même nom si les paramètres (nombre / type) sont différents.
 
 ~~~~{.java}
-protected Rational(long n, long d, boolean check) {
+protected Rational(long n, long d, boolean simplify) {
 	...
 }
 
@@ -180,25 +317,10 @@ L'appel à un autre constructeur de la classe se fait par `this(...)` et doit to
 
 ----
 
+## Quelques méthodes supplémentaires
 
-## Créons des méthodes
+On ajoute quelques méthodes de calcul à notre objet : `multiply`, `minus`, `doubleValue`
 
-~~~~{.java}
-/**
-* Adds rationals
-* @param r2 another rational object
-* @return the Rational representing the sum of object and `r2`
-*/
-public Rational add(Rational r2) {
-	return new Rational((long)n*r2.d + (long)r2.n * d, (long)d * r2.d);
-}
-~~~~
-
-## Portées des variables 
-
-* Une variable existe à l'intérieur de son bloc `{ ... }` (classe, méthode, bloc `if` / `for` 
-* On peut utiliser directement le nom d'un champ ou d'une méthode à la l'intérieur de la classe (statique ou non)
-* Si conflit de nom (avec variable locale) on peut écrire `this.champ` 
 
 ----
 
@@ -402,19 +524,20 @@ On crée un package
 
     fr.upsaclay.bibs.rational.test
     
-Dans ce package on crée une classe `RationalTest` en faisant (avec Eclipse) "New >> JUnit Test Case"
+Dans ce package on crée une classe `RationalTest` où on importe les classes suivantes :
 
 
 ~~~~{.java}
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import fr.upsaclay.bibs.rational.Rational;
 
 class RationalTest {
 ~~~~
+
+Le mot `junit` apparait en rouge dans IntelliJ : il faut ajouter **JUnit 5** au projet. 
 
 ----
 
@@ -432,12 +555,12 @@ public final void testRational() {
 
 ----
 
-On lance les tests en faisant "Run as >> JUnit Test"
+On lance les tests depuis IntelliJ
 
 Junit nous indique :
 
 * quels tests passent et quels tests ne passent pas
-* la partie du code qui est "couverte" par les tests
+* la partie du code qui est "couverte" par les tests (à configurer)
 
 ----
 
