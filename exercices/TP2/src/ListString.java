@@ -18,7 +18,7 @@ public class ListString {
         // Doit afficher les noms en majuscule
         System.out.println(noms);
 
-        // Complétez la fonction `queDesLettres` ci-dessous
+        // Complétez la fonction `presqueQueDesLettres` ci-dessous
 
         // Modifier votre code ci-dessus pour que seuls les "vrais noms" (composés de lettres et éventuellement
         // d'un symbole "-" soit ajoutés dans la liste)
