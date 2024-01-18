@@ -224,6 +224,12 @@ Autres possibilités : Eclipse, Netbeans
 
 *Démo*
 
+Pour lancer InteliJ : tapez la commande
+
+    idea.sh
+    
+dans un terminal
+
 ---
 
 ## Codons en Java !

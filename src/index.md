@@ -22,8 +22,6 @@ Toutes les sources (en partciluer les codes java et les exercices corrigés) son
   - [Slides en version pdf](pdf/Cours4-Heritage.pdf)
   - [TP4](TP4.html)
 * TP Noté : (séance 6)
-  - [Le sujet est disponible ici](https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TPNote_Tamagoshi)
-  - (Un lien sera fourni sous peu pour le TP corrigé)
 * Cours 5 : Applications graphiques et design MVC (séances 7 et 8)
   - [Slides version html](Cours5-Graphique.html)
   - [Slides en version pdf](pdf/Cours5-Graphique.pdf)
@@ -33,12 +31,19 @@ Toutes les sources (en partciluer les codes java et les exercices corrigés) son
   - [Slides en version pdf](pdf/Cours6-Exceptions.pdf)
   
 Tout ce qu'on n'a pas vu : les modules, les classes et méthodes génériques, les itérateurs, les classes anonymes, les expressions lambdas, les streams
+
+## Mémo salle de TP
+
+Pour lancer InteliJ : tapez la commande
+
+    idea.sh
+    
+dans un terminal
   
   
 ## Projet
 
-* [Minicours sur Git](CoursProjet-git.html)
-* [Récupération du projet et utilisation de git](TP-Projet.html)
+A venir
 
 ## Autrice 
 
