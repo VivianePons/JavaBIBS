@@ -260,13 +260,13 @@ public class RationalExample {
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a><span class="kw">public</span> Rational <span class="fu">add</span>(Rational r2) {</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a>    <span class="kw">return</span> <span class="kw">new</span> <span class="fu">Rational</span>((<span class="dt">long</span>)n*r2.<span class="fu">d</span> + (<span class="dt">long</span>)r2.<span class="fu">n</span> * d, (<span class="dt">long</span>)d * r2.<span class="fu">d</span>);</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true"></a>}</span></code></pre></div>
-<p>Je peux écrire directement <code>n</code> et <code>d</code> dans ma méthode : la méthode est <strong>liée</strong> à l’objet créé, ce sont dont les champs de l’objet.</p>
+<p>Je peux écrire directement <code>n</code> et <code>d</code> dans ma méthode : la méthode est <strong>liée</strong> à l’objet créé, ce sont donc les champs de l’objet.</p>
 </div>
 <div class="slide section level1">
 
 <h2 id="portées-des-variables">Portées des variables</h2>
 <ul>
-<li>Une variable existe à l’intérieur de son bloc <code>{ ... }</code> (classe, méthode, bloc <code>if</code> / <code>for</code></li>
+<li>Une variable existe à l’intérieur de son bloc <code>{ ... }</code> (classe, méthode, bloc <code>if</code> / <code>for</code> )</li>
 <li>On peut utiliser directement le nom d’un champ ou d’une méthode à la l’intérieur de la classe (statique ou non)</li>
 <li>Si conflit de nom (avec variable locale) on peut écrire <code>this.champ</code></li>
 </ul>

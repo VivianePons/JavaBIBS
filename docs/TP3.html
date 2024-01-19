@@ -127,30 +127,36 @@
 <ol start="6" type="1">
 <li><p>Créez un package</p>
 <pre><code> fr.upsaclay.bibs.students.test</code></pre>
-<p>Dans ce package, créez une une unité de test JUnit avec “New &gt;&gt; JUnit test Case” intitulée <code>StudentTest</code> pour tester la classe <code>Student</code></p></li>
-<li><p>Supprimez la méthode <code>test</code> ajoutée automatiquement et ajoutez une méthde <code>testCreation</code> contenant le test suivant</p>
-<pre><code> assertEquals(new Student(&quot;Ada&quot;,&quot;Lovelace&quot;).firstName, &quot;Ada&quot;);</code></pre>
-<p>Puis lancez l’exécution de l’unité de test</p></li>
-<li><p>Complétez votre méthode et votre classe avec le contenu présent <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP3_BaseEtudiants/src/fr/upsaclay/bibs/students/test/StudentTest.java">ici</a>. Décommentez les tests de la méthode <code>testCreation</code> et vérifiez que cela passe bien.</p></li>
+<p>Dans ce package, créez une classe <code>StudentTest</code> et ajoutez les import suivant</p>
+<pre><code>import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import fr.upsaclay.bibs.students.Student;</code></pre>
+<p>Dans Intellij, cliquez sur le mot souligné en rouge dans l’import : corrigez l’erreur en ajoutant <strong>JUnit 5</strong> à votre “classpath” (attention ! Il faut ajouter JUnit5 et non pas JUnit4 qui est parfois proposé par défaut)</p></li>
+<li><p>Ajoutez la méthode <code>testCreation</code> suivante</p></li>
 </ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>       <span class="at">@Test</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>       <span class="dt">void</span> <span class="fu">testCreation</span>() {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>           <span class="fu">assertEquals</span>(<span class="kw">new</span> <span class="fu">Student</span>(<span class="st">&quot;Ada&quot;</span>,<span class="st">&quot;Lovelace&quot;</span>).<span class="fu">firstName</span>, <span class="st">&quot;Ada&quot;</span>);</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>       }</span></code></pre></div>
+<p>Puis lancez l’exécution de l’unité de test 8. Complétez votre méthode et votre classe avec le contenu présent <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP3_BaseEtudiants/src/fr/upsaclay/bibs/students/test/StudentTest.java">ici</a>. Décommentez les tests de la méthode <code>testCreation</code> et vérifiez que cela passe bien.</p>
 <h3 id="equals-tostring-et-hashcode"><code>Equals</code>, <code>toString</code> et <code>hashCode</code></h3>
 <ol start="9" type="1">
 <li>On considère (sans doute à tort) que deux étudiants sont “égaux” s’ils ont les mêmes noms et prénoms. Ajoutez et complétez les 3 méthodes suivantes. La méhode <code>toString</code> doit renvoyer le nom (en majuscule) suivi du prénom séparé par un espace.</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">toString</span>() {</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>    }</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>    </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">equals</span>(<span class="bu">Object</span> obj) {</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a>    }</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a>    </span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">hashCode</span>() {</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">toString</span>() {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>    }</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>    </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">equals</span>(<span class="bu">Object</span> obj) {</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a>    }</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a>    </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">hashCode</span>() {</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true"></a>    }</span></code></pre></div>
 <ol start="10" type="1">
 <li>Vérfier la méthode <code>toString</code> en faisant un affichage dans la fonction <code>main</code></li>
 <li>Décommentez les tests correspondants aux 3 méthodes et lancez les.</li>
@@ -159,13 +165,13 @@
 <ol start="12" type="1">
 <li>Implantez la méthode suivante dans la classe <code>Student</code>. Puis décommentez les tests correspondants dans <code>StudentTest</code> et lancez-les.</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>    <span class="co">/**</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>     <span class="co">*</span> Checks that a given String is a valid name</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>     <span class="co">*</span> ie it contains only<span class="co">:</span> letters<span class="co">,</span> spaces<span class="co">,</span> or <span class="co">&quot;-&quot;</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>     <span class="co">* </span><span class="an">@param name </span>a String representing a name </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>     <span class="co">*</span> <span class="an">@return </span>true if it<span class="co">&#39;</span>s a valid name<span class="co">,</span> false otherwise</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>     <span class="co">*/</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">validName</span>(<span class="bu">String</span> name)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>    <span class="co">/**</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>     <span class="co">*</span> Checks that a given String is a valid name</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>     <span class="co">*</span> ie it contains only<span class="co">:</span> letters<span class="co">,</span> spaces<span class="co">,</span> or <span class="co">&quot;-&quot;</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>     <span class="co">* </span><span class="an">@param name </span>a String representing a name </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>     <span class="co">*</span> <span class="an">@return </span>true if it<span class="co">&#39;</span>s a valid name<span class="co">,</span> false otherwise</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>     <span class="co">*/</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">validName</span>(<span class="bu">String</span> name)</span></code></pre></div>
 <ol start="13" type="1">
 <li><p>Dans le constructeur de la classe <code>Student</code>, rajoutez un test pour la validité du prénom et du nom. En cas de nom invalide, vous léverez une exception avec la ligne suivante :</p>
 <pre><code>throw new IllegalArgumentException(&quot;Not a valid name&quot;);</code></pre>
@@ -177,24 +183,24 @@
 <li>Créez deux méthodes <code>public void setEmail(String email)</code> et <code>public String getEmail()</code> qui permette de donner une valeur / récupérer la valeur du champ <code>email</code>.</li>
 </ol>
 <div class="explication">
-<p>Il est très courant d’utiliser la visibilité <code>private</code> pour des champs et d’en controler l’accès par des méthodes appellées “getter” et “setter”. D’ailleurs, lorsqu’on crée le champs, Eclipse affiche un petit “warning” à gauche et on peut créer ces méthodes automatiquement.</p>
+<p>Il est très courant d’utiliser la visibilité <code>private</code> pour des champs et d’en contrôler l’accès par des méthodes appelées “getter” et “setter”. D’ailleurs, une fois qu’on a créé un champ, on peut générer automatiquement ces méthodes avec intellij (bouton droit sur le nom de la classe puis “Generate”).</p>
 </div>
 <ol start="16" type="1">
 <li>Ajoutez un constructeur <code>public Student(String firstName, String lastName, String email)</code> qui fait appel au constructeur principal pour le prénom / nom puis initialise l’email.</li>
 <li>Décommentez et lancez les tests de la méthode <code>testEmail</code> dans <code>StudentTest</code></li>
 <li>On peut tester la validité d’un email grâce à une “expression régulière” en utilisant la classe <code>java.util.regex.Pattern</code>. Ajoutez la méthode suivante à votre classe <code>Student</code> (il faut aussi importer la classe <code>Pattern</code>). (C’est une vérification très basique qui cherche simplement le caractère “@”)</li>
 </ol>
-<div class="sourceCode" id="cb7"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>    <span class="co">/**</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>     <span class="co">*</span> Checks that a given String is a valid email using regular expression</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>     <span class="co">* </span><span class="an">@param email </span>a String representing an email </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>     <span class="co">*</span> <span class="an">@return </span>true if it<span class="co">&#39;</span>s a valid email<span class="co">,</span> false otherwise</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>     <span class="co">*/</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">validEmail</span>(<span class="bu">String</span> email) {</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>        <span class="bu">String</span> regexPattern = <span class="st">&quot;^(.+)@(</span><span class="sc">\\</span><span class="st">S+)$&quot;</span>;</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a>        <span class="kw">return</span> <span class="bu">Pattern</span>.<span class="fu">compile</span>(regexPattern)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a>          .<span class="fu">matcher</span>(email)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a>          .<span class="fu">matches</span>();</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>    <span class="co">/**</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>     <span class="co">*</span> Checks that a given String is a valid email using regular expression</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>     <span class="co">* </span><span class="an">@param email </span>a String representing an email </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a>     <span class="co">*</span> <span class="an">@return </span>true if it<span class="co">&#39;</span>s a valid email<span class="co">,</span> false otherwise</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a>     <span class="co">*/</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">validEmail</span>(<span class="bu">String</span> email) {</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a>        <span class="bu">String</span> regexPattern = <span class="st">&quot;^(.+)@(</span><span class="sc">\\</span><span class="st">S+)$&quot;</span>;</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a>        <span class="kw">return</span> <span class="bu">Pattern</span>.<span class="fu">compile</span>(regexPattern)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a>          .<span class="fu">matcher</span>(email)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a>          .<span class="fu">matches</span>();</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a>    }</span></code></pre></div>
 <ol start="19" type="1">
 <li><p>Utilisez cette méthode pour vérifier la validité d’un email avant de mettre à jour le champ. Si l’email est invalid, on lèvera une exception :</p>
 <pre><code>throw new IllegalArgumentException(&quot;Not a valid email&quot;);</code></pre></li>
@@ -204,7 +210,7 @@
 <ol start="20" type="1">
 <li><p>Changez la déclaration de la classe <code>Student</code> pour qu’elle implémente l’interface <code>Comparable</code> :</p>
 <pre><code>public class Student implements Comparable&lt;Student&gt;</code></pre></li>
-<li><p>Eclispe affiche maintenant une erreur : il faut ajouter la <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Comparable.html#compareTo(T)">méthode <code>compareTo(Student st)</code></a> : implémentez la méthode en utilisant la méthode <code>compareTo</code> des chaînes de caracères.</p></li>
+<li><p>Intellij affiche maintenant une erreur : il faut ajouter la <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Comparable.html#compareTo(T)">méthode <code>compareTo(Student st)</code></a> : implémentez la méthode en utilisant la méthode <code>compareTo</code> des chaînes de caractères.</p></li>
 <li><p>Décommentez et lancez les tests de la méthode <code>testCompareTo</code></p></li>
 </ol>
 <h3 id="une-variable-statique">Une variable statique</h3>
@@ -219,7 +225,7 @@ private static int count = 0;</code></pre></li>
 <h2 id="exercice-2-la-classe-grade">Exercice 2 : la classe <code>Grade</code></h2>
 <ol start="25" type="1">
 <li>Dans le package <code>fr.upsaclay.bibs.students</code>, créez une nouvelle interface <code>Gradable</code> ainsi qu’une classe <code>Grade</code> et copiez les codes <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP3_BaseEtudiants/src/fr/upsaclay/bibs/students/Gradable.java">de l’interface ici</a> et <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP3_BaseEtudiants/src/fr/upsaclay/bibs/students/Grade.java">de la classe ici</a></li>
-<li>Dans le package <code>fr.upsaclay.bibs.students.test</code> créez une nouvelle unité JUnit et copiez le <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP3_BaseEtudiants/src/fr/upsaclay/bibs/students/test/GradeTest.java">code présent ici</a></li>
+<li>Dans le package <code>fr.upsaclay.bibs.students.test</code> créez une nouvelle classe <code>GradeTest</code> et copiez le <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP3_BaseEtudiants/src/fr/upsaclay/bibs/students/test/GradeTest.java">code présent ici</a></li>
 <li>La classe <code>Grade</code> représente une note que l’on peut calculer sur la valeur souhaitée et qui peut aussi stocker un coefficient</li>
 </ol>
 <ul>
@@ -227,7 +233,7 @@ private static int count = 0;</code></pre></li>
 <li>le test d’égalité s’effectue sur la valeur de la note tel que 10/20 soit égal à 50/100</li>
 <li>le hashcode doit être cohérent par rapport à ça (on ne peut donc pas utiliser la représentation sous forme de chaîne de caractère !)</li>
 <li>la classe implémente l’interface <code>Gradable</code> qui contient en particulier une méthode pour renvoyer la note avec la note maximale que l’on souhaite (note /20, /10, /100, etc)</li>
-<li>la classe <code>Grade</code> implémente deux interfaces, l’interface <code>Gradable</code> et l’interface <code>Comparable</code> : on voud fournit la méthode <code>compareTo</code> qui utilise une méthode statique définie dans l’interface.</li>
+<li>la classe <code>Grade</code> implémente deux interfaces, l’interface <code>Gradable</code> et l’interface <code>Comparable</code> : on vous fournit la méthode <code>compareTo</code> qui utilise une méthode statique définie dans l’interface.</li>
 </ul>
 <p>Complétez toutes les méthodes de la classe <code>Grade</code> de telle sorte que les tests définis dans <code>GradeTest</code> passent tous.</p>
 <section id="code-dans-les-interfaces" class="explication">
@@ -240,7 +246,7 @@ private static int count = 0;</code></pre></li>
 </section>
 <h2 id="exercice-3-la-classe-gradelist">Exercice 3 : La classe <code>GradeList</code></h2>
 <ol start="26" type="1">
-<li>Dans le package <code>fr.upsaclay.bibs.etudiants</code>, créez une nouvelle classe <code>GradeList</code> et copiez le <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP3_BaseEtudiants/src/fr/upsaclay/bibs/students/GradeList.java">code présent ici</a>. Dans le package <code>fr.upsaclay.bibs.etudiants.test</code>, créez une unité de test <code>GradeListTest</code> et copiez le <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP3_BaseEtudiants/src/fr/upsaclay/bibs/students/test/GradeListTest.java">code présent ici</a> et vérifiez que les tests passent</li>
+<li>Dans le package <code>fr.upsaclay.bibs.etudiants</code>, créez une nouvelle classe <code>GradeList</code> et copiez le <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP3_BaseEtudiants/src/fr/upsaclay/bibs/students/GradeList.java">code présent ici</a>. Dans le package <code>fr.upsaclay.bibs.etudiants.test</code>, créez une classe <code>GradeListTest</code> et copiez le <a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/exercices/TP3_BaseEtudiants/src/fr/upsaclay/bibs/students/test/GradeListTest.java">code présent ici</a> et vérifiez que les tests passent</li>
 </ol>
 <section id="classes-génériques" class="explication">
 <h3>Classes génériques</h3>

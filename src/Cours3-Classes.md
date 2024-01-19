@@ -219,13 +219,13 @@ public Rational add(Rational r2) {
 }
 ~~~~
 
-Je peux écrire directement `n` et `d` dans ma méthode : la méthode est **liée** à l'objet créé, ce sont dont les champs de l'objet.
+Je peux écrire directement `n` et `d` dans ma méthode : la méthode est **liée** à l'objet créé, ce sont donc les champs de l'objet.
 
 ----
 
 ## Portées des variables 
 
-* Une variable existe à l'intérieur de son bloc `{ ... }` (classe, méthode, bloc `if` / `for` 
+* Une variable existe à l'intérieur de son bloc `{ ... }` (classe, méthode, bloc `if` / `for` )
 * On peut utiliser directement le nom d'un champ ou d'une méthode à la l'intérieur de la classe (statique ou non)
 * Si conflit de nom (avec variable locale) on peut écrire `this.champ` 
 
