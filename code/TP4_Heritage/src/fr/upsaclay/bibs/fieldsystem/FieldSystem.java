@@ -7,30 +7,40 @@ import fr.upsaclay.bibs.fieldsystem.sheepfield.Wolf;
 import fr.upsaclay.bibs.fieldsystem.view.FieldView;
 import fr.upsaclay.bibs.fieldsystem.view.SwingFieldView;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class FieldSystem {
+
+public class FieldSystem implements ActionListener {
+
+	Field field;
+	FieldView view;
+	Timer timer;
 
 	public static void main(String[] args) {
-		
-		
-		Field field = new Field(60,40);
+		FieldSystem system = new FieldSystem();
+		system.start();
+	}
+
+	public FieldSystem() {
+		field = new Field(60,40);
 		/// BEGIN COMMENTEE
 		field.addRandomFieldElements(50, () -> new Sheep());
 		field.addRandomFieldElements(50, () -> new Wolf());
 		/// END COMMENTEE
-		FieldView view = new SwingFieldView("My Field");
+		view = new SwingFieldView("My Field");
 		view.initialize(field);
-		
-		while (true) {
-		    try {
-		    	Thread.sleep(200);
-		    }
-		    catch (InterruptedException e) {
-		    }
-		    field.evolve();
-		    view.update(field);
-	    }
-
+		timer = new Timer(200, this);
 	}
 
+	public void start() {
+		timer.start();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent actionEvent) {
+		field.evolve();
+		view.update(field);
+	}
 }

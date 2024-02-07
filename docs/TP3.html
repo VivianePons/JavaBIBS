@@ -257,14 +257,12 @@ private static int count = 0;</code></pre></li>
 <li><p>Complétez les tests de la méthode <code>testSetGetCoefficient</code> dans <code>GradeListTest</code></p></li>
 <li><p>On va maintenant éditer la classe <code>Student</code> pour qu’on puisse stocker pour chaque étudiant une liste de note. Ajoutez un champ privé final dans la classe <code>Student</code> :</p>
 <pre><code>private final GradeList&lt;Gradable&gt; gradeList = new GradeList&lt;Gradable&gt;();</code></pre></li>
-<li><p>Ajoutez une méthode dans la classe <code>Student</code></p>
+<li><p>Ajoutez une méthode dans la classe <code>Student</code> pour récupérer la liste de note.</p>
 <pre><code>public GradeList&lt;Gradable&gt; getGradeList() {
     return gradeList;
-}</code></pre></li>
-</ol>
-<p>pour récupérer la liste de note. Vérifiez que les tests de <code>testGetGradeList</code> fonctionnent.</p>
-<ol start="31" type="1">
-<li>Modifiez votre déclaration de classe <code>Student</code> pour qu’elle implémente l’interface <code>Gradable</code> en plus de <code>Comparable</code> (on écrit les différentes interfaces implémentées en séparant par des virgules). La seule méthode à implanter est <code>gradeOver</code> qui doit renvoyer la note calculée par <code>gradeList</code> (c’est-à-dire la moyenne de l’étudiant). Vérifiez que les tests de <code>testDefaultCoefficient</code> et <code>testGradeOver</code> fonctionnent.</li>
+}</code></pre>
+<p>Vérifiez que les tests de <code>testGetGradeList</code> fonctionnent.</p></li>
+<li><p>Modifiez votre déclaration de classe <code>Student</code> pour qu’elle implémente l’interface <code>Gradable</code> en plus de <code>Comparable</code> (on écrit les différentes interfaces implémentées en séparant par des virgules). La seule méthode à implanter est <code>gradeOver</code> qui doit renvoyer la note calculée par <code>gradeList</code> (c’est-à-dire la moyenne de l’étudiant). Vérifiez que les tests de <code>testDefaultCoefficient</code> et <code>testGradeOver</code> fonctionnent.</p></li>
 </ol>
 <section id="polymorphisme" class="explication">
 <h3>Polymorphisme</h3>

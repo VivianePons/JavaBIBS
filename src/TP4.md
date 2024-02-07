@@ -11,9 +11,18 @@ L'objectif de ce TP est d'implanter un **système dynamique**, c'est-à-dire un 
 
 ## Récupération du code
 
-L'ensemble du code est disponible dans un [repo indépendant](https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP4_Heritage). Vous pouvez le récupérer en cliquant sur le bouton de téléchargement à côté de "Clone" (on en effectuant un clone avec *git* si vous savez faire). 
+L'ensemble du code est disponible dans un [repo indépendant](https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP4_Heritage). A partir d'IntelliJ, vous pouvez le récupérer directement en choisissant "New Project from version controll" et en donnant l'URL du repo : `https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP4_Heritage`.
 
-Ensuite, avec Eclipse, vous pouvez créer un nouveau projet en utilisant le dossier téléchargé comme source. Ainsi, l'ensmeble de l'architecture de classes et packages seront déjà créés.
+Sinon, il est aussi possible de le télécharger (bouton téléchargement à côté de "Clone" ou d'effectuer un clone avec *git* si vous savez faire (Remarque : nous aurons une séance spéciale sur le fonctionnement de git au début de l'UE Projet de Programmation, pour l'instant ce n'est pas nécessaire).
+
+## Mise à jour du projet dans Intellij
+
+Une fois le projet récupéré, vous devez avoir un Projet ouvert "TP4_Heritage" dans Intellij avec un dossier src contenant les classes.
+
+Ouvrez une classe du package `test` : une erreur apparaît. Faites bouton droit sur le mot `junit` écrit en rouge, puis `More actions` et ajoutez **JUnit 5** (attention !! Pas JUnit4 qui est proposé par défaut)
+
+Parfois, l'erreur continue d'être soulignée. Refermez et réouvrez la classe. Si elle est toujours là, ouvrez la classe `FieldSystem` et tentée de l'exécuter. Normalement, l'exécution doit se passer normalement et vous ouvrir une fenêtre blanche avant de lever une exception "Not implemented yet". 
+
 
 ## Architecture générale
 
@@ -24,11 +33,11 @@ L'architecture du projet est déjà fournie et de nombreuses classes et interfac
 * le package `fr.upsaclay.bibs.fieldsystem.view` concerne la partie graphique de l'application. Nous n'avons pas encore abordé cet aspect : vous n'aurez rien à modifier.
 * le package `fr.upsaclay.bibs.fieldsystem.test` contient l'ensemble des tests que les classes devront satisfaire.
 * la classe `FieldSystem` dans le package `fr.upsaclay.bibs.fieldsystem` contient une fonction `main` déjà écrite (et très simple à comprendre) que vous pourrez utiliser quand vous aurez complété l'application.
-* Le travail à faire réside dans le package `fr.upsaclay.bibs.fieldsystem.sheepfield` qui correspond au modèle du système dynamique. Le système lui-même est déjà écrit dans la classe `Field` : cette une grille rectangulaire où chaque case contient une liste de d'objets de type `FieldElement`, ce sont ces objets que vous allez écrire (l'herbe, les moutons et les loups)
+* Le travail à faire réside dans le package `fr.upsaclay.bibs.fieldsystem.sheepfield` qui correspond au modèle du système dynamique. Le système lui-même est déjà écrit dans la classe `Field` : c'est une grille rectangulaire où chaque case contient une liste de d'objets de type `FieldElement`, ce sont ces objets que vous allez écrire (l'herbe, les moutons et les loups)
 
 ### L'interface `FieldElement`
 
-Cette interface vous ait donnée : elle permet de représenter tous les éléments évoluant dans le champ. Vous allez compléter les différentes classes implémentant l'interface en utilisant l'héritage et les classes abstraites. 
+Cette interface vous est donnée : elle permet de représenter tous les éléments évoluant dans le champ. Vous allez compléter les différentes classes implémentant l'interface en utilisant l'héritage et les classes abstraites. 
 
 Il y a 3 types de `FieldElement` : l'herbe (classe `Grass`), les moutons (classe `Sheep`) et les loups (classe `Wolf`). Les classes suivent la structure d'héritage suivante :
 
@@ -65,19 +74,6 @@ switch(element.getType()) {
 ~~~~
 ::::
 
-:::: {.explication}
-### Les classes record
-
-Les classes record sont des classes particulières qui correspondent plus ou moins aux structures du C (sauf qu'on ne peut pas les modifier). L'objectif de ces classes est simplement de stocker un ensemble de variables dans une structure. C'est le cas ici de la classe `Position` et de la classe `FieldMove` : les paramètres déclarés du record sont stockés comme des champs privé et finaux. Le constructeur et les méthodes d'accès sont créées automatiquement. Par exemple, dans le cas de la classe `Position`, on pourra créer un objet de cette façon :
-
-    Position pos = new Position(1,2);
-    
-puis accéder aux champs `x` et `y`
- 
-    pos.x();
-    pos.y();
-
-::::
 
 ### Du Java un peu avancé
 
@@ -122,7 +118,7 @@ Ce constructeur appelle le constructeur de la super classe en lui passant le bon
 
    si la probabilité est inférieure stricte à 0 ou supérieure stricte à 1. Ensuite, le champ `grassProba` est mis à jour avec la valeur envoyée.
    
-2. Implantez la méthode `activate` : elle doit appelée la méthode de la super classe avec `super.activate()` puis passer le champ `active` à `true`.
+2. Implantez la méthode `activate` : elle doit appeler la méthode de la super classe avec `super.activate()` puis passer le champ `active` à `true`.
 
 3. Implantez la méthode `getInitialLifeSpan` qui renvoie la valeur statique par défaut `Grass.defaultLifeSpan` (ce qui signifie que si l'on modifie la valeur statique, on modifie en temps réel toutes les valeurs pour tous les objets `Grass`)
 
@@ -153,7 +149,7 @@ Le fonctionnement des éléments `Grass` est le suivant : les éléments ne meur
 
 ## Exercice 2 : Les moutons
 
-On va maintenant implantez les animaux qui héritent tous de la classe `AbstractAnimal`. L'objectif est de compléter les classes `AbstractAnimal` et `Sheep` de telle sorte à ce que tous les tests de `SheepTest` passent.
+On va maintenant implanter les animaux qui héritent tous de la classe `AbstractAnimal`. L'objectif est de compléter les classes `AbstractAnimal` et `Sheep` de telle sorte à ce que tous les tests de `SheepTest` passent.
 
 ### Fonctionnement des animaux
 
@@ -192,13 +188,13 @@ Lorsqu'ils sont mangés, les animaux meurent.
 
 Ces actions sont gérées par trois méthodes `canEat` `eat` et `eaten` et sont implantées en partie dans `AbstractFieldElement`, `AbstractAnimal` et enfin `Sheep` qui n'implémente que `getIncreasePerEat`. 
 
-19. Implantez `getIncreasePerEat` dans `Sheep` ainsi que les méthodes nécessaires dans `AbstractAnimal` pour que les tests `testCanEat` `testEat` et `testEaten` fonctionnent. Pensez à regarder ce qui est implanté dans `AbstractFieldElement` et a appelé la méthode de la super classe quand c'est nécessaire.
+19. Implantez `getIncreasePerEat` dans `Sheep` ainsi que les méthodes nécessaires dans `AbstractAnimal` pour que les tests `testCanEat` `testEat` et `testEaten` fonctionnent. Pensez à regarder ce qui est implanté dans `AbstractFieldElement` et à appeler la méthode de la super classe quand c'est nécessaire.
 
 ### Reproduction
 
 Chaque animal peut, à chaque tour, se "reproduire", c'est à dire se dédoubler. Cette action est gérée par la méthode `conditionnalReproduce`. La méthode par défaut de `AbstractFieldElement` renvoie simplement `null` ce qui signifie qu'il n'y a pas eu de reproduction.
 
-20. Dans `Sheep` implantez la méthode `testNewInstance` : cette méthode est définie comme abstraite dans `AbstractAnimal` , elle doit simplement renvoyer une nouvelle instance de la classe `Sheep`.
+20. Dans `Sheep` implantez la méthode `newInstance` : cette méthode est définie comme abstraite dans `AbstractAnimal` , elle doit simplement renvoyer une nouvelle instance de la classe `Sheep`.
 
 21. Dans `AbstractAnimal`, implantez la méthode `conditionalReproduce` . Le fonctionnement est le suivant : si l'animal n'est pas faible (méthode `isWeak`) et si un nombre tiré au hasard (avec `Math.random`) est inférieur à la probabilité de reproduction, alors, on renvoie une nouvelle instance de l'animal. Sinon, on renvoie `null`.
 
@@ -210,9 +206,9 @@ Les animaux avancent avec une certaine vitesse déterminée par la méthode `get
 
 23. Implantez la méthode `getSpeed` de `Sheep` et vérifiez que les tests de `testGetSpeed` passent. 
 
-24. Les animaux peuvent se dépcer s'ils sont vivants. Dans `AbstractAnimal`, implantez la méthode `canMove` et vérifiez que les tests de `testCanMove` passent.
+24. Les animaux peuvent se déplacer s'ils sont vivants. Dans `AbstractAnimal`, implantez la méthode `canMove` et vérifiez que les tests de `testCanMove` passent.
 
-25. Enfin, implantez la méthode `nextMove` dans `abstractAnimal` (la documentation se trouve au niveau de l'interface `FieldElement`). Cette méthode prend en paramètre une position de départ et une position cible. Elle doit renvoyer un mouvement `FieldMove` c'est-à-dire un objet structuré contenant l'animal lui-même, sa position actuelle et sa nouvelle position calculée en fonction de sa cible et de sa vitesse. Un exemple vous ai donné dans le cas où l'animal a déjà atteint sa cible.
+25. Enfin, implantez la méthode `nextMove` dans `abstractAnimal` (la documentation se trouve au niveau de l'interface `FieldElement`). Cette méthode prend en paramètre une position de départ et une position cible. Elle doit renvoyer un mouvement `FieldMove` c'est-à-dire un objet structuré contenant l'animal lui-même, sa position actuelle et sa nouvelle position calculée en fonction de sa cible et de sa vitesse. Un exemple vous est donné dans le cas où l'animal a déjà atteint sa cible.
 
    Pour implanter cette méthode, vous devez : 
    

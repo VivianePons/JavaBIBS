@@ -85,6 +85,7 @@
 <ul>
 <li><a href="#objectif">Objectif</a></li>
 <li><a href="#récupération-du-code">Récupération du code</a></li>
+<li><a href="#mise-à-jour-du-projet-dans-intellij">Mise à jour du projet dans Intellij</a></li>
 <li><a href="#architecture-générale">Architecture générale</a>
 <ul>
 <li><a href="#organisation-des-packages">Organisation des packages</a></li>
@@ -93,7 +94,6 @@
 <li><a href="#avant-de-commencer-quelques-nouveauté">Avant de commencer : quelques nouveauté</a>
 <ul>
 <li><a href="#les-classes-enum">Les classes enum</a></li>
-<li><a href="#les-classes-record">Les classes record</a></li>
 <li><a href="#du-java-un-peu-avancé">Du Java un peu avancé</a></li>
 </ul></li>
 <li><a href="#exercice-1-la-classe-grass">Exercice 1 : La classe <code>Grass</code></a>
@@ -125,8 +125,12 @@
 <p><img src="media/illustration_TP4.png" width="300" alt="Une image du système dynamique : un grand rectangle blanc avec des petits carrés vers et des petits ronds blancs et noirs" /><br />
 </p>
 <h2 id="récupération-du-code">Récupération du code</h2>
-<p>L’ensemble du code est disponible dans un <a href="https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP4_Heritage">repo indépendant</a>. Vous pouvez le récupérer en cliquant sur le bouton de téléchargement à côté de “Clone” (on en effectuant un clone avec <em>git</em> si vous savez faire).</p>
-<p>Ensuite, avec Eclipse, vous pouvez créer un nouveau projet en utilisant le dossier téléchargé comme source. Ainsi, l’ensmeble de l’architecture de classes et packages seront déjà créés.</p>
+<p>L’ensemble du code est disponible dans un <a href="https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP4_Heritage">repo indépendant</a>. A partir d’IntelliJ, vous pouvez le récupérer directement en choisissant “New Project from version controll” et en donnant l’URL du repo : <code>https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP4_Heritage</code>.</p>
+<p>Sinon, il est aussi possible de le télécharger (bouton téléchargement à côté de “Clone” ou d’effectuer un clone avec <em>git</em> si vous savez faire (Remarque : nous aurons une séance spéciale sur le fonctionnement de git au début de l’UE Projet de Programmation, pour l’instant ce n’est pas nécessaire).</p>
+<h2 id="mise-à-jour-du-projet-dans-intellij">Mise à jour du projet dans Intellij</h2>
+<p>Une fois le projet récupéré, vous devez avoir un Projet ouvert “TP4_Heritage” dans Intellij avec un dossier src contenant les classes.</p>
+<p>Ouvrez une classe du package <code>test</code> : une erreur apparaît. Faites bouton droit sur le mot <code>junit</code> écrit en rouge, puis <code>More actions</code> et ajoutez <strong>JUnit 5</strong> (attention !! Pas JUnit4 qui est proposé par défaut)</p>
+<p>Parfois, l’erreur continue d’être soulignée. Refermez et réouvrez la classe. Si elle est toujours là, ouvrez la classe <code>FieldSystem</code> et tentée de l’exécuter. Normalement, l’exécution doit se passer normalement et vous ouvrir une fenêtre blanche avant de lever une exception “Not implemented yet”.</p>
 <h2 id="architecture-générale">Architecture générale</h2>
 <p>L’architecture du projet est déjà fournie et de nombreuses classes et interfaces sont écrites. Votre travail sera de compléter le code fourni.</p>
 <h3 id="organisation-des-packages">Organisation des packages</h3>
@@ -134,10 +138,10 @@
 <li>le package <code>fr.upsaclay.bibs.fieldsystem.view</code> concerne la partie graphique de l’application. Nous n’avons pas encore abordé cet aspect : vous n’aurez rien à modifier.</li>
 <li>le package <code>fr.upsaclay.bibs.fieldsystem.test</code> contient l’ensemble des tests que les classes devront satisfaire.</li>
 <li>la classe <code>FieldSystem</code> dans le package <code>fr.upsaclay.bibs.fieldsystem</code> contient une fonction <code>main</code> déjà écrite (et très simple à comprendre) que vous pourrez utiliser quand vous aurez complété l’application.</li>
-<li>Le travail à faire réside dans le package <code>fr.upsaclay.bibs.fieldsystem.sheepfield</code> qui correspond au modèle du système dynamique. Le système lui-même est déjà écrit dans la classe <code>Field</code> : cette une grille rectangulaire où chaque case contient une liste de d’objets de type <code>FieldElement</code>, ce sont ces objets que vous allez écrire (l’herbe, les moutons et les loups)</li>
+<li>Le travail à faire réside dans le package <code>fr.upsaclay.bibs.fieldsystem.sheepfield</code> qui correspond au modèle du système dynamique. Le système lui-même est déjà écrit dans la classe <code>Field</code> : c’est une grille rectangulaire où chaque case contient une liste de d’objets de type <code>FieldElement</code>, ce sont ces objets que vous allez écrire (l’herbe, les moutons et les loups)</li>
 </ul>
 <h3 id="linterface-fieldelement">L’interface <code>FieldElement</code></h3>
-<p>Cette interface vous ait donnée : elle permet de représenter tous les éléments évoluant dans le champ. Vous allez compléter les différentes classes implémentant l’interface en utilisant l’héritage et les classes abstraites.</p>
+<p>Cette interface vous est donnée : elle permet de représenter tous les éléments évoluant dans le champ. Vous allez compléter les différentes classes implémentant l’interface en utilisant l’héritage et les classes abstraites.</p>
 <p>Il y a 3 types de <code>FieldElement</code> : l’herbe (classe <code>Grass</code>), les moutons (classe <code>Sheep</code>) et les loups (classe <code>Wolf</code>). Les classes suivent la structure d’héritage suivante :</p>
 <figure>
 <img src="media/diagrams/FieldElement.png" alt="" /><figcaption>La classe abstraite AbstractFieldElement implémente l’interface. Grass et AbstractAnimal héritent de AbstractFieldElement. Sheep et Wolf héritent de AbstractAnimal.</figcaption>
@@ -161,14 +165,6 @@
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>        <span class="fu">paintAnimal</span>(g, i, j, <span class="bu">Color</span>.<span class="fu">BLACK</span>, element.<span class="fu">isWeak</span>());</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>        <span class="kw">break</span>;</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>}</span></code></pre></div>
-</section>
-<section id="les-classes-record" class="explication">
-<h3>Les classes record</h3>
-<p>Les classes record sont des classes particulières qui correspondent plus ou moins aux structures du C (sauf qu’on ne peut pas les modifier). L’objectif de ces classes est simplement de stocker un ensemble de variables dans une structure. C’est le cas ici de la classe <code>Position</code> et de la classe <code>FieldMove</code> : les paramètres déclarés du record sont stockés comme des champs privé et finaux. Le constructeur et les méthodes d’accès sont créées automatiquement. Par exemple, dans le cas de la classe <code>Position</code>, on pourra créer un objet de cette façon :</p>
-<pre><code>Position pos = new Position(1,2);</code></pre>
-<p>puis accéder aux champs <code>x</code> et <code>y</code></p>
-<pre><code>pos.x();
-pos.y();</code></pre>
 </section>
 <h3 id="du-java-un-peu-avancé">Du Java un peu avancé</h3>
 <p>La classe <code>Field</code> contient des éléments de Java avancés : interface fonctionnels et lambda fonctions, classes internes, implémentation d’itérateur, etc. Vous pouvez regarder son fonctionnement par curiosité et intérêt mais on ne vous demande pas de tout comprendre !</p>
@@ -194,7 +190,7 @@ pos.y();</code></pre>
 <li><p>Implantez la méthode <code>setGrassProba</code> : cette méthode doit lever une exception</p>
 <pre><code> throw new IllegalArgumentException();</code></pre>
 <p>si la probabilité est inférieure stricte à 0 ou supérieure stricte à 1. Ensuite, le champ <code>grassProba</code> est mis à jour avec la valeur envoyée.</p></li>
-<li><p>Implantez la méthode <code>activate</code> : elle doit appelée la méthode de la super classe avec <code>super.activate()</code> puis passer le champ <code>active</code> à <code>true</code>.</p></li>
+<li><p>Implantez la méthode <code>activate</code> : elle doit appeler la méthode de la super classe avec <code>super.activate()</code> puis passer le champ <code>active</code> à <code>true</code>.</p></li>
 <li><p>Implantez la méthode <code>getInitialLifeSpan</code> qui renvoie la valeur statique par défaut <code>Grass.defaultLifeSpan</code> (ce qui signifie que si l’on modifie la valeur statique, on modifie en temps réel toutes les valeurs pour tous les objets <code>Grass</code>)</p></li>
 <li><p>Ouvrez le fichier <code>GrassTest</code> et lancez les tests. Les premiers tests de <code>testCreation</code> doivent passer.</p></li>
 <li><p>Implantez les autres constructeurs de la classe <code>Grass</code> : ils appellent le constructeur principal avec les bons paramètres puis effectuent les actions nécessaires :</p>
@@ -215,7 +211,7 @@ pos.y();</code></pre>
 <li><p>Lancez la fonction main de la classe <code>FieldSystem</code> : les éléments herbes sont ajoutés automatiquement à la création de champ (avec une probabilité aléatoire d’activation). Vous devriez voir aparaitre un grand rectangle avec des petits carrés verts qui apparaissent et disparaissent. C’est notre champ !</p></li>
 </ol>
 <h2 id="exercice-2-les-moutons">Exercice 2 : Les moutons</h2>
-<p>On va maintenant implantez les animaux qui héritent tous de la classe <code>AbstractAnimal</code>. L’objectif est de compléter les classes <code>AbstractAnimal</code> et <code>Sheep</code> de telle sorte à ce que tous les tests de <code>SheepTest</code> passent.</p>
+<p>On va maintenant implanter les animaux qui héritent tous de la classe <code>AbstractAnimal</code>. L’objectif est de compléter les classes <code>AbstractAnimal</code> et <code>Sheep</code> de telle sorte à ce que tous les tests de <code>SheepTest</code> passent.</p>
 <h3 id="fonctionnement-des-animaux">Fonctionnement des animaux</h3>
 <p>Contrairement aux éléments <code>Grass</code>, les animaux peuvent être vivants ou morts (les animaux morts sont en fait retirés du champ, alors que les éléments inactifs comme l’herbe restent présents mais invisibles). La classe <code>AbstractAnimal</code> stocke donc un champ <code>dead</code> : les animaux sont considérés comme actif s’ils ne sont pas morts.</p>
 <p>Par ailleurs, ils ont des fonctionnalités en plus comme le fait de pourvoir manger, se reproduire et se déplacer. La plupart des actions peuvent être traitées de façon uniforme pour tous les animaux et sont donc implémentées dans <code>AbstractAnimal</code> avec parfois l’utilisation de certaines méthodes abstraites qui correspondent au comportement spécifique de chaque type d’animal.</p>
@@ -241,12 +237,12 @@ pos.y();</code></pre>
 <p>Lorsqu’ils sont mangés, les animaux meurent.</p>
 <p>Ces actions sont gérées par trois méthodes <code>canEat</code> <code>eat</code> et <code>eaten</code> et sont implantées en partie dans <code>AbstractFieldElement</code>, <code>AbstractAnimal</code> et enfin <code>Sheep</code> qui n’implémente que <code>getIncreasePerEat</code>.</p>
 <ol start="19" type="1">
-<li>Implantez <code>getIncreasePerEat</code> dans <code>Sheep</code> ainsi que les méthodes nécessaires dans <code>AbstractAnimal</code> pour que les tests <code>testCanEat</code> <code>testEat</code> et <code>testEaten</code> fonctionnent. Pensez à regarder ce qui est implanté dans <code>AbstractFieldElement</code> et a appelé la méthode de la super classe quand c’est nécessaire.</li>
+<li>Implantez <code>getIncreasePerEat</code> dans <code>Sheep</code> ainsi que les méthodes nécessaires dans <code>AbstractAnimal</code> pour que les tests <code>testCanEat</code> <code>testEat</code> et <code>testEaten</code> fonctionnent. Pensez à regarder ce qui est implanté dans <code>AbstractFieldElement</code> et à appeler la méthode de la super classe quand c’est nécessaire.</li>
 </ol>
 <h3 id="reproduction">Reproduction</h3>
 <p>Chaque animal peut, à chaque tour, se “reproduire”, c’est à dire se dédoubler. Cette action est gérée par la méthode <code>conditionnalReproduce</code>. La méthode par défaut de <code>AbstractFieldElement</code> renvoie simplement <code>null</code> ce qui signifie qu’il n’y a pas eu de reproduction.</p>
 <ol start="20" type="1">
-<li><p>Dans <code>Sheep</code> implantez la méthode <code>testNewInstance</code> : cette méthode est définie comme abstraite dans <code>AbstractAnimal</code> , elle doit simplement renvoyer une nouvelle instance de la classe <code>Sheep</code>.</p></li>
+<li><p>Dans <code>Sheep</code> implantez la méthode <code>newInstance</code> : cette méthode est définie comme abstraite dans <code>AbstractAnimal</code> , elle doit simplement renvoyer une nouvelle instance de la classe <code>Sheep</code>.</p></li>
 <li><p>Dans <code>AbstractAnimal</code>, implantez la méthode <code>conditionalReproduce</code> . Le fonctionnement est le suivant : si l’animal n’est pas faible (méthode <code>isWeak</code>) et si un nombre tiré au hasard (avec <code>Math.random</code>) est inférieur à la probabilité de reproduction, alors, on renvoie une nouvelle instance de l’animal. Sinon, on renvoie <code>null</code>.</p></li>
 <li><p>Vérifiez que les tests de <code>testConditionalReproduce</code> passent.</p></li>
 </ol>
@@ -254,8 +250,8 @@ pos.y();</code></pre>
 <p>Les animaux avancent avec une certaine vitesse déterminée par la méthode <code>getSpeed</code> : c’est le nombre de pas qu’ils peuvent faire en un tour. Un pas est un déplacement horizontal ou vertical d’une unité.</p>
 <ol start="23" type="1">
 <li><p>Implantez la méthode <code>getSpeed</code> de <code>Sheep</code> et vérifiez que les tests de <code>testGetSpeed</code> passent.</p></li>
-<li><p>Les animaux peuvent se dépcer s’ils sont vivants. Dans <code>AbstractAnimal</code>, implantez la méthode <code>canMove</code> et vérifiez que les tests de <code>testCanMove</code> passent.</p></li>
-<li><p>Enfin, implantez la méthode <code>nextMove</code> dans <code>abstractAnimal</code> (la documentation se trouve au niveau de l’interface <code>FieldElement</code>). Cette méthode prend en paramètre une position de départ et une position cible. Elle doit renvoyer un mouvement <code>FieldMove</code> c’est-à-dire un objet structuré contenant l’animal lui-même, sa position actuelle et sa nouvelle position calculée en fonction de sa cible et de sa vitesse. Un exemple vous ai donné dans le cas où l’animal a déjà atteint sa cible.</p></li>
+<li><p>Les animaux peuvent se déplacer s’ils sont vivants. Dans <code>AbstractAnimal</code>, implantez la méthode <code>canMove</code> et vérifiez que les tests de <code>testCanMove</code> passent.</p></li>
+<li><p>Enfin, implantez la méthode <code>nextMove</code> dans <code>abstractAnimal</code> (la documentation se trouve au niveau de l’interface <code>FieldElement</code>). Cette méthode prend en paramètre une position de départ et une position cible. Elle doit renvoyer un mouvement <code>FieldMove</code> c’est-à-dire un objet structuré contenant l’animal lui-même, sa position actuelle et sa nouvelle position calculée en fonction de sa cible et de sa vitesse. Un exemple vous est donné dans le cas où l’animal a déjà atteint sa cible.</p></li>
 </ol>
 <p>Pour implanter cette méthode, vous devez :</p>
 <ul>
