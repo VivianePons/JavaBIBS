@@ -1,19 +1,89 @@
 package fr.upsaclay.bibs.mvc.control;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 
 import fr.upsaclay.bibs.mvc.model.Rectangle;
-import fr.upsaclay.bibs.mvc.view.RectangleAppActionComponent;
 import fr.upsaclay.bibs.mvc.view.RectangleAppFrame;
 import fr.upsaclay.bibs.mvc.view.RectangleAppView;
+import fr.upsaclay.bibs.mvc.view.ViewState;
 
-public class RectangleController implements ActionListener, KeyListener {
+public class RectangleController {
+
+	public static final int BOUNDX = 500;
+	public static final int BOUNDY = 300;
+
+	private Rectangle rectangle;
+	private RectangleAppView view;
+
+	public RectangleController() {
+		view = new RectangleAppFrame("My Rectangle app", BOUNDX, BOUNDY);
+	}
+
+	public void initialize() {
+		Rectangle.setMaxx(BOUNDX);
+		Rectangle.setMaxy(BOUNDY);
+		view.setController(this);
+		view.initialize();
+		view.setViewState(ViewState.WITHOUT_RECTANGLE);
+	}
+
+	private void createRectangle() {
+		rectangle = new Rectangle(250, 150, 30, 20);
+		rectangle.setFillColor(Color.BLUE);
+		view.setRectanle(rectangle);
+		view.setViewState(ViewState.WITH_RECTANGLE);
+	}
+
+	private void deleteRectangle() {
+		rectangle = null;
+		view.setRectanle(null);
+		view.setViewState(ViewState.WITHOUT_RECTANGLE);
+	}
+
+	public void receiveAction(RectangleAction action) {
+		switch (action) {
+            case CREATE: createRectangle(); break;
+			case DELETE: deleteRectangle(); break;
+			case DECREASE_HEIGHT:
+				rectangle.tryExtendHeight(-1);
+				break;
+			case DECREASE_WIDTH:
+				rectangle.tryExtendWidth(-1);
+				break;
+			case INCREASE_HEIGHT:
+				rectangle.tryExtendHeight(1);
+				break;
+			case INCREASE_WIDTH:
+				rectangle.tryExtendWidth(1);
+				break;
+			case MOVE_DOWN:
+				rectangle.trymove(0, 1);
+				break;
+			case MOVE_LEFT:
+				rectangle.trymove(-1, 0);
+				break;
+			case MOVE_RIGHT:
+				rectangle.trymove(1, 0);
+				break;
+			case MOVE_UP:
+				rectangle.trymove(0, -1);
+				break;
+        }
+		view.update();
+	}
+
+	public void receiveAction(RectangleAction action, int x, int y) {
+		switch (action) {
+			case MOVE:
+				rectangle.trymove(x, y);
+				break;
+		}
+		view.update();
+	}
+}
+
+/*
+public class RectangleController {
 	
 	public static final int BOUNDX = 500;
 	public static final int BOUNDY = 300;
@@ -31,8 +101,12 @@ public class RectangleController implements ActionListener, KeyListener {
 	
 	public void initialize() {
 		view.initialize();
+
+
 		view.drawNoRectangleView();
 		view.setListenerOnButtons(this);
+
+
 	}
 
 	@Override
@@ -174,3 +248,4 @@ public class RectangleController implements ActionListener, KeyListener {
 	}
 
 }
+*/

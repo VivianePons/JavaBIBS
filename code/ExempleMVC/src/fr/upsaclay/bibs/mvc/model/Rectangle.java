@@ -3,8 +3,7 @@ package fr.upsaclay.bibs.mvc.model;
 import java.awt.Color;
 
 public class Rectangle {
-	
-	
+
 
 	private static int maxx;
 	private static int maxy;

@@ -43,6 +43,8 @@ dans un terminal
   
 ## Projet
 
+* [Cours Git](CoursProjet-git.html)
+
 A venir
 
 ## Autrice 

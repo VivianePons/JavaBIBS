@@ -358,6 +358,8 @@ A l’initialisation du contrôleur, on va créer un nouveau rectangle et le pas
 
 ~~~~{.java}
 	public void initialize() {
+		Rectangle.setMaxx(BOUNDX);
+		Rectangle.setMaxy(BOUNDY);
 		rectangle = new Rectangle(250, 150, 30, 20);
 		rectangle.setFillColor(Color.BLUE);
 		view.setRectanle(rectangle);
@@ -404,41 +406,19 @@ Ca reste assez peu intéressant, comment contrôler le rectangle ?
 
 ## Fabriquer un bouton
 
-On va ajouter un bouton pour faire apparaître le rectangle. Tout d'abord, on va créer une interface pour nos boutons toujours dans l'idée de modulariser et de gérer la communication entre la vue et le contrôleur.
+On va ajouter un bouton pour faire apparaître le rectangle. Dans Swing, il y a une classe spéciale pour les boutons `JButton`. On va créé une variable dans la vue et l'ajouter au panneau des boutons.
 
-~~~~{.java}
-public interface RectangleAppActionComponent {
-
-}
-~~~~
-
-----
-
-On crée ensuite une classe `RectangleAppButton` qui hérite de `JButton`, le composant bouton de `Swing` et qui implémente notre interface.
-
-~~~~{.java}
-public class RectangleAppButton extends JButton implements RectangleAppActionComponent {
-
-	public RectangleAppButton(String name) {
-		super(name);
-	}
-}
-~~~~
-
-----
-
-A présent, dans `RectangleAppFrame`, on crée et on ajoute le bouton au panneau des boutons.
 
 ~~~~{.java}
 public class RectangleAppFrame extends JFrame implements RectangleAppView {
 
 	...
-	RectangleAppButton makeRectangleBtn;
+	JButton makeRectangleBtn;
 	...
 	
 	@Override
 	public void initialize() {
-		makeRectangleBtn = new RectangleAppButton("Create rectangle");
+		makeRectangleBtn = new JButton("Create rectangle");
 		buttonPanel.add(makeRectangleBtn);
 		rectanglePanel.initialize();
 		setVisible(true);
@@ -456,90 +436,120 @@ Mais comment faire pour qu'il se passe quelque chose quand on appuie sur le bout
 
 ----
 
+## Côté contrôleur 
+
+On va créer le moyen de recevoir des actions depuis la vue. Pour cela, on crée un `enum` avec la liste des actions possibles (pour l'instant une seule action).
+
+~~~~{.java}
+public enum RectangleAction {
+	CREATE
+}
+~~~~
+
+----
+
+Et dans la classe `RectangleController` lui-même, on implémente de quoi recevoir l'action
+
+~~~~{.java}
+    private void createRectangle() {
+		rectangle = new Rectangle(250, 150, 30, 20);
+		rectangle.setFillColor(Color.BLUE);
+		view.setRectanle(rectangle);
+	}
+
+	public void receiveAction(RectangleAction action) {
+		switch (action) {
+            case CREATE: createRectangle(); break;
+        }
+	}
+~~~~
+
+----
+
+Enfin, on rajoute un lien vers le contrôleur depuis la vue, pour que la vue puisse envoyer des actions
+
+~~~~{.java}
+public interface RectangleAppView {
+
+	...
+
+	void setController(RectangleController controller);
+}
+~~~~
+
+----
+
+Le contrôleur est stocké dans un champs privé de la vue. Au moment d'initialiser la vue dans `RectangleController`, on lui envoie le contrôleur
+
+~~~~{.java}
+public void initialize() {
+	view.setController(this);
+	view.initialize();
+}
+~~~~
+
+**Remarque :** la seule interaction que la vue doit avoir avec le contrôleur, c'est d'envoyer une action. Pour plus de modularité, on pourrait donc stocker uniquement "la partie" du contrôleur qui reçoit les actions (par un objet ou une interface dédiée) 
+
+----
+
+## Mais comment faire pour le lier au bouton ?
+
+On a besoin que quand on clique sur le bouton, ça envoie la bonne action au contrôleur
+
+----
+
 ## Les évènements et les `Listeners`
 
 Suivant le principe du MVC, `Swing` sépare l'objet graphique bouton de l'action enclenchée par le clic. Tout le principe de l'interface graphique est basée sur l'idée "d'évènements" qui sont lancés par les composants et "écoutés" par d'autres classes. C'est un framework qui est directement inspiré par la philosophie du MVC et que l'on retrouve, sous une forme ou une autre, dans la plupart des bibliothèques graphiques.
 
+Ici, on a rajouté une couche supplémentaire avec notre contrôleur pour pouvoir recevoir des actions de façon indépendante de l'architecture de `Swing`.
+
+
 ----
 
-### Notre contrôleur listener
+### Nos listener de boutons
 
-Dans notre application, on va transformer notre contrôleur `RectangleController` en "écouteur" en ajoutant l'interface `ActionListener`.
+Dans notre application, on va créer une classe `ButtonListener` (dans la partie vue) qui servira à écouter nos différents boutons
 
 ~~~~{.java}
-public class RectangleController implements ActionListener {
-	
-	...
+public class ButtonListener implements ActionListener {
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+    private final RectangleController controller;
+    private final RectangleAction action;
+
+    public ButtonListener(RectangleController controller, RectangleAction action) {
+        this.controller = controller;
+        this.action = action;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        controller.receiveAction(action);
+    }
 }
+~~~~
+
+----
+
+Au moment de la création du bouton, on le relie à un écouteur de boutons avec la bonne action
+
+~~~~{.java}
+makeRectangleBtn.addActionListener(new ButtonListener(controller, RectangleAction.CREATE));
 ~~~~
 
 ----
 
 ### Faire apparaître le rectangle quand on clique
 
-Plutôt que d'ajouter le rectangle à l'initialisation, on va l'ajouter quand la méthode `actionPerformed` est appelée.
+Donc maintenant, le contrôleur ne crée le rectangle que lorsqu'il en reçoit l'ordre et le bouton est configuré pour envoyer l'ordre au moment du click par le biais de son "écouteur". 
 
-~~~~{.java}
-	public void initialize() {
-		view.initialize();
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		rectangle = new Rectangle(250, 150, 30, 20);
-		rectangle.setFillColor(Color.BLUE);
-		view.setRectanle(rectangle);
-	}
-~~~~
+Donc tout est parfait ! 
 
 ----
 
-Mais ce n'est pas tout, il faut aussi dire au contrôleur d'écouter le bouton. Pour cela, on ajoute une méthode dans notre interface `RectangleAppView`
+### Ca ne marche pas !!!
 
-~~~~{.java}
-public interface RectangleAppView {
-
-	public void initialize();
-	
-	public void setRectanle(Rectangle rectangle);
-	
-	public void setListenerOnButtons(ActionListener listener);
-	
-}
-~~~~
-
----- 
-
-Et on l'implémente dans `RectangleAppFrame`
-
-~~~~{.java}
-	@Override
-	public void setListenerOnButtons(ActionListener listener) {
-		makeRectangleBtn.addActionListener(listener);
-		
-	}
-~~~~
-
-----
-
-Et on l'appelle dans le contrôleur
-
-~~~~
-	public void initialize() {
-		view.initialize();
-		view.setListenerOnButtons(this);
-	}
-~~~~
-
-----
-
-Mais ça ne marche toujours pas !! **POURQUOI ?** *Désespoir*
+**POURQUOI ?** *Désespoir*
 
 ----
 
@@ -561,11 +571,10 @@ La méthode `update` appelle la méthode `repaint` du `JPanel` `rectanglePanel`.
 Et bien sûr, on appelle `update` depuis le contrôleur.
 
 ~~~~{.java}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		rectangle = new Rectangle(250, 150, 30, 20);
-		rectangle.setFillColor(Color.BLUE);
-		view.setRectanle(rectangle);
+	public void receiveAction(RectangleAction action) {
+		switch (action) {
+            case CREATE: createRectangle(); break;
+        }
 		view.update();
 	}
 ~~~~
@@ -574,34 +583,70 @@ Maintenant, ça marche !
 
 ----
 
+**Remarque : ** vous aurez peut-être remarqué qu'il y a ici deux couches de "contrôle" : les `ActionListener` de `Swing` et l'écoute de nos actions spécifiques dans notre contrôleur à nous.
+
+En effet, les `ActionListener` sont *déjà* des mini contrôleurs. On pourrait décider de directement implémenter les interfaces de Swing avec notre contrôleur. Cependant, cela rendrait notre architecture très dépendantes des interfaces définies par `Swing`. 
+
+La solution qu'on propose ici permet plus de modularité :
+
+* la vue gère les différents composants graphiques et envoient les actions nécessaires
+* le contrôleur agit sur le modèle et la vue en fonction des actions requises. 
+
+----
+
 ## On fait un peu plus ?
 
 On va créer un bouton pour faire disparaître le rectangle.
+
+Pour cela une crée une nouvelle action dans le contrôleur
+
+~~~~{.java}
+public enum RectangleAction {
+	CREATE,
+	DELETE
+}
+~~~~
+
+----
+
+~~~~{.java}
+	private void deleteRectangle() {
+		rectangle = null;
+		view.setRectanle(null);
+	}
+
+	public void receiveAction(RectangleAction action) {
+		switch (action) {
+            case CREATE: createRectangle(); break;
+			case DELETE: deleteRectangle(); break;
+        }
+		view.update();
+	}
+~~~~
+
+----
+
+et un nouveau bouton dans la vue
+
 
 ~~~~{.java}
 public class RectangleAppFrame extends JFrame implements RectangleAppView {
 
 	
 	...
-	RectangleAppButton makeRectangleBtn;
-	RectangleAppButton deleteRectangleBtn;
+	JButton makeRectangleBtn;
+	JButton deleteRectangleBtn;
 	...
 	@Override
 	public void initialize() {
-		makeRectangleBtn = new RectangleAppButton("Create rectangle");
-		deleteRectangleBtn = new RectangleAppButton("Delete rectangle");
+		makeRectangleBtn = new JButton("Create rectangle");
+		makeRectangleBtn.addActionListener(new ButtonListener(controller, RectangleAction.CREATE));
+		deleteRectangleBtn = new JButton("Delete Rectangle");
+		deleteRectangleBtn.addActionListener(new ButtonListener(controller, RectangleAction.DELETE));
 		buttonPanel.add(makeRectangleBtn);
 		buttonPanel.add(deleteRectangleBtn);
 		...
 	}
-
-
-	@Override
-	public void setListenerOnButtons(ActionListener listener) {
-		makeRectangleBtn.addActionListener(listener);
-		deleteRectangleBtn.addActionListener(listener);
-		
-	}
 	...
 
 }
@@ -609,73 +654,7 @@ public class RectangleAppFrame extends JFrame implements RectangleAppView {
 
 ----
 
-Mais comment faire pour séparer les actions ?
-
-On va créer une liste d'actions différentes avec un `enum`.
-
-~~~~{.java}
-public enum RectangleActions {
-	CREATE,
-	DELETE;
-}
-~~~~
-
-----
-
-On va attacher les actions aux boutons. Pour cela, on rajoute des méthodes dans notre interface `RectangleAppActionComponent` que l'on implémente dans `RectangleAppButton`.
-
-~~~~{.java}
-public interface RectangleAppActionComponent {
-
-	public void setRectangleAction(RectangleAction action);
-	
-	public RectangleAction getRectangleAction();
-}
-~~~~
-
-----
-
-On attache l'action correspondante à chacun des boutons dans `RectangleAppFrame`
-
-~~~~{.java}
-	@Override
-	public void initialize() {
-		makeRectangleBtn = new RectangleAppButton("Create rectangle");
-		makeRectangleBtn.setRectangleAction(RectangleAction.CREATE);
-		deleteRectangleBtn = new RectangleAppButton("Delete rectangle");
-		deleteRectangleBtn.setRectangleAction(RectangleAction.DELETE);
-		buttonPanel.add(makeRectangleBtn);
-		buttonPanel.add(deleteRectangleBtn);
-		rectanglePanel.initialize();
-		setVisible(true);
-	}
-~~~~
-
-----
-
-Le contrôleur récupère l'action reçue (grâce à la méthode `getSource` de `ActionEvent`) et agit en conséquence.
-
-~~~~{.java}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		RectangleAppActionComponent button = (RectangleAppActionComponent) e.getSource();
-		switch(button.getRectangleAction()) {
-		case CREATE:
-			rectangle = new Rectangle(250, 150, 30, 20);
-			rectangle.setFillColor(Color.BLUE);
-			view.setRectanle(rectangle);
-			break;
-		case DELETE:
-			rectangle = null;
-			view.setRectanle(null);
-			break;
-		default:
-			break;
-		
-		}
-		view.update();
-	}
-~~~~
+C'est super ! Ca marche !
 
 ----
 
@@ -683,77 +662,81 @@ Le contrôleur récupère l'action reçue (grâce à la méthode `getSource` de 
 
 Encore une fois, on va essayer de faire ça de façon générique en séparant ce qui relève du contrôleur de ce qui relève de la vue.
 
-Ce qui se passe, c'est qu'on a en fait 2 états possible de la vue : avec et sans rectangle. On va créer les deux méthodes correspondantes dans notre interface `RectangleAppView`
+On va créer une liste d'états possibles pour la vue avec un enum
+
+~~~~{.java}
+public enum ViewState {
+    WITH_RECTANGLE,
+    WITHOUT_RECTANGLE;
+}
+~~~~
+
+
+----
+
+Et dans l'intervace `RectangleAppView`, on ajoute une méthode pour modifier l'état de la vue.
 
 ~~~~{.java}
 public interface RectangleAppView {
-
+	
 	...
 	
-	public void drawNoRectangleView();
+	void setViewState(ViewState state);
 	
-	public void drawWithRectangleView();
-	
+	...
 }
 ~~~~
 
 ----
 
-On les implémente dans `RectangleAppFrame` en rendant visible / invisible les éléments que l'on souhaite.
+On implémente cette méthode dans la vue en faisant apparaître / disparaître les éléments que l'on souhaite
 
 ~~~~{.java}
-	@Override
-	public void drawNoRectangleView() {
+    private void withRectangle() {
+		makeRectangleBtn.setVisible(false);
+		deleteRectangleBtn.setVisible(true);
+	}
+
+	private void withoutRectangle() {
 		makeRectangleBtn.setVisible(true);
 		deleteRectangleBtn.setVisible(false);
 	}
 
-
 	@Override
-	public void drawWithRectangleView() {
-		makeRectangleBtn.setVisible(false);
-		deleteRectangleBtn.setVisible(true);
+	public void setViewState(ViewState state) {
+		switch (state) {
+            case WITH_RECTANGLE: withRectangle();
+                break;
+            case WITHOUT_RECTANGLE: withoutRectangle();
+                break;
+        }
 	}
 ~~~~
 
 ----
 
-Dans le contrôleur, on appelle la méthode appropriée que ce soit à l'intitialisation
+Le contrôleur s'occupe ensuite demander à la vue l'état souhaité.
 
 ~~~~{.java}
+public class RectangleController {
+
+    ....
+
 	public void initialize() {
-		view.initialize();
-		view.drawNoRectangleView();
-		view.setListenerOnButtons(this);
+		...
+		view.setViewState(ViewState.WITHOUT_RECTANGLE);
 	}
-~~~~
 
-----
-
-Que lors d'un évènement
-
-~~~~{.java}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		RectangleAppActionComponent button = (RectangleAppActionComponent) e.getSource();
-		switch(button.getRectangleAction()) {
-		case CREATE:
-			rectangle = new Rectangle(250, 150, 30, 20);
-			rectangle.setFillColor(Color.BLUE);
-			view.setRectanle(rectangle);
-			view.drawWithRectangleView();
-			break;
-		case DELETE:
-			rectangle = null;
-			view.setRectanle(null);
-			view.drawNoRectangleView();
-			break;
-		default:
-			break;
-		
-		}
-		view.update();
+	private void createRectangle() {
+		...
+		view.setViewState(ViewState.WITH_RECTANGLE);
 	}
+
+	private void deleteRectangle() {
+		...
+		view.setViewState(ViewState.WITHOUT_RECTANGLE);
+	}
+}
 ~~~~
 
 ----
@@ -781,172 +764,133 @@ public enum RectangleAction {
 
 ## Contrôle au clavier
 
-On peut ajouter des "écouteurs" pour d'autres actions, par exemple un `KeyListener` pour les touches du clavier. On implémente l'interface avec 
+On va créer une implémentation de la classe `KeyListener` de `Swing`  pour envoyer ces mêmes actions avec les touches du clavier.
 
 ~~~~{.java}
-public class RectangleController implements ActionListener, KeyListener {
 
-	...
+public class RectangleKeyListener implements KeyListener {
+
+    private final RectangleController controller;
+
+    public RectangleKeyListener(RectangleController controller) {
+        this.controller = controller;
+    }
 	
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	...    
 }
 ~~~~
 
 ----
 
-Voilà une implémentation possible de la méthode `keyPressed`
+Il y a 3 méthodes à implanter pour cette interface : 
 
 ~~~~{.java}
-@Override
-	public void keyPressed(KeyEvent e) {
-		switch(e.getKeyCode()) {
-		case KeyEvent.VK_LEFT:
-			rectangle.trymove(-1, 0);
-			break;
-		case KeyEvent.VK_RIGHT:
-			rectangle.trymove(1, 0);
-			break;
-		case KeyEvent.VK_UP:
-			rectangle.trymove(0, -1);
-			break;
-		case KeyEvent.VK_DOWN:
-			rectangle.trymove(0, 1);
-			break;
-		case KeyEvent.VK_C:
-			rectangle.tryExtendWidth(-1);
-			break;
-		case KeyEvent.VK_V:
-			rectangle.tryExtendWidth(1);
-			break;
-		case KeyEvent.VK_B:
-			rectangle.tryExtendHeight(-1);
-			break;
-		case KeyEvent.VK_N:
-			rectangle.tryExtendHeight(1);
-			break;
-		}
-		view.update();
-	}
+public void keyTyped(KeyEvent keyEvent);
+public void keyPressed(KeyEvent keyEvent)
+public void keyReleased(KeyEvent keyEvent) 
+~~~~
+
+L'objet `KeyEvent` de swing permet de récupérer la touche du clavier qui a été pressée.
+
+----
+
+On laisse `keyTyped` et `keyReleasead` vides et on implémente `keyPressed`
+
+~~~~{.java}
+public void keyPressed(KeyEvent keyEvent) {
+        switch(keyEvent.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                controller.receiveAction(RectangleAction.MOVE_LEFT);
+                break;
+            case KeyEvent.VK_RIGHT:
+                controller.receiveAction(RectangleAction.MOVE_RIGHT);
+                break;
+            case KeyEvent.VK_UP:
+                controller.receiveAction(RectangleAction.MOVE_UP);
+                break;
+            case KeyEvent.VK_DOWN:
+                controller.receiveAction(RectangleAction.MOVE_DOWN);
+                break;
+            case KeyEvent.VK_C:
+                controller.receiveAction(RectangleAction.DECREASE_WIDTH);
+                break;
+            case KeyEvent.VK_V:
+                controller.receiveAction(RectangleAction.INCREASE_WIDTH);
+                break;
+            case KeyEvent.VK_B:
+                controller.receiveAction(RectangleAction.DECREASE_HEIGHT);
+                break;
+            case KeyEvent.VK_N:
+                controller.receiveAction(RectangleAction.INCREASE_HEIGHT);
+                break;
+        }
+    }
 ~~~~
 
 ----
 
-Il faut ensuite ajouter les méthodes et appels nécessaires pour que le contrôleur soit bien ajouté comme écouteur des actions clavier de la fenêtre principale.
+Ensuite, dans `RectangleAppFrame`, on s'assure de 
 
-
-
-~~~~{.java}
-public interface RectangleAppView {
-
-	...
-	
-	public void startKeyListener(KeyListener listener);
-	
-	public void stopKeyListener(KeyListener listener);
-	
-	...
-	
-}
-~~~~
+* créer "l'écouteur de clavier" (on le crée une seule fois, on le garde dans un champ de l'instance, comme les boutons)
+* de l'ajouter comme écouteurs à la fenêtre principale (on "écoute" en général le clavier avec la fenêtre principale)
 
 ----
-
-Comme on utilise à la fois des boutons et le clavier, il faut faire un peu attention car l'écoute du clavier que si le "focus" est sur le bon objet.
-
-On doit spécifier que la fenêtre est "focusable"
 
 ~~~~{.java}
 public class RectangleAppFrame extends JFrame implements RectangleAppView {
 
 	
 	...
+
+	RectangleKeyListener keyListener;
 	
+
+	@Override
+	public void initialize() {
+		...
+		keyListener = new RectangleKeyListener(controller);
+		...
+	}
+
+
+	private void withRectangle() {
+		...
+		addKeyListener(keyListener);
+	}
+
+	private void withoutRectangle() {
+		...
+		removeKeyListener(keyListener);
+	}
+	
+	...
+}
+~~~~ 
+
+----
+
+Il faut aussi, pour des raisons techniques, spécifier explicitement que la fenêtre est "focusable"
+
+~~~~{.java}
 	public RectangleAppFrame(String name, int boundx, int boundy) {
 		super();
 		setTitle(name);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setFocusable(true);
 		...
-		
 	}
-	
-	...
-}
 ~~~~
-
-----
 
 On récupère le focus à chaque fois qu'on active l'écoute clavier
 
-~~~~
-public class RectangleAppFrame extends JFrame implements RectangleAppView {
-
-	...
-
-	@Override
-	public void startKeyListener(KeyListener listener) {
-		addKeyListener(listener);
+~~~~{.java}
+	private void withRectangle() {
+		...
+		addKeyListener(keyListener);
 		requestFocus();
 	}
-	
-	@Override
-	public void stopKeyListener(KeyListener listener) {
-		removeKeyListener(listener);
-	}
-	
-	...
-}
 ~~~~
 
----- 
-
-Côté contrôleur, on relance l'écoute du clavier après chaque action de bouton :
-
-~~~~{.java}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(rectangle != null) {
-			view.stopKeyListener(this);
-		}
-		switch(button.getRectangleAction()) {
-		case CREATE:
-			rectangle = new Rectangle(250, 150, 30, 20);
-			rectangle.setFillColor(Color.BLUE);
-			view.setRectanle(rectangle);
-			view.drawWithRectangleView();
-			mouseListener = new ControllerMouseMotionListener();
-			break;
-		case DELETE:
-			rectangle = null;
-			view.setRectanle(null);
-			view.drawNoRectangleView();
-			break;
-		...
-		
-		}
-		if(rectangle != null) {
-			view.startKeyListener(this);
-		}
-		view.update();
-	}
-
-~~~~
 
 ----
 

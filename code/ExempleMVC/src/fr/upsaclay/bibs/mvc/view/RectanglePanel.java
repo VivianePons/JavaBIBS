@@ -26,10 +26,6 @@ public class RectanglePanel extends JPanel {
 			g.fillRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
 		}
 	}
-	
-	public void initialize() {
-		
-	}
 
 	public Rectangle getRectangle() {
 		return rectangle;
