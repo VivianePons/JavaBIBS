@@ -160,9 +160,9 @@ Pour la vue, on commencer par créer une interface `RectangleAppView` qui va lis
 ~~~~{.java}
 public interface RectangleAppView {
 
-	public void initialize();
+	void initialize();
 	
-	public void setRectanle(Rectangle rectangle);
+	void setRectangle(Rectangle rectangle);
 		
 }
 ~~~~
@@ -281,19 +281,18 @@ public class RectangleAppFrame extends JFrame implements RectangleAppView {
 	
 	@Override
 	public void initialize() {
-		rectanglePanel.initialize();
 		setVisible(true);
 	}
 
 	@Override
-	public void setRectanle(Rectangle rectangle) {
+	public void setRectangle(Rectangle rectangle) {
 		rectanglePanel.setRectangle(rectangle);
 	}
 
 }
 ~~~~
 
-L'initialisation ne fait qu'initialiser le panneau rectangle et rendre la fenêtre visible. La méthode `setRectangle` délègue au panneau rectangle.
+L'initialisation ne fait que rendre la fenêtre visible. La méthode `setRectangle` délègue au panneau rectangle.
 
 ----
 
@@ -311,6 +310,8 @@ public class RectangleController {
 	private RectangleAppView view;
 
 	public RectangleController() {
+		Rectangle.setMaxx(BOUNDX);
+		Rectangle.setMaxy(BOUNDY);
 		view = new RectangleAppFrame("My Rectangle app", BOUNDX, BOUNDY);
 	}
 	
@@ -320,7 +321,7 @@ public class RectangleController {
 }
 ~~~~
 
-La classe contient un pointeur sur le modèle et un sur la vue. Pour l'instant, elle ne fait que créer la vue.
+La classe contient un pointeur sur le modèle et un sur la vue. Pour l'instant, elle initialise les valeurs statiques du modèle et la vue.
 
 ----
 
@@ -362,7 +363,7 @@ A l’initialisation du contrôleur, on va créer un nouveau rectangle et le pas
 		Rectangle.setMaxy(BOUNDY);
 		rectangle = new Rectangle(250, 150, 30, 20);
 		rectangle.setFillColor(Color.BLUE);
-		view.setRectanle(rectangle);
+		view.setRectangle(rectangle);
 		view.initialize();
 	}
 ~~~~
@@ -454,7 +455,7 @@ Et dans la classe `RectangleController` lui-même, on implémente de quoi recevo
     private void createRectangle() {
 		rectangle = new Rectangle(250, 150, 30, 20);
 		rectangle.setFillColor(Color.BLUE);
-		view.setRectanle(rectangle);
+		view.setRectangle(rectangle);
 	}
 
 	public void receiveAction(RectangleAction action) {
@@ -612,7 +613,7 @@ public enum RectangleAction {
 ~~~~{.java}
 	private void deleteRectangle() {
 		rectangle = null;
-		view.setRectanle(null);
+		view.setRectangle(null);
 	}
 
 	public void receiveAction(RectangleAction action) {
@@ -881,6 +882,8 @@ Il faut aussi, pour des raisons techniques, spécifier explicitement que la fen�
 	}
 ~~~~
 
+----
+
 On récupère le focus à chaque fois qu'on active l'écoute clavier
 
 ~~~~{.java}
@@ -891,194 +894,232 @@ On récupère le focus à chaque fois qu'on active l'écoute clavier
 	}
 ~~~~
 
+Ainsi qu'à chaque mise à jour de la vue (car sinon le focus reste sur les boutons)
+
+~~~~{.java}
+public void update() {
+	rectanglePanel.repaint();
+	requestFocus();
+}
+~~~~
+
 
 ----
 
 ## Contrôle de la souris
 
-On veut pouvoir déplacer le rectangle à la souris. Le *listener* qui correspond à cette action est le `MouseMotionListener`. On ajoute des méthodes à notre vue :
+On veut pouvoir déplacer le rectangle à la souris. Pour cela, on peut implanter l'interface `MouseMotionListener` de `Swing`
 
-~~~{.java}
-public interface RectangleAppView {
+(Note : pour traiter les simples clics de la souris, on utilisera à la place `MouseListener`)
 
-	...
-	
-	public void startMouseMotionListener(MouseMotionListener listener);
-	
-	public void stopMouseMotionListener(MouseMotionListener listener);
-	
-	...
-	
+~~~~{.java}
+public class RectangleMouseListener implements MouseMotionListener {
+
+    ...
+
+    @Override
+    public void mouseDragged(MouseEvent mouseEvent) {
+        ...
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent mouseEvent) {
+        ...
+    }
 }
 ~~~~
 
 ----
 
-### Implémentation côté vue
+L'idée : lors d'un évènement `mouseDragged` on vérifiera si on est à l'intérieur ou hors du rectangle. Si on est dans le rectangle, on calcule le changement de position par rapport à l'évènement précédent et on envoie une action au contrôleur. En analysant le problème, on réalise que :
 
-Dans `RectangleAppFrame`, on délègue en réalité cette action au panneau sur lequel est dessiné le rectangle. Ainsi, la position renvoyée par la souris correspondra bien à la position théorique dans le modèle.
+* notre listener doit avoir accès au rectangle (pour savoir si le clic se situe à l'intérieur du rectangle)
+* on a besoin d'une action supplémentaire au niveau controleur et d'envoyer des informations de mouvement
+
+----
+
+Dans le contrôleur, on crée donc :
+
+(l'action `MOVE` a été ajoutée à la liste des `RectangleAction`)
 
 ~~~~{.java}
-	@Override
-	public void startMouseMotionListener(MouseMotionListener listener) {
-		rectanglePanel.addMouseMotionListener(listener);
-		
-	}
-
-	@Override
-	public void stopMouseMotionListener(MouseMotionListener listener) {
-		rectanglePanel.removeMouseMotionListener(listener);
-		
-	}
-~~~~
-
-----
-
-### Implantation côté contrôleur
-
-La gestion du mouvement de la souris va demander un peu de logique interne. Pour ne pas mélanger cette logique avec celle du contrôleur général, on va créer une nouvelle classe dédiée spécifiquement à l'écoute de la souris. 
-
-On veut que l'objet créé ait accès à tous les paramètres internes du contôleur et par ailleurs, cette classe ne sera utilisée que à l'intérieur d'une instance du contrôleur : la solution est de passer par une classe interne.
-
-----
-
-### Point info : classe interne
-
-Les classes internes sont utilisées exactement pour répondre au problème qu'on vient d'énoncer : 
-
-* besoin d'une logique spécifique ou d'un objet spécifique
-* besoin d'accéder aux champs et méthodes de l'instance
-* utilisation uniquement au sein de la classe en question
-
-Il y a parfois des petites subtilités techniques mais globalement, leur utilisation est assez naturelle. Comme on les voit très souvent dans le contexte des interfaces graphiques (où il faut tout le temps créer des listeners), je vous montre cet exemple là.
-
-----
-
-### La classe interne 
-
-~~~~{.java}
-public class RectangleController implements ActionListener, KeyListener {
+public class RectangleController {
 
 	...
 	
-	private class ControllerMouseMotionListener implements MouseMotionListener {
-
-		private boolean startDrag;
-		private int prevx;
-		private int prevy;
-		
-		ControllerMouseMotionListener() {
-			startDrag = false;
-		}
-		
-		@Override
-		public void mouseDragged(MouseEvent e) {
-			
-			if(! startDrag) {
-				int x = e.getX();
-				int y = e.getY();
-				if(rectangle.insideRectanle(x, y)) {
-					startDrag = true;
-					prevx = x;
-					prevy = y;
-				}
-			} else {
-				int diffx = e.getX() - prevx;
-				int diffy = e.getY() - prevy;
+	public void receiveAction(RectangleAction action, int diffx, int diffy) {
+		switch (action) {
+			case MOVE:
 				rectangle.trymove(diffx, diffy);
-				prevx = e.getX();
-				prevy = e.getY();
-				view.update();
-			}
-			
+				break;
 		}
-
-		@Override
-		public void mouseMoved(MouseEvent e) {
-			startDrag = false;
-			
-		}
-		
+		view.update();
 	}
+	
+	...
+}
+
 ~~~~
 
 ----
 
-### On en parle pas mais ça existe
+Côté "écouteur", construction :
 
-Scoop: en fait, on aurait même pu faire ce qui s'appelle une "classe anonyme" mais j'ai préféré ne pas vous embrouiller surtout que ça rend le code peu lisible.
+~~~~{.java}
+public class RectangleMouseListener implements MouseMotionListener {
+	
+	
+    private final RectangleController controller;
+    private Rectangle rectangle;
+    
+    private boolean startDrag;
+    int prevx;
+    int prevy;
 
-Cependant, si vous parcourez des exemples de code d'interface graphique en java, vous en verrez sûrement et dans ce cas, pas de panique : cherchez un peu plus d'info, ce n'est pas plus compliqué que les classes internes.
+    public RectangleMouseListener(RectangleController controller) {
+        this.controller = controller;
+        startDrag = false;
+    }
+
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
+    }
+    
+    ...
+}
+~~~~
 
 ----
 
-### Le reste de l'implémentation côté contrôleur
+Implémentation :
 
 ~~~~{.java}
-public class RectangleController implements ActionListener, KeyListener {
+public class RectangleMouseListener implements MouseMotionListener {
+
+	...
+	
+    @Override
+    public void mouseDragged(MouseEvent mouseEvent) {
+        if(! startDrag) {
+            int x = mouseEvent.getX();
+            int y = mouseEvent.getY();
+            if(rectangle.insideRectanle(x, y)) {
+                startDrag = true;
+                prevx = x;
+                prevy = y;
+            }
+        } else {
+            int diffx = mouseEvent.getX() - prevx;
+            int diffy = mouseEvent.getY() - prevy;
+            controller.receiveAction(RectangleAction.MOVE, diffx, diffy);
+            prevx = mouseEvent.getX();
+            prevy = mouseEvent.getY();
+        }
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent mouseEvent) {
+        startDrag = false;
+    }
+}
+~~~~
+
+----
+
+Pour que ça fonctionne, il faut que l'écouteur soit créé dans la vue et qu'on lui envoie le rectangle
+
+~~~~{.java}
+public class RectangleAppFrame extends JFrame implements RectangleAppView {
 	
 	...
 	
-	private ControllerMouseMotionListener mouseListener;
+	RectangleMouseListener mouseListener;
+	
+	...
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void initialize() {
 		...
-		switch(button.getRectangleAction()) {
-		case CREATE:
-			rectangle = new Rectangle(250, 150, 30, 20);
-			rectangle.setFillColor(Color.BLUE);
-			view.setRectanle(rectangle);
-			view.drawWithRectangleView();
-			mouseListener = new ControllerMouseMotionListener();
-			view.startMouseMotionListener(mouseListener);
-			break;
-		case DELETE:
-			rectangle = null;
-			view.setRectanle(null);
-			view.drawNoRectangleView();
-			view.stopMouseMotionListener(mouseListener);
-			break;
-		...
-		}
+		mouseListener = new RectangleMouseListener(controller);
 		...
 	}
+
+	@Override
+	public void setRectangle(Rectangle rectangle) {
+		rectanglePanel.setRectangle(rectangle);
+		mouseListener.setRectangle(rectangle);
+	}
+
+}
 ~~~~
 
-# En conclusion
+----
 
-Ceci, n'est **qu'un exemple** d'une architecture possible. Une partie de la séparation entre contrôle et vue est déjà assurée par `Swing` en séparant les composants des `listener`. Dans notre architecture :
+Et qu'on ajoute l'écouteur au bon composant au moment adéquat : ici, c'est le rectanglePanel qui doit "écouter" la souris.
+
+~~~~{.java}
+public class RectangleAppFrame extends JFrame implements RectangleAppView {
+	
+	...
+
+	private void withRectangle() {
+		...
+		rectanglePanel.addMouseMotionListener(mouseListener);
+	}
+
+	private void withoutRectangle() {
+		...
+		rectanglePanel.removeMouseMotionListener(mouseListener);
+	}
+
+}
+~~~~
 
 ----
 
-## Le rôle de la vue
 
-Dans notre architecture :
+## Point info : classe interne
 
-* la vue s'occupe de qui dessiner où et pendant quelle phase de l'application
-* quand la vue reçoit une demande d'écoute par le contrôleur, elle s'occupe de qui doit être écouté (les boutons, le panneau, la fenêtre)
-* la vue s'occupe de se mettre à jour sur demande en fonction de ce qu'elle voit du modèle
+Les classes "écouteuses" ne sont utilisées que par `RectangleAppFrame` et ont souvent besoin d'accéder à des champs de l'instance (comme le contrôleur qu'on a à chaque fois passé comme un champ privé). On pourrait en fait en faire des **classes internes** qui sont régulièrement utilisées dans les interfaces graphiques en particulier.
+
+A votre niveau, vous n'êtes jamais obligé de l'utiliser mais vous pourriez tomber dessus dans des architectures un peu plus compliquées.
 
 ----
 
-## Le rôle du contrôleur
+
+## Conclusion : Le rôle du contrôleur
 
 Dans notre architecture :
 
 * le contrôleur s'occupe de modifier le modèle
 * le contrôleur s'occupe de lancer les différentes phases 
-* le contrôleur s'occupe de quand commencer / arrêter d'écouter
-* le contrôleur s'occupe de réagir aux actions de l'utilisateur remontées par la vue (par le biais des listeners)
-* le contrôleur ne s'occupe **pas** de quels sont les composants qu'il écoute, ni même de quel type ils sont (il y a plusieurs sortes de boutons), il s'occupe simplement des évènements qui lui arrive
+* le contrôleur s'occupe de réagir aux actions de l'utilisateur remontées par la vue 
+* le contrôleur ne s'occupe **pas** de quels sont les composants qui remontent les informations ni de ce qui est concrètement affiché par la vue
 
+
+----
+
+## Conclusion : le rôle de la vue
+
+Dans notre architecture :
+
+* la vue s'occupe des détails techniques de l'interface graphique (composants, structure, etc)
+* la vue s'occupe d'afficher le modèle à l'utilisateur-trice
+* la vue s'occupe de ce qui s'affiche / ne s'affiche pas dans les différentes phases de l'appli
+* la vue s'occupe de la gestion des "écouteurs" pour faire remonter les actions au contrôleur
+* l'interface de la vue utilisée par le contrôleur est complètement indépendante de l'architecture graphique utilisée
+* la vue ne modifie PAS le modèle
+* la vue ne prend aucune décision quant au fonctionnement de l'appli ou aux conséquences des actions demandées
 
 ----
 
 ## les limites
 
-L'implantation du contrôleur est très dépendante de l'architecture de `Swing`. Quand le contrôleur a plus de travail que lancer une action de base sur le modèle, on va vouloir séparer la partie plus "haut niveau", de la partie "bas niveau" (les listeners) qui est dépendante de la bibliothèque graphique. 
+Ceci n'est qu'une possibilité d'architecture, ce ne sera pas forcément la réponse à chaque fois.
 
-La partie bas niveau du contrôleur peut même être assimilée à la vue mais elle doit garder un moyen d'envoyer les évènements au contrôleur.
+Par exemple, dans notre architecture, la vue possède un pointeur sur le modèle et sur le contrôleur : il n'y a pas de garantie dans l'architecture même qu'elle ne va pas "outrepasser" ses droits. 
+
+On peut aussi décider que le contrôleur écoute directement les composants pour agir sur le modèle (dans ce cas, le contrôleur dépend de l'architecture de l'interface graphique) et que la vue n'a pas accès au contrôleur.
 
 Ce qu'il faut garder à l'esprit : c'est une philosophie générale qu'il faut essayer d'adapter à bon escient. Le principe est de séparer les rôles.
 

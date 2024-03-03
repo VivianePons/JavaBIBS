@@ -224,9 +224,9 @@ Viviane Pons
 
 <div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">interface</span> RectangleAppView {</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>();</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>    <span class="dt">void</span> <span class="fu">initialize</span>();</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>    </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setRectanle</span>(<span class="bu">Rectangle</span> rectangle);</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>    <span class="dt">void</span> <span class="fu">setRectangle</span>(<span class="bu">Rectangle</span> rectangle);</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>        </span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>}</span></code></pre></div>
 <p>Pour l’instant, l’interface ne contient que 2 méthodes : on l’enrichira au fur et à mesure.</p>
@@ -318,17 +318,16 @@ Viviane Pons
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a>    </span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a>    <span class="at">@Override</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>() {</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a>        rectanglePanel.<span class="fu">initialize</span>();</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a>        <span class="fu">setVisible</span>(<span class="kw">true</span>);</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a>    }</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setRectanle</span>(<span class="bu">Rectangle</span> rectangle) {</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true"></a>        rectanglePanel.<span class="fu">setRectangle</span>(rectangle);</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true"></a>    }</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true"></a></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true"></a>}</span></code></pre></div>
-<p>L’initialisation ne fait qu’initialiser le panneau rectangle et rendre la fenêtre visible. La méthode <code>setRectangle</code> délègue au panneau rectangle.</p>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a>        <span class="fu">setVisible</span>(<span class="kw">true</span>);</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a>    }</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setRectangle</span>(<span class="bu">Rectangle</span> rectangle) {</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true"></a>        rectanglePanel.<span class="fu">setRectangle</span>(rectangle);</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true"></a>    }</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true"></a>}</span></code></pre></div>
+<p>L’initialisation ne fait que rendre la fenêtre visible. La méthode <code>setRectangle</code> délègue au panneau rectangle.</p>
 </div>
 <div class="slide section level1">
 
@@ -343,14 +342,16 @@ Viviane Pons
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a>    <span class="kw">private</span> RectangleAppView view;</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true"></a></span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true"></a>    <span class="kw">public</span> <span class="fu">RectangleController</span>() {</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true"></a>        view = <span class="kw">new</span> <span class="fu">RectangleAppFrame</span>(<span class="st">&quot;My Rectangle app&quot;</span>, BOUNDX, BOUNDY);</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true"></a>    }</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true"></a>    </span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>() {</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true"></a>        view.<span class="fu">initialize</span>();</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true"></a>    }</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true"></a>}</span></code></pre></div>
-<p>La classe contient un pointeur sur le modèle et un sur la vue. Pour l’instant, elle ne fait que créer la vue.</p>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true"></a>        <span class="bu">Rectangle</span>.<span class="fu">setMaxx</span>(BOUNDX);</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true"></a>        <span class="bu">Rectangle</span>.<span class="fu">setMaxy</span>(BOUNDY);</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true"></a>        view = <span class="kw">new</span> <span class="fu">RectangleAppFrame</span>(<span class="st">&quot;My Rectangle app&quot;</span>, BOUNDX, BOUNDY);</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true"></a>    }</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true"></a>    </span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>() {</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true"></a>        view.<span class="fu">initialize</span>();</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true"></a>    }</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true"></a>}</span></code></pre></div>
+<p>La classe contient un pointeur sur le modèle et un sur la vue. Pour l’instant, elle initialise les valeurs statiques du modèle et la vue.</p>
 </div>
 <div class="slide section level1">
 
@@ -377,11 +378,13 @@ Viviane Pons
 <h3 id="côté-contrôleur">Côté contrôleur</h3>
 <p>A l’initialisation du contrôleur, on va créer un nouveau rectangle et le passer à la vue.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>() {</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a>        rectangle = <span class="kw">new</span> <span class="bu">Rectangle</span>(<span class="dv">250</span>, <span class="dv">150</span>, <span class="dv">30</span>, <span class="dv">20</span>);</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a>        rectangle.<span class="fu">setFillColor</span>(<span class="bu">Color</span>.<span class="fu">BLUE</span>);</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>        view.<span class="fu">setRectanle</span>(rectangle);</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a>        view.<span class="fu">initialize</span>();</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a>    }</span></code></pre></div>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a>        <span class="bu">Rectangle</span>.<span class="fu">setMaxx</span>(BOUNDX);</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a>        <span class="bu">Rectangle</span>.<span class="fu">setMaxy</span>(BOUNDY);</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>        rectangle = <span class="kw">new</span> <span class="bu">Rectangle</span>(<span class="dv">250</span>, <span class="dv">150</span>, <span class="dv">30</span>, <span class="dv">20</span>);</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a>        rectangle.<span class="fu">setFillColor</span>(<span class="bu">Color</span>.<span class="fu">BLUE</span>);</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a>        view.<span class="fu">setRectangle</span>(rectangle);</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a>        view.<span class="fu">initialize</span>();</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true"></a>    }</span></code></pre></div>
 </div>
 <div class="slide section level1">
 
@@ -413,38 +416,21 @@ Viviane Pons
 <div class="slide section level1">
 
 <h2 id="fabriquer-un-bouton">Fabriquer un bouton</h2>
-<p>On va ajouter un bouton pour faire apparaître le rectangle. Tout d’abord, on va créer une interface pour nos boutons toujours dans l’idée de modulariser et de gérer la communication entre la vue et le contrôleur.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">interface</span> RectangleAppActionComponent {</span>
+<p>On va ajouter un bouton pour faire apparaître le rectangle. Dans Swing, il y a une classe spéciale pour les boutons <code>JButton</code>. On va créé une variable dans la vue et l’ajouter au panneau des boutons.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleAppFrame <span class="kw">extends</span> <span class="bu">JFrame</span> <span class="kw">implements</span> RectangleAppView {</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a>}</span></code></pre></div>
-</div>
-<div class="slide section level1">
-
-<p>On crée ensuite une classe <code>RectangleAppButton</code> qui hérite de <code>JButton</code>, le composant bouton de <code>Swing</code> et qui implémente notre interface.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleAppButton <span class="kw">extends</span> <span class="bu">JButton</span> <span class="kw">implements</span> RectangleAppActionComponent {</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a>    <span class="kw">public</span> <span class="fu">RectangleAppButton</span>(<span class="bu">String</span> name) {</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true"></a>        <span class="kw">super</span>(name);</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true"></a>    }</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true"></a>}</span></code></pre></div>
-</div>
-<div class="slide section level1">
-
-<p>A présent, dans <code>RectangleAppFrame</code>, on crée et on ajoute le bouton au panneau des boutons.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleAppFrame <span class="kw">extends</span> <span class="bu">JFrame</span> <span class="kw">implements</span> RectangleAppView {</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true"></a>    ...</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true"></a>    RectangleAppButton makeRectangleBtn;</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true"></a>    ...</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true"></a>    </span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>() {</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true"></a>        makeRectangleBtn = <span class="kw">new</span> <span class="fu">RectangleAppButton</span>(<span class="st">&quot;Create rectangle&quot;</span>);</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true"></a>        buttonPanel.<span class="fu">add</span>(makeRectangleBtn);</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true"></a>        rectanglePanel.<span class="fu">initialize</span>();</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true"></a>        <span class="fu">setVisible</span>(<span class="kw">true</span>);</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true"></a>    }</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true"></a>}</span></code></pre></div>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a>    ...</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a>    <span class="bu">JButton</span> makeRectangleBtn;</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a>    ...</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true"></a>    </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>() {</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true"></a>        makeRectangleBtn = <span class="kw">new</span> <span class="bu">JButton</span>(<span class="st">&quot;Create rectangle&quot;</span>);</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true"></a>        buttonPanel.<span class="fu">add</span>(makeRectangleBtn);</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true"></a>        rectanglePanel.<span class="fu">initialize</span>();</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true"></a>        <span class="fu">setVisible</span>(<span class="kw">true</span>);</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true"></a>    }</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <div class="slide section level1">
 
@@ -455,578 +441,569 @@ Viviane Pons
 </div>
 <div class="slide section level1">
 
-<h2 id="les-évènements-et-les-listeners">Les évènements et les <code>Listeners</code></h2>
-<p>Suivant le principe du MVC, <code>Swing</code> sépare l’objet graphique bouton de l’action enclenchée par le clic. Tout le principe de l’interface graphique est basée sur l’idée “d’évènements” qui sont lancés par les composants et “écoutés” par d’autres classes. C’est un framework qui est directement inspiré par la philosophie du MVC et que l’on retrouve, sous une forme ou une autre, dans la plupart des bibliothèques graphiques.</p>
+<h2 id="côté-contrôleur-1">Côté contrôleur</h2>
+<p>On va créer le moyen de recevoir des actions depuis la vue. Pour cela, on crée un <code>enum</code> avec la liste des actions possibles (pour l’instant une seule action).</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">enum</span> RectangleAction {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a>    CREATE</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <div class="slide section level1">
 
-<h3 id="notre-contrôleur-listener">Notre contrôleur listener</h3>
-<p>Dans notre application, on va transformer notre contrôleur <code>RectangleController</code> en “écouteur” en ajoutant l’interface <code>ActionListener</code>.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleController <span class="kw">implements</span> <span class="bu">ActionListener</span> {</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a>    </span>
+<p>Et dans la classe <code>RectangleController</code> lui-même, on implémente de quoi recevoir l’action</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">createRectangle</span>() {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true"></a>        rectangle = <span class="kw">new</span> <span class="bu">Rectangle</span>(<span class="dv">250</span>, <span class="dv">150</span>, <span class="dv">30</span>, <span class="dv">20</span>);</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true"></a>        rectangle.<span class="fu">setFillColor</span>(<span class="bu">Color</span>.<span class="fu">BLUE</span>);</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true"></a>        view.<span class="fu">setRectangle</span>(rectangle);</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true"></a>    }</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">receiveAction</span>(RectangleAction action) {</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true"></a>        <span class="kw">switch</span> (action) {</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true"></a>            <span class="kw">case</span> CREATE: <span class="fu">createRectangle</span>(); <span class="kw">break</span>;</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true"></a>        }</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true"></a>    }</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<p>Enfin, on rajoute un lien vers le contrôleur depuis la vue, pour que la vue puisse envoyer des actions</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">interface</span> RectangleAppView {</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true"></a>    ...</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">actionPerformed</span>(<span class="bu">ActionEvent</span> e) {</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co"> Auto-generated method stub</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true"></a>        </span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true"></a>    }</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true"></a>}</span></code></pre></div>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true"></a>    <span class="dt">void</span> <span class="fu">setController</span>(RectangleController controller);</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<p>Le contrôleur est stocké dans un champs privé de la vue. Au moment d’initialiser la vue dans <code>RectangleController</code>, on lui envoie le contrôleur</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>() {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true"></a>    view.<span class="fu">setController</span>(<span class="kw">this</span>);</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true"></a>    view.<span class="fu">initialize</span>();</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true"></a>}</span></code></pre></div>
+<p><strong>Remarque :</strong> la seule interaction que la vue doit avoir avec le contrôleur, c’est d’envoyer une action. Pour plus de modularité, on pourrait donc stocker uniquement “la partie” du contrôleur qui reçoit les actions (par un objet ou une interface dédiée)</p>
+</div>
+<div class="slide section level1">
+
+<h2 id="mais-comment-faire-pour-le-lier-au-bouton">Mais comment faire pour le lier au bouton ?</h2>
+<p>On a besoin que quand on clique sur le bouton, ça envoie la bonne action au contrôleur</p>
+</div>
+<div class="slide section level1">
+
+<h2 id="les-évènements-et-les-listeners">Les évènements et les <code>Listeners</code></h2>
+<p>Suivant le principe du MVC, <code>Swing</code> sépare l’objet graphique bouton de l’action enclenchée par le clic. Tout le principe de l’interface graphique est basée sur l’idée “d’évènements” qui sont lancés par les composants et “écoutés” par d’autres classes. C’est un framework qui est directement inspiré par la philosophie du MVC et que l’on retrouve, sous une forme ou une autre, dans la plupart des bibliothèques graphiques.</p>
+<p>Ici, on a rajouté une couche supplémentaire avec notre contrôleur pour pouvoir recevoir des actions de façon indépendante de l’architecture de <code>Swing</code>.</p>
+</div>
+<div class="slide section level1">
+
+<h3 id="nos-listener-de-boutons">Nos listener de boutons</h3>
+<p>Dans notre application, on va créer une classe <code>ButtonListener</code> (dans la partie vue) qui servira à écouter nos différents boutons</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> ButtonListener <span class="kw">implements</span> <span class="bu">ActionListener</span> {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">final</span> RectangleController controller;</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">final</span> RectangleAction action;</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true"></a>    <span class="kw">public</span> <span class="fu">ButtonListener</span>(RectangleController controller, RectangleAction action) {</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true"></a>        <span class="kw">this</span>.<span class="fu">controller</span> = controller;</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true"></a>        <span class="kw">this</span>.<span class="fu">action</span> = action;</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true"></a>    }</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">actionPerformed</span>(<span class="bu">ActionEvent</span> actionEvent) {</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true"></a>        controller.<span class="fu">receiveAction</span>(action);</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true"></a>    }</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<p>Au moment de la création du bouton, on le relie à un écouteur de boutons avec la bonne action</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a>makeRectangleBtn.<span class="fu">addActionListener</span>(<span class="kw">new</span> <span class="fu">ButtonListener</span>(controller, RectangleAction.<span class="fu">CREATE</span>));</span></code></pre></div>
 </div>
 <div class="slide section level1">
 
 <h3 id="faire-apparaître-le-rectangle-quand-on-clique">Faire apparaître le rectangle quand on clique</h3>
-<p>Plutôt que d’ajouter le rectangle à l’initialisation, on va l’ajouter quand la méthode <code>actionPerformed</code> est appelée.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>() {</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true"></a>        view.<span class="fu">initialize</span>();</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true"></a>    }</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">actionPerformed</span>(<span class="bu">ActionEvent</span> e) {</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true"></a>        rectangle = <span class="kw">new</span> <span class="bu">Rectangle</span>(<span class="dv">250</span>, <span class="dv">150</span>, <span class="dv">30</span>, <span class="dv">20</span>);</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true"></a>        rectangle.<span class="fu">setFillColor</span>(<span class="bu">Color</span>.<span class="fu">BLUE</span>);</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true"></a>        view.<span class="fu">setRectanle</span>(rectangle);</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true"></a>    }</span></code></pre></div>
+<p>Donc maintenant, le contrôleur ne crée le rectangle que lorsqu’il en reçoit l’ordre et le bouton est configuré pour envoyer l’ordre au moment du click par le biais de son “écouteur”.</p>
+<p>Donc tout est parfait !</p>
 </div>
 <div class="slide section level1">
 
-<p>Mais ce n’est pas tout, il faut aussi dire au contrôleur d’écouter le bouton. Pour cela, on ajoute une méthode dans notre interface <code>RectangleAppView</code></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">interface</span> RectangleAppView {</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>();</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true"></a>    </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setRectanle</span>(<span class="bu">Rectangle</span> rectangle);</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true"></a>    </span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setListenerOnButtons</span>(<span class="bu">ActionListener</span> listener);</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true"></a>    </span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true"></a>}</span></code></pre></div>
-</div>
-<div class="slide section level1">
-
-<p>Et on l’implémente dans <code>RectangleAppFrame</code></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setListenerOnButtons</span>(<span class="bu">ActionListener</span> listener) {</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true"></a>        makeRectangleBtn.<span class="fu">addActionListener</span>(listener);</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true"></a>        </span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true"></a>    }</span></code></pre></div>
-</div>
-<div class="slide section level1">
-
-<p>Et on l’appelle dans le contrôleur</p>
-<pre><code>    public void initialize() {
-        view.initialize();
-        view.setListenerOnButtons(this);
-    }</code></pre>
-</div>
-<div class="slide section level1">
-
-<p>Mais ça ne marche toujours pas !! <strong>POURQUOI ?</strong> <em>Désespoir</em></p>
+<h3 id="ca-ne-marche-pas">Ca ne marche pas !!!</h3>
+<p><strong>POURQUOI ?</strong> <em>Désespoir</em></p>
 </div>
 <div class="slide section level1">
 
 <p>Mais non, il y a une raison simple : la vue ne sait pas que quelque chose a changé, elle a besoin d’être mise à jour.</p>
 <p>On rajoute une méthode <code>update</code> dans l’interface et dans la classe :</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">update</span>() {</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true"></a>        rectanglePanel.<span class="fu">repaint</span>();</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">update</span>() {</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true"></a>        rectanglePanel.<span class="fu">repaint</span>();</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true"></a>    }</span></code></pre></div>
 <p>La méthode <code>update</code> appelle la méthode <code>repaint</code> du <code>JPanel</code> <code>rectanglePanel</code>.</p>
 </div>
 <div class="slide section level1">
 
 <p>Et bien sûr, on appelle <code>update</code> depuis le contrôleur.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">actionPerformed</span>(<span class="bu">ActionEvent</span> e) {</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true"></a>        rectangle = <span class="kw">new</span> <span class="bu">Rectangle</span>(<span class="dv">250</span>, <span class="dv">150</span>, <span class="dv">30</span>, <span class="dv">20</span>);</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true"></a>        rectangle.<span class="fu">setFillColor</span>(<span class="bu">Color</span>.<span class="fu">BLUE</span>);</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true"></a>        view.<span class="fu">setRectanle</span>(rectangle);</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true"></a>        view.<span class="fu">update</span>();</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">receiveAction</span>(RectangleAction action) {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true"></a>        <span class="kw">switch</span> (action) {</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true"></a>            <span class="kw">case</span> CREATE: <span class="fu">createRectangle</span>(); <span class="kw">break</span>;</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true"></a>        }</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true"></a>        view.<span class="fu">update</span>();</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true"></a>    }</span></code></pre></div>
 <p>Maintenant, ça marche !</p>
+</div>
+<div class="slide section level1">
+
+<p><strong>Remarque : </strong> vous aurez peut-être remarqué qu’il y a ici deux couches de “contrôle” : les <code>ActionListener</code> de <code>Swing</code> et l’écoute de nos actions spécifiques dans notre contrôleur à nous.</p>
+<p>En effet, les <code>ActionListener</code> sont <em>déjà</em> des mini contrôleurs. On pourrait décider de directement implémenter les interfaces de Swing avec notre contrôleur. Cependant, cela rendrait notre architecture très dépendantes des interfaces définies par <code>Swing</code>.</p>
+<p>La solution qu’on propose ici permet plus de modularité :</p>
+<ul>
+<li>la vue gère les différents composants graphiques et envoient les actions nécessaires</li>
+<li>le contrôleur agit sur le modèle et la vue en fonction des actions requises.</li>
+</ul>
 </div>
 <div class="slide section level1">
 
 <h2 id="on-fait-un-peu-plus">On fait un peu plus ?</h2>
 <p>On va créer un bouton pour faire disparaître le rectangle.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleAppFrame <span class="kw">extends</span> <span class="bu">JFrame</span> <span class="kw">implements</span> RectangleAppView {</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true"></a>    </span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true"></a>    ...</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true"></a>    RectangleAppButton makeRectangleBtn;</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true"></a>    RectangleAppButton deleteRectangleBtn;</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true"></a>    ...</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>() {</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true"></a>        makeRectangleBtn = <span class="kw">new</span> <span class="fu">RectangleAppButton</span>(<span class="st">&quot;Create rectangle&quot;</span>);</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true"></a>        deleteRectangleBtn = <span class="kw">new</span> <span class="fu">RectangleAppButton</span>(<span class="st">&quot;Delete rectangle&quot;</span>);</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true"></a>        buttonPanel.<span class="fu">add</span>(makeRectangleBtn);</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true"></a>        buttonPanel.<span class="fu">add</span>(deleteRectangleBtn);</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true"></a>        ...</span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true"></a>    }</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true"></a></span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true"></a></span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setListenerOnButtons</span>(<span class="bu">ActionListener</span> listener) {</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true"></a>        makeRectangleBtn.<span class="fu">addActionListener</span>(listener);</span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true"></a>        deleteRectangleBtn.<span class="fu">addActionListener</span>(listener);</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true"></a>        </span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true"></a>    }</span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true"></a>    ...</span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true"></a></span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true"></a>}</span></code></pre></div>
+<p>Pour cela une crée une nouvelle action dans le contrôleur</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">enum</span> RectangleAction {</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true"></a>    CREATE,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true"></a>    DELETE</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <div class="slide section level1">
 
-<p>Mais comment faire pour séparer les actions ?</p>
-<p>On va créer une liste d’actions différentes avec un <code>enum</code>.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">enum</span> RectangleActions {</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true"></a>    CREATE,</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true"></a>    DELETE;</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">deleteRectangle</span>() {</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true"></a>        rectangle = <span class="kw">null</span>;</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true"></a>        view.<span class="fu">setRectangle</span>(<span class="kw">null</span>);</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true"></a>    }</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">receiveAction</span>(RectangleAction action) {</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true"></a>        <span class="kw">switch</span> (action) {</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true"></a>            <span class="kw">case</span> CREATE: <span class="fu">createRectangle</span>(); <span class="kw">break</span>;</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true"></a>            <span class="kw">case</span> DELETE: <span class="fu">deleteRectangle</span>(); <span class="kw">break</span>;</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true"></a>        }</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true"></a>        view.<span class="fu">update</span>();</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true"></a>    }</span></code></pre></div>
 </div>
 <div class="slide section level1">
 
-<p>On va attacher les actions aux boutons. Pour cela, on rajoute des méthodes dans notre interface <code>RectangleAppActionComponent</code> que l’on implémente dans <code>RectangleAppButton</code>.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">interface</span> RectangleAppActionComponent {</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setRectangleAction</span>(RectangleAction action);</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true"></a>    </span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true"></a>    <span class="kw">public</span> RectangleAction <span class="fu">getRectangleAction</span>();</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true"></a>}</span></code></pre></div>
+<p>et un nouveau bouton dans la vue</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleAppFrame <span class="kw">extends</span> <span class="bu">JFrame</span> <span class="kw">implements</span> RectangleAppView {</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true"></a>    </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true"></a>    ...</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true"></a>    <span class="bu">JButton</span> makeRectangleBtn;</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true"></a>    <span class="bu">JButton</span> deleteRectangleBtn;</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true"></a>    ...</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>() {</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true"></a>        makeRectangleBtn = <span class="kw">new</span> <span class="bu">JButton</span>(<span class="st">&quot;Create rectangle&quot;</span>);</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true"></a>        makeRectangleBtn.<span class="fu">addActionListener</span>(<span class="kw">new</span> <span class="fu">ButtonListener</span>(controller, RectangleAction.<span class="fu">CREATE</span>));</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true"></a>        deleteRectangleBtn = <span class="kw">new</span> <span class="bu">JButton</span>(<span class="st">&quot;Delete Rectangle&quot;</span>);</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true"></a>        deleteRectangleBtn.<span class="fu">addActionListener</span>(<span class="kw">new</span> <span class="fu">ButtonListener</span>(controller, RectangleAction.<span class="fu">DELETE</span>));</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true"></a>        buttonPanel.<span class="fu">add</span>(makeRectangleBtn);</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true"></a>        buttonPanel.<span class="fu">add</span>(deleteRectangleBtn);</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true"></a>        ...</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true"></a>    }</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true"></a>    ...</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true"></a></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <div class="slide section level1">
 
-<p>On attache l’action correspondante à chacun des boutons dans <code>RectangleAppFrame</code></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>() {</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true"></a>        makeRectangleBtn = <span class="kw">new</span> <span class="fu">RectangleAppButton</span>(<span class="st">&quot;Create rectangle&quot;</span>);</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true"></a>        makeRectangleBtn.<span class="fu">setRectangleAction</span>(RectangleAction.<span class="fu">CREATE</span>);</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true"></a>        deleteRectangleBtn = <span class="kw">new</span> <span class="fu">RectangleAppButton</span>(<span class="st">&quot;Delete rectangle&quot;</span>);</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true"></a>        deleteRectangleBtn.<span class="fu">setRectangleAction</span>(RectangleAction.<span class="fu">DELETE</span>);</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true"></a>        buttonPanel.<span class="fu">add</span>(makeRectangleBtn);</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true"></a>        buttonPanel.<span class="fu">add</span>(deleteRectangleBtn);</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true"></a>        rectanglePanel.<span class="fu">initialize</span>();</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true"></a>        <span class="fu">setVisible</span>(<span class="kw">true</span>);</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true"></a>    }</span></code></pre></div>
-</div>
-<div class="slide section level1">
-
-<p>Le contrôleur récupère l’action reçue (grâce à la méthode <code>getSource</code> de <code>ActionEvent</code>) et agit en conséquence.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">actionPerformed</span>(<span class="bu">ActionEvent</span> e) {</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true"></a>        RectangleAppActionComponent button = (RectangleAppActionComponent) e.<span class="fu">getSource</span>();</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true"></a>        <span class="kw">switch</span>(button.<span class="fu">getRectangleAction</span>()) {</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true"></a>        <span class="kw">case</span> CREATE:</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true"></a>            rectangle = <span class="kw">new</span> <span class="bu">Rectangle</span>(<span class="dv">250</span>, <span class="dv">150</span>, <span class="dv">30</span>, <span class="dv">20</span>);</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true"></a>            rectangle.<span class="fu">setFillColor</span>(<span class="bu">Color</span>.<span class="fu">BLUE</span>);</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true"></a>            view.<span class="fu">setRectanle</span>(rectangle);</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true"></a>        <span class="kw">case</span> DELETE:</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true"></a>            rectangle = <span class="kw">null</span>;</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true"></a>            view.<span class="fu">setRectanle</span>(<span class="kw">null</span>);</span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true"></a>        <span class="kw">default</span>:</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true"></a>        </span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true"></a>        }</span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true"></a>        view.<span class="fu">update</span>();</span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true"></a>    }</span></code></pre></div>
+<p>C’est super ! Ca marche !</p>
 </div>
 <div class="slide section level1">
 
 <h2 id="faire-napparaître-que-le-bouton-pertinent">Faire n’apparaître que le bouton pertinent</h2>
 <p>Encore une fois, on va essayer de faire ça de façon générique en séparant ce qui relève du contrôleur de ce qui relève de la vue.</p>
-<p>Ce qui se passe, c’est qu’on a en fait 2 états possible de la vue : avec et sans rectangle. On va créer les deux méthodes correspondantes dans notre interface <code>RectangleAppView</code></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">interface</span> RectangleAppView {</span>
+<p>On va créer une liste d’états possibles pour la vue avec un enum</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">enum</span> ViewState {</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true"></a>    WITH_RECTANGLE,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true"></a>    WITHOUT_RECTANGLE;</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<p>Et dans l’intervace <code>RectangleAppView</code>, on ajoute une méthode pour modifier l’état de la vue.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">interface</span> RectangleAppView {</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true"></a>    </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true"></a>    ...</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true"></a>    </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true"></a>    <span class="dt">void</span> <span class="fu">setViewState</span>(ViewState state);</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true"></a>    </span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true"></a>    ...</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<p>On implémente cette méthode dans la vue en faisant apparaître / disparaître les éléments que l’on souhaite</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">withRectangle</span>() {</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true"></a>        makeRectangleBtn.<span class="fu">setVisible</span>(<span class="kw">false</span>);</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true"></a>        deleteRectangleBtn.<span class="fu">setVisible</span>(<span class="kw">true</span>);</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true"></a>    }</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">withoutRectangle</span>() {</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true"></a>        makeRectangleBtn.<span class="fu">setVisible</span>(<span class="kw">true</span>);</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true"></a>        deleteRectangleBtn.<span class="fu">setVisible</span>(<span class="kw">false</span>);</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true"></a>    }</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setViewState</span>(ViewState state) {</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true"></a>        <span class="kw">switch</span> (state) {</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true"></a>            <span class="kw">case</span> WITH_RECTANGLE: <span class="fu">withRectangle</span>();</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true"></a>                <span class="kw">break</span>;</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true"></a>            <span class="kw">case</span> WITHOUT_RECTANGLE: <span class="fu">withoutRectangle</span>();</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true"></a>                <span class="kw">break</span>;</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true"></a>        }</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true"></a>    }</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<p>Le contrôleur s’occupe ensuite demander à la vue l’état souhaité.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleController {</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true"></a>    ...</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true"></a>    </span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">drawNoRectangleView</span>();</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true"></a>    </span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">drawWithRectangleView</span>();</span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true"></a>    </span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true"></a>}</span></code></pre></div>
-</div>
-<div class="slide section level1">
-
-<p>On les implémente dans <code>RectangleAppFrame</code> en rendant visible / invisible les éléments que l’on souhaite.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">drawNoRectangleView</span>() {</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true"></a>        makeRectangleBtn.<span class="fu">setVisible</span>(<span class="kw">true</span>);</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true"></a>        deleteRectangleBtn.<span class="fu">setVisible</span>(<span class="kw">false</span>);</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true"></a>    }</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true"></a></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true"></a></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">drawWithRectangleView</span>() {</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true"></a>        makeRectangleBtn.<span class="fu">setVisible</span>(<span class="kw">false</span>);</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true"></a>        deleteRectangleBtn.<span class="fu">setVisible</span>(<span class="kw">true</span>);</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true"></a>    }</span></code></pre></div>
-</div>
-<div class="slide section level1">
-
-<p>Dans le contrôleur, on appelle la méthode appropriée que ce soit à l’intitialisation</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>() {</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true"></a>        view.<span class="fu">initialize</span>();</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true"></a>        view.<span class="fu">drawNoRectangleView</span>();</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true"></a>        view.<span class="fu">setListenerOnButtons</span>(<span class="kw">this</span>);</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true"></a>    }</span></code></pre></div>
-</div>
-<div class="slide section level1">
-
-<p>Que lors d’un évènement</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">actionPerformed</span>(<span class="bu">ActionEvent</span> e) {</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true"></a>        RectangleAppActionComponent button = (RectangleAppActionComponent) e.<span class="fu">getSource</span>();</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true"></a>        <span class="kw">switch</span>(button.<span class="fu">getRectangleAction</span>()) {</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true"></a>        <span class="kw">case</span> CREATE:</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true"></a>            rectangle = <span class="kw">new</span> <span class="bu">Rectangle</span>(<span class="dv">250</span>, <span class="dv">150</span>, <span class="dv">30</span>, <span class="dv">20</span>);</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true"></a>            rectangle.<span class="fu">setFillColor</span>(<span class="bu">Color</span>.<span class="fu">BLUE</span>);</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true"></a>            view.<span class="fu">setRectanle</span>(rectangle);</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true"></a>            view.<span class="fu">drawWithRectangleView</span>();</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true"></a>        <span class="kw">case</span> DELETE:</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true"></a>            rectangle = <span class="kw">null</span>;</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true"></a>            view.<span class="fu">setRectanle</span>(<span class="kw">null</span>);</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true"></a>            view.<span class="fu">drawNoRectangleView</span>();</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true"></a>        <span class="kw">default</span>:</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true"></a>        </span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true"></a>        }</span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true"></a>        view.<span class="fu">update</span>();</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true"></a>    }</span></code></pre></div>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true"></a>    ....</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>() {</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true"></a>        ...</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true"></a>        view.<span class="fu">setViewState</span>(ViewState.<span class="fu">WITHOUT_RECTANGLE</span>);</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true"></a>    }</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">createRectangle</span>() {</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true"></a>        ...</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true"></a>        view.<span class="fu">setViewState</span>(ViewState.<span class="fu">WITH_RECTANGLE</span>);</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true"></a>    }</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">deleteRectangle</span>() {</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true"></a>        ...</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true"></a>        view.<span class="fu">setViewState</span>(ViewState.<span class="fu">WITHOUT_RECTANGLE</span>);</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true"></a>    }</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <div class="slide section level1">
 
 <h2 id="on-rajoute-plein-de-boutons">On rajoute plein de boutons :</h2>
 <p>De la même façon, on peut rajouter des boutons correspondants à toutes les actions suivantes :</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">enum</span> RectangleAction {</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true"></a>    CREATE,</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true"></a>    DELETE,</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true"></a>    MOVE_LEFT,</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true"></a>    MOVE_RIGHT,</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true"></a>    MOVE_UP,</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true"></a>    MOVE_DOWN,</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true"></a>    INCREASE_WIDTH,</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true"></a>    DECREASE_WIDTH,</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true"></a>    INCREASE_HEIGHT,</span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true"></a>    DECREASE_HEIGHT</span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">enum</span> RectangleAction {</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true"></a>    CREATE,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true"></a>    DELETE,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true"></a>    MOVE_LEFT,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true"></a>    MOVE_RIGHT,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true"></a>    MOVE_UP,</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true"></a>    MOVE_DOWN,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true"></a>    INCREASE_WIDTH,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true"></a>    DECREASE_WIDTH,</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true"></a>    INCREASE_HEIGHT,</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true"></a>    DECREASE_HEIGHT</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <div class="slide section level1">
 
 <h2 id="contrôle-au-clavier">Contrôle au clavier</h2>
-<p>On peut ajouter des “écouteurs” pour d’autres actions, par exemple un <code>KeyListener</code> pour les touches du clavier. On implémente l’interface avec</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleController <span class="kw">implements</span> <span class="bu">ActionListener</span>, <span class="bu">KeyListener</span> {</span>
+<p>On va créer une implémentation de la classe <code>KeyListener</code> de <code>Swing</code> pour envoyer ces mêmes actions avec les touches du clavier.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true"></a></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleKeyListener <span class="kw">implements</span> <span class="bu">KeyListener</span> {</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">final</span> RectangleController controller;</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true"></a>    <span class="kw">public</span> <span class="fu">RectangleKeyListener</span>(RectangleController controller) {</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true"></a>        <span class="kw">this</span>.<span class="fu">controller</span> = controller;</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true"></a>    }</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true"></a>    </span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true"></a>    <span class="kw">...    </span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<p>Il y a 3 méthodes à implanter pour cette interface :</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">keyTyped</span>(<span class="bu">KeyEvent</span> keyEvent);</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">keyPressed</span>(<span class="bu">KeyEvent</span> keyEvent)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">keyReleased</span>(<span class="bu">KeyEvent</span> keyEvent) </span></code></pre></div>
+<p>L’objet <code>KeyEvent</code> de swing permet de récupérer la touche du clavier qui a été pressée.</p>
+</div>
+<div class="slide section level1">
+
+<p>On laisse <code>keyTyped</code> et <code>keyReleasead</code> vides et on implémente <code>keyPressed</code></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">keyPressed</span>(<span class="bu">KeyEvent</span> keyEvent) {</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true"></a>        <span class="kw">switch</span>(keyEvent.<span class="fu">getKeyCode</span>()) {</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true"></a>            <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_LEFT</span>:</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true"></a>                controller.<span class="fu">receiveAction</span>(RectangleAction.<span class="fu">MOVE_LEFT</span>);</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true"></a>                <span class="kw">break</span>;</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true"></a>            <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_RIGHT</span>:</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true"></a>                controller.<span class="fu">receiveAction</span>(RectangleAction.<span class="fu">MOVE_RIGHT</span>);</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true"></a>                <span class="kw">break</span>;</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true"></a>            <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_UP</span>:</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true"></a>                controller.<span class="fu">receiveAction</span>(RectangleAction.<span class="fu">MOVE_UP</span>);</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true"></a>                <span class="kw">break</span>;</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true"></a>            <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_DOWN</span>:</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true"></a>                controller.<span class="fu">receiveAction</span>(RectangleAction.<span class="fu">MOVE_DOWN</span>);</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true"></a>                <span class="kw">break</span>;</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true"></a>            <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_C</span>:</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true"></a>                controller.<span class="fu">receiveAction</span>(RectangleAction.<span class="fu">DECREASE_WIDTH</span>);</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true"></a>                <span class="kw">break</span>;</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true"></a>            <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_V</span>:</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true"></a>                controller.<span class="fu">receiveAction</span>(RectangleAction.<span class="fu">INCREASE_WIDTH</span>);</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true"></a>                <span class="kw">break</span>;</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true"></a>            <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_B</span>:</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true"></a>                controller.<span class="fu">receiveAction</span>(RectangleAction.<span class="fu">DECREASE_HEIGHT</span>);</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true"></a>                <span class="kw">break</span>;</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true"></a>            <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_N</span>:</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true"></a>                controller.<span class="fu">receiveAction</span>(RectangleAction.<span class="fu">INCREASE_HEIGHT</span>);</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true"></a>                <span class="kw">break</span>;</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true"></a>        }</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true"></a>    }</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<p>Ensuite, dans <code>RectangleAppFrame</code>, on s’assure de</p>
+<ul>
+<li>créer “l’écouteur de clavier” (on le crée une seule fois, on le garde dans un champ de l’instance, comme les boutons)</li>
+<li>de l’ajouter comme écouteurs à la fenêtre principale (on “écoute” en général le clavier avec la fenêtre principale)</li>
+</ul>
+</div>
+<div class="slide section level1">
+
+<div class="sourceCode" id="cb35"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleAppFrame <span class="kw">extends</span> <span class="bu">JFrame</span> <span class="kw">implements</span> RectangleAppView {</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true"></a></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true"></a>    ...</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true"></a>    </span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">keyTyped</span>(<span class="bu">KeyEvent</span> e) {</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co"> Auto-generated method stub</span></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true"></a>        </span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true"></a>    }</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true"></a></span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">keyPressed</span>(<span class="bu">KeyEvent</span> e) {</span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co"> Auto-generated method stub</span></span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true"></a>        </span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true"></a>    }</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true"></a>    </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true"></a>    ...</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true"></a>    RectangleKeyListener keyListener;</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true"></a>    </span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>() {</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true"></a>        ...</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true"></a>        keyListener = <span class="kw">new</span> <span class="fu">RectangleKeyListener</span>(controller);</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true"></a>        ...</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true"></a>    }</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true"></a></span>
 <span id="cb35-16"><a href="#cb35-16" aria-hidden="true"></a></span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">keyReleased</span>(<span class="bu">KeyEvent</span> e) {</span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true"></a>        <span class="co">// </span><span class="al">TODO</span><span class="co"> Auto-generated method stub</span></span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true"></a>        </span>
-<span id="cb35-21"><a href="#cb35-21" aria-hidden="true"></a>    }</span>
-<span id="cb35-22"><a href="#cb35-22" aria-hidden="true"></a>}</span></code></pre></div>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">withRectangle</span>() {</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true"></a>        ...</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true"></a>        <span class="fu">addKeyListener</span>(keyListener);</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true"></a>    }</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true"></a></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">withoutRectangle</span>() {</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true"></a>        ...</span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true"></a>        <span class="fu">removeKeyListener</span>(keyListener);</span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true"></a>    }</span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true"></a>    </span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true"></a>    ...</span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <div class="slide section level1">
 
-<p>Voilà une implémentation possible de la méthode <code>keyPressed</code></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true"></a><span class="at">@Override</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">keyPressed</span>(<span class="bu">KeyEvent</span> e) {</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true"></a>        <span class="kw">switch</span>(e.<span class="fu">getKeyCode</span>()) {</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true"></a>        <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_LEFT</span>:</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true"></a>            rectangle.<span class="fu">trymove</span>(-<span class="dv">1</span>, <span class="dv">0</span>);</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true"></a>        <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_RIGHT</span>:</span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true"></a>            rectangle.<span class="fu">trymove</span>(<span class="dv">1</span>, <span class="dv">0</span>);</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true"></a>        <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_UP</span>:</span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true"></a>            rectangle.<span class="fu">trymove</span>(<span class="dv">0</span>, -<span class="dv">1</span>);</span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true"></a>        <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_DOWN</span>:</span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true"></a>            rectangle.<span class="fu">trymove</span>(<span class="dv">0</span>, <span class="dv">1</span>);</span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true"></a>        <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_C</span>:</span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true"></a>            rectangle.<span class="fu">tryExtendWidth</span>(-<span class="dv">1</span>);</span>
-<span id="cb36-18"><a href="#cb36-18" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb36-19"><a href="#cb36-19" aria-hidden="true"></a>        <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_V</span>:</span>
-<span id="cb36-20"><a href="#cb36-20" aria-hidden="true"></a>            rectangle.<span class="fu">tryExtendWidth</span>(<span class="dv">1</span>);</span>
-<span id="cb36-21"><a href="#cb36-21" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb36-22"><a href="#cb36-22" aria-hidden="true"></a>        <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_B</span>:</span>
-<span id="cb36-23"><a href="#cb36-23" aria-hidden="true"></a>            rectangle.<span class="fu">tryExtendHeight</span>(-<span class="dv">1</span>);</span>
-<span id="cb36-24"><a href="#cb36-24" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb36-25"><a href="#cb36-25" aria-hidden="true"></a>        <span class="kw">case</span> <span class="bu">KeyEvent</span>.<span class="fu">VK_N</span>:</span>
-<span id="cb36-26"><a href="#cb36-26" aria-hidden="true"></a>            rectangle.<span class="fu">tryExtendHeight</span>(<span class="dv">1</span>);</span>
-<span id="cb36-27"><a href="#cb36-27" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb36-28"><a href="#cb36-28" aria-hidden="true"></a>        }</span>
-<span id="cb36-29"><a href="#cb36-29" aria-hidden="true"></a>        view.<span class="fu">update</span>();</span>
-<span id="cb36-30"><a href="#cb36-30" aria-hidden="true"></a>    }</span></code></pre></div>
-</div>
-<div class="slide section level1">
-
-<p>Il faut ensuite ajouter les méthodes et appels nécessaires pour que le contrôleur soit bien ajouté comme écouteur des actions clavier de la fenêtre principale.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">interface</span> RectangleAppView {</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true"></a>    ...</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true"></a>    </span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">startKeyListener</span>(<span class="bu">KeyListener</span> listener);</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true"></a>    </span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">stopKeyListener</span>(<span class="bu">KeyListener</span> listener);</span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true"></a>    </span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true"></a>    ...</span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true"></a>    </span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true"></a>}</span></code></pre></div>
-</div>
-<div class="slide section level1">
-
-<p>Comme on utilise à la fois des boutons et le clavier, il faut faire un peu attention car l’écoute du clavier que si le “focus” est sur le bon objet.</p>
-<p>On doit spécifier que la fenêtre est “focusable”</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleAppFrame <span class="kw">extends</span> <span class="bu">JFrame</span> <span class="kw">implements</span> RectangleAppView {</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true"></a></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true"></a>    </span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true"></a>    ...</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true"></a>    </span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true"></a>    <span class="kw">public</span> <span class="fu">RectangleAppFrame</span>(<span class="bu">String</span> name, <span class="dt">int</span> boundx, <span class="dt">int</span> boundy) {</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true"></a>        <span class="kw">super</span>();</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true"></a>        <span class="fu">setTitle</span>(name);</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true"></a>        <span class="fu">setDefaultCloseOperation</span>(<span class="bu">JFrame</span>.<span class="fu">EXIT_ON_CLOSE</span>);</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true"></a>        <span class="kw">this</span>.<span class="fu">setFocusable</span>(<span class="kw">true</span>);</span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true"></a>        ...</span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true"></a>        </span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true"></a>    }</span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true"></a>    </span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true"></a>    ...</span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true"></a>}</span></code></pre></div>
+<p>Il faut aussi, pour des raisons techniques, spécifier explicitement que la fenêtre est “focusable”</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true"></a>    <span class="kw">public</span> <span class="fu">RectangleAppFrame</span>(<span class="bu">String</span> name, <span class="dt">int</span> boundx, <span class="dt">int</span> boundy) {</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true"></a>        <span class="kw">super</span>();</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true"></a>        <span class="fu">setTitle</span>(name);</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true"></a>        <span class="fu">setDefaultCloseOperation</span>(<span class="bu">JFrame</span>.<span class="fu">EXIT_ON_CLOSE</span>);</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true"></a>        <span class="kw">this</span>.<span class="fu">setFocusable</span>(<span class="kw">true</span>);</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true"></a>        ...</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true"></a>    }</span></code></pre></div>
 </div>
 <div class="slide section level1">
 
 <p>On récupère le focus à chaque fois qu’on active l’écoute clavier</p>
-<pre><code>public class RectangleAppFrame extends JFrame implements RectangleAppView {
-
-    ...
-
-    @Override
-    public void startKeyListener(KeyListener listener) {
-        addKeyListener(listener);
-        requestFocus();
-    }
-    
-    @Override
-    public void stopKeyListener(KeyListener listener) {
-        removeKeyListener(listener);
-    }
-    
-    ...
-}</code></pre>
-</div>
-<div class="slide section level1">
-
-<p>Côté contrôleur, on relance l’écoute du clavier après chaque action de bouton :</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">actionPerformed</span>(<span class="bu">ActionEvent</span> e) {</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true"></a>        <span class="kw">if</span>(rectangle != <span class="kw">null</span>) {</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true"></a>            view.<span class="fu">stopKeyListener</span>(<span class="kw">this</span>);</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true"></a>        }</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true"></a>        <span class="kw">switch</span>(button.<span class="fu">getRectangleAction</span>()) {</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true"></a>        <span class="kw">case</span> CREATE:</span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true"></a>            rectangle = <span class="kw">new</span> <span class="bu">Rectangle</span>(<span class="dv">250</span>, <span class="dv">150</span>, <span class="dv">30</span>, <span class="dv">20</span>);</span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true"></a>            rectangle.<span class="fu">setFillColor</span>(<span class="bu">Color</span>.<span class="fu">BLUE</span>);</span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true"></a>            view.<span class="fu">setRectanle</span>(rectangle);</span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true"></a>            view.<span class="fu">drawWithRectangleView</span>();</span>
-<span id="cb40-12"><a href="#cb40-12" aria-hidden="true"></a>            mouseListener = <span class="kw">new</span> <span class="fu">ControllerMouseMotionListener</span>();</span>
-<span id="cb40-13"><a href="#cb40-13" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb40-14"><a href="#cb40-14" aria-hidden="true"></a>        <span class="kw">case</span> DELETE:</span>
-<span id="cb40-15"><a href="#cb40-15" aria-hidden="true"></a>            rectangle = <span class="kw">null</span>;</span>
-<span id="cb40-16"><a href="#cb40-16" aria-hidden="true"></a>            view.<span class="fu">setRectanle</span>(<span class="kw">null</span>);</span>
-<span id="cb40-17"><a href="#cb40-17" aria-hidden="true"></a>            view.<span class="fu">drawNoRectangleView</span>();</span>
-<span id="cb40-18"><a href="#cb40-18" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb40-19"><a href="#cb40-19" aria-hidden="true"></a>        ...</span>
-<span id="cb40-20"><a href="#cb40-20" aria-hidden="true"></a>        </span>
-<span id="cb40-21"><a href="#cb40-21" aria-hidden="true"></a>        }</span>
-<span id="cb40-22"><a href="#cb40-22" aria-hidden="true"></a>        <span class="kw">if</span>(rectangle != <span class="kw">null</span>) {</span>
-<span id="cb40-23"><a href="#cb40-23" aria-hidden="true"></a>            view.<span class="fu">startKeyListener</span>(<span class="kw">this</span>);</span>
-<span id="cb40-24"><a href="#cb40-24" aria-hidden="true"></a>        }</span>
-<span id="cb40-25"><a href="#cb40-25" aria-hidden="true"></a>        view.<span class="fu">update</span>();</span>
-<span id="cb40-26"><a href="#cb40-26" aria-hidden="true"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">withRectangle</span>() {</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true"></a>        ...</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true"></a>        <span class="fu">addKeyListener</span>(keyListener);</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true"></a>        <span class="fu">requestFocus</span>();</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true"></a>    }</span></code></pre></div>
+<p>Ainsi qu’à chaque mise à jour de la vue (car sinon le focus reste sur les boutons)</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">update</span>() {</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true"></a>    rectanglePanel.<span class="fu">repaint</span>();</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true"></a>    <span class="fu">requestFocus</span>();</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <div class="slide section level1">
 
 <h2 id="contrôle-de-la-souris">Contrôle de la souris</h2>
-<p>On veut pouvoir déplacer le rectangle à la souris. Le <em>listener</em> qui correspond à cette action est le <code>MouseMotionListener</code>. On ajoute des méthodes à notre vue :</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">interface</span> RectangleAppView {</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true"></a></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true"></a>    ...</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true"></a>    </span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">startMouseMotionListener</span>(<span class="bu">MouseMotionListener</span> listener);</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true"></a>    </span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">stopMouseMotionListener</span>(<span class="bu">MouseMotionListener</span> listener);</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true"></a>    </span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true"></a>    ...</span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true"></a>    </span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true"></a>}</span></code></pre></div>
+<p>On veut pouvoir déplacer le rectangle à la souris. Pour cela, on peut implanter l’interface <code>MouseMotionListener</code> de <code>Swing</code></p>
+<p>(Note : pour traiter les simples clics de la souris, on utilisera à la place <code>MouseListener</code>)</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleMouseListener <span class="kw">implements</span> <span class="bu">MouseMotionListener</span> {</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true"></a>    ...</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">mouseDragged</span>(<span class="bu">MouseEvent</span> mouseEvent) {</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true"></a>        ...</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true"></a>    }</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true"></a></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">mouseMoved</span>(<span class="bu">MouseEvent</span> mouseEvent) {</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true"></a>        ...</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true"></a>    }</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <div class="slide section level1">
 
-<h3 id="implémentation-côté-vue">Implémentation côté vue</h3>
-<p>Dans <code>RectangleAppFrame</code>, on délègue en réalité cette action au panneau sur lequel est dessiné le rectangle. Ainsi, la position renvoyée par la souris correspondra bien à la position théorique dans le modèle.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">startMouseMotionListener</span>(<span class="bu">MouseMotionListener</span> listener) {</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true"></a>        rectanglePanel.<span class="fu">addMouseMotionListener</span>(listener);</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true"></a>        </span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true"></a>    }</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true"></a></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">stopMouseMotionListener</span>(<span class="bu">MouseMotionListener</span> listener) {</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true"></a>        rectanglePanel.<span class="fu">removeMouseMotionListener</span>(listener);</span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true"></a>        </span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true"></a>    }</span></code></pre></div>
-</div>
-<div class="slide section level1">
-
-<h3 id="implantation-côté-contrôleur">Implantation côté contrôleur</h3>
-<p>La gestion du mouvement de la souris va demander un peu de logique interne. Pour ne pas mélanger cette logique avec celle du contrôleur général, on va créer une nouvelle classe dédiée spécifiquement à l’écoute de la souris.</p>
-<p>On veut que l’objet créé ait accès à tous les paramètres internes du contôleur et par ailleurs, cette classe ne sera utilisée que à l’intérieur d’une instance du contrôleur : la solution est de passer par une classe interne.</p>
-</div>
-<div class="slide section level1">
-
-<h3 id="point-info-classe-interne">Point info : classe interne</h3>
-<p>Les classes internes sont utilisées exactement pour répondre au problème qu’on vient d’énoncer :</p>
+<p>L’idée : lors d’un évènement <code>mouseDragged</code> on vérifiera si on est à l’intérieur ou hors du rectangle. Si on est dans le rectangle, on calcule le changement de position par rapport à l’évènement précédent et on envoie une action au contrôleur. En analysant le problème, on réalise que :</p>
 <ul>
-<li>besoin d’une logique spécifique ou d’un objet spécifique</li>
-<li>besoin d’accéder aux champs et méthodes de l’instance</li>
-<li>utilisation uniquement au sein de la classe en question</li>
+<li>notre listener doit avoir accès au rectangle (pour savoir si le clic se situe à l’intérieur du rectangle)</li>
+<li>on a besoin d’une action supplémentaire au niveau controleur et d’envoyer des informations de mouvement</li>
 </ul>
-<p>Il y a parfois des petites subtilités techniques mais globalement, leur utilisation est assez naturelle. Comme on les voit très souvent dans le contexte des interfaces graphiques (où il faut tout le temps créer des listeners), je vous montre cet exemple là.</p>
 </div>
 <div class="slide section level1">
 
-<h3 id="la-classe-interne">La classe interne</h3>
-<div class="sourceCode" id="cb43"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleController <span class="kw">implements</span> <span class="bu">ActionListener</span>, <span class="bu">KeyListener</span> {</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true"></a></span>
+<p>Dans le contrôleur, on crée donc :</p>
+<p>(l’action <code>MOVE</code> a été ajoutée à la liste des <code>RectangleAction</code>)</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleController {</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true"></a>    ...</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true"></a>    </span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">receiveAction</span>(RectangleAction action, <span class="dt">int</span> diffx, <span class="dt">int</span> diffy) {</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true"></a>        <span class="kw">switch</span> (action) {</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true"></a>            <span class="kw">case</span> MOVE:</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true"></a>                rectangle.<span class="fu">trymove</span>(diffx, diffy);</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true"></a>                <span class="kw">break</span>;</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true"></a>        }</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true"></a>        view.<span class="fu">update</span>();</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true"></a>    }</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true"></a>    </span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true"></a>    ...</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<p>Côté “écouteur”, construction :</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleMouseListener <span class="kw">implements</span> <span class="bu">MouseMotionListener</span> {</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true"></a>    </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true"></a>    </span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">final</span> RectangleController controller;</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true"></a>    <span class="kw">private</span> <span class="bu">Rectangle</span> rectangle;</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true"></a>    </span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">boolean</span> startDrag;</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true"></a>    <span class="dt">int</span> prevx;</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true"></a>    <span class="dt">int</span> prevy;</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true"></a></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true"></a>    <span class="kw">public</span> <span class="fu">RectangleMouseListener</span>(RectangleController controller) {</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true"></a>        <span class="kw">this</span>.<span class="fu">controller</span> = controller;</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true"></a>        startDrag = <span class="kw">false</span>;</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true"></a>    }</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true"></a></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setRectangle</span>(<span class="bu">Rectangle</span> rectangle) {</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true"></a>        <span class="kw">this</span>.<span class="fu">rectangle</span> = rectangle;</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true"></a>    }</span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true"></a>    </span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true"></a>    ...</span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<p>Implémentation :</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleMouseListener <span class="kw">implements</span> <span class="bu">MouseMotionListener</span> {</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true"></a>    ...</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true"></a>    </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">mouseDragged</span>(<span class="bu">MouseEvent</span> mouseEvent) {</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true"></a>        <span class="kw">if</span>(! startDrag) {</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true"></a>            <span class="dt">int</span> x = mouseEvent.<span class="fu">getX</span>();</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true"></a>            <span class="dt">int</span> y = mouseEvent.<span class="fu">getY</span>();</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true"></a>            <span class="kw">if</span>(rectangle.<span class="fu">insideRectanle</span>(x, y)) {</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true"></a>                startDrag = <span class="kw">true</span>;</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true"></a>                prevx = x;</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true"></a>                prevy = y;</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true"></a>            }</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true"></a>        } <span class="kw">else</span> {</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true"></a>            <span class="dt">int</span> diffx = mouseEvent.<span class="fu">getX</span>() - prevx;</span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true"></a>            <span class="dt">int</span> diffy = mouseEvent.<span class="fu">getY</span>() - prevy;</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true"></a>            controller.<span class="fu">receiveAction</span>(RectangleAction.<span class="fu">MOVE</span>, diffx, diffy);</span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true"></a>            prevx = mouseEvent.<span class="fu">getX</span>();</span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true"></a>            prevy = mouseEvent.<span class="fu">getY</span>();</span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true"></a>        }</span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true"></a>    }</span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true"></a></span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">mouseMoved</span>(<span class="bu">MouseEvent</span> mouseEvent) {</span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true"></a>        startDrag = <span class="kw">false</span>;</span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true"></a>    }</span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<p>Pour que ça fonctionne, il faut que l’écouteur soit créé dans la vue et qu’on lui envoie le rectangle</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleAppFrame <span class="kw">extends</span> <span class="bu">JFrame</span> <span class="kw">implements</span> RectangleAppView {</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true"></a>    </span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true"></a>    ...</span>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true"></a>    </span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true"></a>    <span class="kw">private</span> <span class="kw">class</span> ControllerMouseMotionListener <span class="kw">implements</span> <span class="bu">MouseMotionListener</span> {</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true"></a></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true"></a>        <span class="kw">private</span> <span class="dt">boolean</span> startDrag;</span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true"></a>        <span class="kw">private</span> <span class="dt">int</span> prevx;</span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true"></a>        <span class="kw">private</span> <span class="dt">int</span> prevy;</span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true"></a>        </span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true"></a>        <span class="fu">ControllerMouseMotionListener</span>() {</span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true"></a>            startDrag = <span class="kw">false</span>;</span>
-<span id="cb43-13"><a href="#cb43-13" aria-hidden="true"></a>        }</span>
-<span id="cb43-14"><a href="#cb43-14" aria-hidden="true"></a>        </span>
-<span id="cb43-15"><a href="#cb43-15" aria-hidden="true"></a>        <span class="at">@Override</span></span>
-<span id="cb43-16"><a href="#cb43-16" aria-hidden="true"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">mouseDragged</span>(<span class="bu">MouseEvent</span> e) {</span>
-<span id="cb43-17"><a href="#cb43-17" aria-hidden="true"></a>            </span>
-<span id="cb43-18"><a href="#cb43-18" aria-hidden="true"></a>            <span class="kw">if</span>(! startDrag) {</span>
-<span id="cb43-19"><a href="#cb43-19" aria-hidden="true"></a>                <span class="dt">int</span> x = e.<span class="fu">getX</span>();</span>
-<span id="cb43-20"><a href="#cb43-20" aria-hidden="true"></a>                <span class="dt">int</span> y = e.<span class="fu">getY</span>();</span>
-<span id="cb43-21"><a href="#cb43-21" aria-hidden="true"></a>                <span class="kw">if</span>(rectangle.<span class="fu">insideRectanle</span>(x, y)) {</span>
-<span id="cb43-22"><a href="#cb43-22" aria-hidden="true"></a>                    startDrag = <span class="kw">true</span>;</span>
-<span id="cb43-23"><a href="#cb43-23" aria-hidden="true"></a>                    prevx = x;</span>
-<span id="cb43-24"><a href="#cb43-24" aria-hidden="true"></a>                    prevy = y;</span>
-<span id="cb43-25"><a href="#cb43-25" aria-hidden="true"></a>                }</span>
-<span id="cb43-26"><a href="#cb43-26" aria-hidden="true"></a>            } <span class="kw">else</span> {</span>
-<span id="cb43-27"><a href="#cb43-27" aria-hidden="true"></a>                <span class="dt">int</span> diffx = e.<span class="fu">getX</span>() - prevx;</span>
-<span id="cb43-28"><a href="#cb43-28" aria-hidden="true"></a>                <span class="dt">int</span> diffy = e.<span class="fu">getY</span>() - prevy;</span>
-<span id="cb43-29"><a href="#cb43-29" aria-hidden="true"></a>                rectangle.<span class="fu">trymove</span>(diffx, diffy);</span>
-<span id="cb43-30"><a href="#cb43-30" aria-hidden="true"></a>                prevx = e.<span class="fu">getX</span>();</span>
-<span id="cb43-31"><a href="#cb43-31" aria-hidden="true"></a>                prevy = e.<span class="fu">getY</span>();</span>
-<span id="cb43-32"><a href="#cb43-32" aria-hidden="true"></a>                view.<span class="fu">update</span>();</span>
-<span id="cb43-33"><a href="#cb43-33" aria-hidden="true"></a>            }</span>
-<span id="cb43-34"><a href="#cb43-34" aria-hidden="true"></a>            </span>
-<span id="cb43-35"><a href="#cb43-35" aria-hidden="true"></a>        }</span>
-<span id="cb43-36"><a href="#cb43-36" aria-hidden="true"></a></span>
-<span id="cb43-37"><a href="#cb43-37" aria-hidden="true"></a>        <span class="at">@Override</span></span>
-<span id="cb43-38"><a href="#cb43-38" aria-hidden="true"></a>        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">mouseMoved</span>(<span class="bu">MouseEvent</span> e) {</span>
-<span id="cb43-39"><a href="#cb43-39" aria-hidden="true"></a>            startDrag = <span class="kw">false</span>;</span>
-<span id="cb43-40"><a href="#cb43-40" aria-hidden="true"></a>            </span>
-<span id="cb43-41"><a href="#cb43-41" aria-hidden="true"></a>        }</span>
-<span id="cb43-42"><a href="#cb43-42" aria-hidden="true"></a>        </span>
-<span id="cb43-43"><a href="#cb43-43" aria-hidden="true"></a>    }</span></code></pre></div>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true"></a>    RectangleMouseListener mouseListener;</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true"></a>    </span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true"></a>    ...</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true"></a></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>() {</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true"></a>        ...</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true"></a>        mouseListener = <span class="kw">new</span> <span class="fu">RectangleMouseListener</span>(controller);</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true"></a>        ...</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true"></a>    }</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true"></a></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true"></a>    <span class="at">@Override</span></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setRectangle</span>(<span class="bu">Rectangle</span> rectangle) {</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true"></a>        rectanglePanel.<span class="fu">setRectangle</span>(rectangle);</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true"></a>        mouseListener.<span class="fu">setRectangle</span>(rectangle);</span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true"></a>    }</span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true"></a></span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <div class="slide section level1">
 
-<h3 id="on-en-parle-pas-mais-ça-existe">On en parle pas mais ça existe</h3>
-<p>Scoop: en fait, on aurait même pu faire ce qui s’appelle une “classe anonyme” mais j’ai préféré ne pas vous embrouiller surtout que ça rend le code peu lisible.</p>
-<p>Cependant, si vous parcourez des exemples de code d’interface graphique en java, vous en verrez sûrement et dans ce cas, pas de panique : cherchez un peu plus d’info, ce n’est pas plus compliqué que les classes internes.</p>
-</div>
-<div class="slide section level1">
-
-<h3 id="le-reste-de-limplémentation-côté-contrôleur">Le reste de l’implémentation côté contrôleur</h3>
-<div class="sourceCode" id="cb44"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleController <span class="kw">implements</span> <span class="bu">ActionListener</span>, <span class="bu">KeyListener</span> {</span>
+<p>Et qu’on ajoute l’écouteur au bon composant au moment adéquat : ici, c’est le rectanglePanel qui doit “écouter” la souris.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> RectangleAppFrame <span class="kw">extends</span> <span class="bu">JFrame</span> <span class="kw">implements</span> RectangleAppView {</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true"></a>    </span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true"></a>    ...</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true"></a>    </span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true"></a>    <span class="kw">private</span> ControllerMouseMotionListener mouseListener;</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true"></a></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true"></a>    <span class="at">@Override</span></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">actionPerformed</span>(<span class="bu">ActionEvent</span> e) {</span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true"></a>        ...</span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true"></a>        <span class="kw">switch</span>(button.<span class="fu">getRectangleAction</span>()) {</span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true"></a>        <span class="kw">case</span> CREATE:</span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true"></a>            rectangle = <span class="kw">new</span> <span class="bu">Rectangle</span>(<span class="dv">250</span>, <span class="dv">150</span>, <span class="dv">30</span>, <span class="dv">20</span>);</span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true"></a>            rectangle.<span class="fu">setFillColor</span>(<span class="bu">Color</span>.<span class="fu">BLUE</span>);</span>
-<span id="cb44-14"><a href="#cb44-14" aria-hidden="true"></a>            view.<span class="fu">setRectanle</span>(rectangle);</span>
-<span id="cb44-15"><a href="#cb44-15" aria-hidden="true"></a>            view.<span class="fu">drawWithRectangleView</span>();</span>
-<span id="cb44-16"><a href="#cb44-16" aria-hidden="true"></a>            mouseListener = <span class="kw">new</span> <span class="fu">ControllerMouseMotionListener</span>();</span>
-<span id="cb44-17"><a href="#cb44-17" aria-hidden="true"></a>            view.<span class="fu">startMouseMotionListener</span>(mouseListener);</span>
-<span id="cb44-18"><a href="#cb44-18" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb44-19"><a href="#cb44-19" aria-hidden="true"></a>        <span class="kw">case</span> DELETE:</span>
-<span id="cb44-20"><a href="#cb44-20" aria-hidden="true"></a>            rectangle = <span class="kw">null</span>;</span>
-<span id="cb44-21"><a href="#cb44-21" aria-hidden="true"></a>            view.<span class="fu">setRectanle</span>(<span class="kw">null</span>);</span>
-<span id="cb44-22"><a href="#cb44-22" aria-hidden="true"></a>            view.<span class="fu">drawNoRectangleView</span>();</span>
-<span id="cb44-23"><a href="#cb44-23" aria-hidden="true"></a>            view.<span class="fu">stopMouseMotionListener</span>(mouseListener);</span>
-<span id="cb44-24"><a href="#cb44-24" aria-hidden="true"></a>            <span class="kw">break</span>;</span>
-<span id="cb44-25"><a href="#cb44-25" aria-hidden="true"></a>        ...</span>
-<span id="cb44-26"><a href="#cb44-26" aria-hidden="true"></a>        }</span>
-<span id="cb44-27"><a href="#cb44-27" aria-hidden="true"></a>        ...</span>
-<span id="cb44-28"><a href="#cb44-28" aria-hidden="true"></a>    }</span></code></pre></div>
-</div>
-<div id="en-conclusion" class="slide section level1">
-<h1>En conclusion</h1>
-<p>Ceci, n’est <strong>qu’un exemple</strong> d’une architecture possible. Une partie de la séparation entre contrôle et vue est déjà assurée par <code>Swing</code> en séparant les composants des <code>listener</code>. Dans notre architecture :</p>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">withRectangle</span>() {</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true"></a>        ...</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true"></a>        rectanglePanel.<span class="fu">addMouseMotionListener</span>(mouseListener);</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true"></a>    }</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true"></a></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">withoutRectangle</span>() {</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true"></a>        ...</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true"></a>        rectanglePanel.<span class="fu">removeMouseMotionListener</span>(mouseListener);</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true"></a>    }</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true"></a></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <div class="slide section level1">
 
-<h2 id="le-rôle-de-la-vue">Le rôle de la vue</h2>
-<p>Dans notre architecture :</p>
-<ul>
-<li>la vue s’occupe de qui dessiner où et pendant quelle phase de l’application</li>
-<li>quand la vue reçoit une demande d’écoute par le contrôleur, elle s’occupe de qui doit être écouté (les boutons, le panneau, la fenêtre)</li>
-<li>la vue s’occupe de se mettre à jour sur demande en fonction de ce qu’elle voit du modèle</li>
-</ul>
+<h2 id="point-info-classe-interne">Point info : classe interne</h2>
+<p>Les classes “écouteuses” ne sont utilisées que par <code>RectangleAppFrame</code> et ont souvent besoin d’accéder à des champs de l’instance (comme le contrôleur qu’on a à chaque fois passé comme un champ privé). On pourrait en fait en faire des <strong>classes internes</strong> qui sont régulièrement utilisées dans les interfaces graphiques en particulier.</p>
+<p>A votre niveau, vous n’êtes jamais obligé de l’utiliser mais vous pourriez tomber dessus dans des architectures un peu plus compliquées.</p>
 </div>
 <div class="slide section level1">
 
-<h2 id="le-rôle-du-contrôleur">Le rôle du contrôleur</h2>
+<h2 id="conclusion-le-rôle-du-contrôleur">Conclusion : Le rôle du contrôleur</h2>
 <p>Dans notre architecture :</p>
 <ul>
 <li>le contrôleur s’occupe de modifier le modèle</li>
 <li>le contrôleur s’occupe de lancer les différentes phases</li>
-<li>le contrôleur s’occupe de quand commencer / arrêter d’écouter</li>
-<li>le contrôleur s’occupe de réagir aux actions de l’utilisateur remontées par la vue (par le biais des listeners)</li>
-<li>le contrôleur ne s’occupe <strong>pas</strong> de quels sont les composants qu’il écoute, ni même de quel type ils sont (il y a plusieurs sortes de boutons), il s’occupe simplement des évènements qui lui arrive</li>
+<li>le contrôleur s’occupe de réagir aux actions de l’utilisateur remontées par la vue</li>
+<li>le contrôleur ne s’occupe <strong>pas</strong> de quels sont les composants qui remontent les informations ni de ce qui est concrètement affiché par la vue</li>
+</ul>
+</div>
+<div class="slide section level1">
+
+<h2 id="conclusion-le-rôle-de-la-vue">Conclusion : le rôle de la vue</h2>
+<p>Dans notre architecture :</p>
+<ul>
+<li>la vue s’occupe des détails techniques de l’interface graphique (composants, structure, etc)</li>
+<li>la vue s’occupe d’afficher le modèle à l’utilisateur-trice</li>
+<li>la vue s’occupe de ce qui s’affiche / ne s’affiche pas dans les différentes phases de l’appli</li>
+<li>la vue s’occupe de la gestion des “écouteurs” pour faire remonter les actions au contrôleur</li>
+<li>l’interface de la vue utilisée par le contrôleur est complètement indépendante de l’architecture graphique utilisée</li>
+<li>la vue ne modifie PAS le modèle</li>
+<li>la vue ne prend aucune décision quant au fonctionnement de l’appli ou aux conséquences des actions demandées</li>
 </ul>
 </div>
 <div class="slide section level1">
 
 <h2 id="les-limites">les limites</h2>
-<p>L’implantation du contrôleur est très dépendante de l’architecture de <code>Swing</code>. Quand le contrôleur a plus de travail que lancer une action de base sur le modèle, on va vouloir séparer la partie plus “haut niveau”, de la partie “bas niveau” (les listeners) qui est dépendante de la bibliothèque graphique.</p>
-<p>La partie bas niveau du contrôleur peut même être assimilée à la vue mais elle doit garder un moyen d’envoyer les évènements au contrôleur.</p>
+<p>Ceci n’est qu’une possibilité d’architecture, ce ne sera pas forcément la réponse à chaque fois.</p>
+<p>Par exemple, dans notre architecture, la vue possède un pointeur sur le modèle et sur le contrôleur : il n’y a pas de garantie dans l’architecture même qu’elle ne va pas “outrepasser” ses droits.</p>
+<p>On peut aussi décider que le contrôleur écoute directement les composants pour agir sur le modèle (dans ce cas, le contrôleur dépend de l’architecture de l’interface graphique) et que la vue n’a pas accès au contrôleur.</p>
 <p>Ce qu’il faut garder à l’esprit : c’est une philosophie générale qu’il faut essayer d’adapter à bon escient. Le principe est de séparer les rôles.</p>
 </div>
 </body>

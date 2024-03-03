@@ -34,6 +34,4 @@ public class RectanglePanel extends JPanel {
 	public void setRectangle(Rectangle rectangle) {
 		this.rectangle = rectangle;
 	}
-	
-	
 }

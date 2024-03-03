@@ -45,10 +45,6 @@ public class RectangleMouseListener implements MouseMotionListener {
         startDrag = false;
     }
 
-    public Rectangle getRectangle() {
-        return rectangle;
-    }
-
     public void setRectangle(Rectangle rectangle) {
         this.rectangle = rectangle;
     }

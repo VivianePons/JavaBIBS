@@ -49,11 +49,6 @@ public class Rectangle {
 		return y;
 	}
 	public void setY(int y) {
-		if(y > maxy) {
-			y = maxy;
-		} else if(y < 0) {
-			
-		}
 		this.y = y;
 	}
 	public int getWidth() {
@@ -73,7 +68,7 @@ public class Rectangle {
 
 	/**
 	 * Check that the rectangle fit inside its bounds
-	 * @return
+	 * @return true if it fits
 	 */
 	public boolean insideBounds() {
 		return x >= 0 && (x + width) <= maxx && y >= 0 && (y + height) <= maxy && width > 0 && height > 0;
