@@ -1,15 +1,13 @@
 package fr.upsaclay.bibs.fieldsystem.control;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import fr.upsaclay.bibs.fieldsystem.sheepfield.Field;
 import fr.upsaclay.bibs.fieldsystem.sheepfield.Grass;
 import fr.upsaclay.bibs.fieldsystem.sheepfield.Sheep;
 import fr.upsaclay.bibs.fieldsystem.sheepfield.Wolf;
-import fr.upsaclay.bibs.fieldsystem.view.FieldActionComponent;
 import fr.upsaclay.bibs.fieldsystem.view.FieldView;
 import fr.upsaclay.bibs.fieldsystem.view.SwingFieldView;
+import fr.upsaclay.bibs.fieldsystem.view.ViewState;
 
 /**
  * The controller of the application
@@ -17,7 +15,7 @@ import fr.upsaclay.bibs.fieldsystem.view.SwingFieldView;
  * @author viviane
  *
  */
-public class FieldController implements ActionListener {
+public class FieldController  {
 	
 	public static final int WIDTH = 60;
 	public static final int HEIGHT = 40;
@@ -28,17 +26,25 @@ public class FieldController implements ActionListener {
 	
 	private int numberOfInitialSheeps = 50;
 	private int numberOfInitialWolves = 50;
+
+	/// BEGIN SOLUTION
+	private int current_delay;
+	private boolean simulationStarted;
+	/// END SOLUTION
 	
 	public FieldController() {
 		view = new SwingFieldView("Sheep field", WIDTH, HEIGHT);
 	}
 	
 	public void initialize() {
+		view.setController(this);
 		view.initialize();
 		/// BEGIN SOLUTION
-		view.setFieldActionListener(this);
-		view.setLoopAction(new UpdateActionListener());
-		view.setLoopDelay(INITIAL_DELAY);
+		current_delay = INITIAL_DELAY;
+		view.setLoopDelay(current_delay);
+		view.setViewState(ViewState.SIMULATION_INIT);
+		simulationStarted = false;
+		view.update();
 		/// END SOLUTION
 	}
 
@@ -57,128 +63,114 @@ public class FieldController implements ActionListener {
 	public void setNumberOfInitialWolves(int numberOfInitialWolves) {
 		this.numberOfInitialWolves = numberOfInitialWolves;
 	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		FieldActionComponent comp = (FieldActionComponent)e.getSource();
-		switch(comp.getFieldAction()) {
-		case INITIAL_START:
-			// Write action for initial start
-			/// BEGIN SOLUTION
-			view.drawSimulationPlayView();
-			field = new Field(WIDTH, HEIGHT);
-			view.setField(field);
-			field.addRandomFieldElements(numberOfInitialSheeps, () -> new Sheep());
-			field.addRandomFieldElements(numberOfInitialWolves, () -> new Wolf());
-			view.update();
-			view.startActionLoop();
-			/// END SOLUTION
-			break;
-		case PAUSE:
-			// Write action for pause
-			/// BEGIN SOLUTION
-			view.drawSimulationPauseView();
-			view.stopActionLoop();
-			/// END SOLUTION
-			break;
-		case START:
-			// Write action for start (when the similation was on pause)
-			/// BEGIN SOLUTION
-			view.drawSimulationPlayView();
-			view.startActionLoop();
-			/// END SOLUTION
-			break;
-		case QUIT:
-			// Write action for quitting simulation
-			/// BEGIN SOLUTION
-			view.drawSimulationInitView();
-			view.stopActionLoop();
-			view.setField(null);
-			field = null;
-			view.update();
-			break;
-			/// END SOLUTION
+
+	/**
+	 * Launches the simulation :
+	 *  * create the field
+	 *  * adds the sheep and wolves
+	 *  * initiate the view
+	 */
+	private void initial_start() {
+		/* Write your code here */
 		/// BEGIN SOLUTION
-		case INITIAL_SHEEPS:
-			numberOfInitialSheeps = Integer.valueOf(comp.getActionCommand());
-			break;
-		case INITIAL_WOLVES:
-			numberOfInitialWolves = Integer.valueOf(comp.getActionCommand());
-			break;
-		case MANAGEMENT_START:
-			view.drawManagementView();
-			break;
-		case MANAGEMENT_END:
-			view.eraseManagementView();
-			break;
-		case GRASS_PROBA:
-			Grass.setDefaultProba(Double.valueOf(comp.getActionCommand()));
-			break;
-		case GRASS_LIFE_SPAN:
-			Grass.setDefaultLifeSpan(Integer.valueOf(comp.getActionCommand()));
-			break;
-		case SHEEP_LIFE_SPAN:
-			Sheep.setDefaultLifeSpan(Integer.valueOf(comp.getActionCommand()));
-			break;
-		case SHEEP_WEAK_LEV:
-			Sheep.setDefaultWeakLevel(Integer.valueOf(comp.getActionCommand()));
-			break;
-		case SHEEP_INCREASE:
-			Sheep.setDefaultIncreasePerEat(Integer.valueOf(comp.getActionCommand()));
-			break;
-		case SHEEP_SPEED:
-			Sheep.setDefaultSpeed(Integer.valueOf(comp.getActionCommand()));
-			break;
-		case SHEEP_PROBA:
-			Sheep.setDefaultReproductionProba(Double.valueOf(comp.getActionCommand()));
-			break;
-		case WOLF_LIFE_SPAN:
-			Wolf.setDefaultLifeSpan(Integer.valueOf(comp.getActionCommand()));
-			break;
-		case WOLF_WEAK_LEV:
-			Wolf.setDefaultWeakLevel(Integer.valueOf(comp.getActionCommand()));
-			break;
-		case WOLF_INCREASE:
-			Wolf.setDefaultIncreasePerEat(Integer.valueOf(comp.getActionCommand()));
-			break;
-		case WOLF_SPEED:
-			Wolf.setDefaultSpeed(Integer.valueOf(comp.getActionCommand()));
-			break;
-		case WOLF_PROBA:
-			Wolf.setDefaultReproductionProba(Double.valueOf(comp.getActionCommand()));
-			break;
-		case ADD_SHEEP:
-			field.addRandomFieldElements(Integer.valueOf(comp.getActionCommand()), () -> new Sheep());
-			view.update();
-			break;
-		case ADD_WOLF:
-			field.addRandomFieldElements(Integer.valueOf(comp.getActionCommand()), () -> new Wolf());
-			view.update();
-			break;
-		case SPEED_PLUS:
-			int d = view.getLoopDelay();
-			if(d > 5) {
-				view.setLoopDelay(d-5);
-			}
-			break;
-		case SPEED_MINUS:
-			view.setLoopDelay(view.getLoopDelay()+5);
-			break;
+		field = new Field(WIDTH, HEIGHT);
+		view.setField(field);
+		field.addRandomFieldElements(numberOfInitialSheeps, () -> new Sheep());
+		field.addRandomFieldElements(numberOfInitialWolves, () -> new Wolf());
+		view.setViewState(ViewState.SIMULATION_PLAY);
+		simulationStarted = true;
 		/// END SOLUTION
-		default:
-			break;
-		
-		}
 	}
 
-	class UpdateActionListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			field.evolve();
-			view.update();
-		}
-		
+	/**
+	 * Quit the simulation
+	 */
+	private void quit() {
+		/* Write your code here */
+		/// BEGIN SOLUTION
+		view.setViewState(ViewState.SIMULATION_INIT);
+		view.setField(null);
+		field = null;
+		simulationStarted = false;
+		/// END SOLUTION
 	}
-	
+
+	/**
+	 * Launches the option management panel
+	 */
+	private void startManagement() {
+		/* Write your code here */
+		/// BEGIN SOLUTION
+		view.setViewState(ViewState.MANAGEMENT);
+		/// END SOLUTION
+	}
+
+	/**
+	 * Erase the management panel and goes back either to:
+	 * - initial panel (if the simulation has not started)
+	 * - pause panel otherwise
+	 */
+	private void stopManagement() {
+		/// BEGIN SOLUTION
+		view.setViewState(simulationStarted? ViewState.SIMULATION_PAUSE : ViewState.SIMULATION_INIT);
+		/// END SOLUTION
+		/* Write your code here */
+	}
+
+
+	/**
+	 * Receives an action with no extra parameter
+	 * @param action, the action to be perfoermed
+	 */
+	public void receiveAction(FieldAction action) {
+		switch (action) {
+			case INITIAL_START: initial_start(); break;
+			/// BEGIN SOLUTION
+			case EVOLVE: field.evolve();break;
+			case PAUSE: view.setViewState(ViewState.SIMULATION_PAUSE);break;
+			case START: view.setViewState(ViewState.SIMULATION_PLAY);break;
+			case QUIT: quit();break;
+			case MANAGEMENT_START: startManagement();break;
+			case MANAGEMENT_END: stopManagement();break;
+			case SPEED_PLUS:
+				if(current_delay > 5) {
+					current_delay-=5;
+					view.setLoopDelay(current_delay);
+				}
+				break;
+			case SPEED_MINUS:
+				current_delay+=5;
+				view.setLoopDelay(current_delay);
+				break;
+			/// END SOLUTION
+		}
+		/// BEGIN SOLUTION
+		view.update();
+		/// END SOLUTION
+	}
+
+	public void receiveAction(FieldAction action, String v) {
+		/* Write your code here */
+		/// BEGIN SOLUTION
+		switch (action) {
+			case INITIAL_SHEEPS: setNumberOfInitialSheeps(Integer.parseInt(v));break;
+			case INITIAL_WOLVES: setNumberOfInitialWolves(Integer.parseInt(v));break;
+			case GRASS_PROBA: Grass.setDefaultProba(Double.parseDouble(v)); break;
+			case GRASS_LIFE_SPAN: Grass.setDefaultLifeSpan(Integer.parseInt(v));break;
+			case SHEEP_LIFE_SPAN: Sheep.setDefaultLifeSpan(Integer.parseInt(v));break;
+			case SHEEP_WEAK_LEV: Sheep.setDefaultWeakLevel(Integer.parseInt(v));break;
+			case SHEEP_INCREASE: Sheep.setDefaultIncreasePerEat(Integer.parseInt(v));break;
+			case SHEEP_SPEED: Sheep.setDefaultSpeed(Integer.parseInt(v));break;
+			case SHEEP_PROBA: Sheep.setDefaultReproductionProba(Double.parseDouble(v));break;
+			case WOLF_LIFE_SPAN: Wolf.setDefaultLifeSpan(Integer.parseInt(v));break;
+			case WOLF_WEAK_LEV: Wolf.setDefaultWeakLevel(Integer.parseInt(v));break;
+			case WOLF_INCREASE: Wolf.setDefaultIncreasePerEat(Integer.parseInt(v));break;
+			case WOLF_SPEED: Wolf.setDefaultSpeed(Integer.parseInt(v));break;
+			case WOLF_PROBA: Wolf.setDefaultReproductionProba(Double.parseDouble(v));break;
+			case ADD_SHEEP: field.addRandomFieldElements(Integer.parseInt(v), () -> new Sheep());break;
+			case ADD_WOLF: field.addRandomFieldElements(Integer.parseInt(v), () -> new Wolf()); break;
+		}
+		view.update();
+		/// END SOLUTION
+	}
 }

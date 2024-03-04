@@ -1,7 +1,6 @@
 package fr.upsaclay.bibs.fieldsystem.view;
 
-import java.awt.event.ActionListener;
-
+import fr.upsaclay.bibs.fieldsystem.control.FieldController;
 import fr.upsaclay.bibs.fieldsystem.sheepfield.Field;
 
 /**
@@ -15,84 +14,37 @@ public interface FieldView {
 	/**
 	 * Initialize the view
 	 */
-	public void initialize();
+	void initialize();
 	
 	/**
 	 * Attach the field to the view components that need to read information from the model
-	 * 
 	 * The field classe shouls NOT be modified by the view
-	 * 
-	 * @param field
+	 * @param field, a Field to be shown
 	 */
-	public void setField(Field field);
+	void setField(Field field);
+
+	/**
+	 * Attach the controller to the view
+	 * The controller should only be used to receive action
+	 * @param controller, a FieldController
+	 */
+	void setController(FieldController controller);
 	
 	/**
-	 * Updates the view
+	 * Update the view
 	 */
-	public void update();
-	
-	/**
-	 * Set the listener in charge of receiving FieldActon actions
-	 * 
-	 * @param listener
-	 */
-	public void setFieldActionListener(ActionListener listener);
-	
-	/**
-	 * Set the listener in charge of running the simulation loop
-	 * 
-	 * @param listener
-	 */
-	public void setLoopAction(ActionListener listener);
+	void update();
 	
 	/**
 	 * Set the loop delay
-	 * 
-	 * @param ms
+	 * @param ms, the delay in ms
 	 */
-	public void setLoopDelay(int ms);
-	
+	void setLoopDelay(int ms);
+
 	/**
-	 * Return the loop delay
-	 * 
-	 * @return
+	 * Sets the current state
+	 * @param state, the view state to show
 	 */
-	public int getLoopDelay();
-	
-	/**
-	 * Start the simulation loop
-	 */
-	public void startActionLoop();
-	
-	/**
-	 * Stop the simulation loop
-	 */
-	public void stopActionLoop();
-	
-	/**
-	 * Draw the initial view
-	 */
-	public void drawSimulationInitView();
-	
-	/**
-	 * Draw the view when the simulation is running
-	 */
-	public void drawSimulationPlayView();
-	
-	/**
-	 * Draw the view when the simulation is on pause
-	 */
-	public void drawSimulationPauseView();
-	
-	/**
-	 * Draw management play view
-	 */
-	public void drawManagementView();
-	
-	/**
-	 * Erase management play view
-	 */
-	public void eraseManagementView();
-	
+	void setViewState(ViewState state);
 
 }

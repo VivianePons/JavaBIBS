@@ -9,4 +9,12 @@ package fr.upsaclay.bibs.fieldsystem.control;
 public enum FieldParameterType {
 	PROBA,
 	INT;
+
+	public static ParameterVerifier getVerifier(FieldParameterType type) {
+		switch (type) {
+            case PROBA: return new ProbaVerifier();
+            case INT: return new NonNegativeIntVerifier();
+        }
+		return null;
+	}
 }

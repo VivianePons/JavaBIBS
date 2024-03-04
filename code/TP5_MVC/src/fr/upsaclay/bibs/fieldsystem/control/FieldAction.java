@@ -1,7 +1,5 @@
 package fr.upsaclay.bibs.fieldsystem.control;
 
-import javax.swing.InputVerifier;
-
 /**
  * List of actions that sent from the view to the controller 
  * 
@@ -13,6 +11,7 @@ public enum FieldAction {
 	PAUSE("", null),
 	START("", null),
 	QUIT("", null),
+	EVOLVE("", null),
 	INITIAL_SHEEPS("50", FieldParameterType.INT),
 	INITIAL_WOLVES("50", FieldParameterType.INT)
 	/// BEGIN SOLUTION
@@ -37,10 +36,10 @@ public enum FieldAction {
 	/// END SOLUTION
 	;
 	
-	private String defaultValue;
-	private FieldParameterType type;
+	private final String defaultValue;
+	private final FieldParameterType type;
 	
-	private FieldAction(String defaultValue, FieldParameterType type) {
+	FieldAction(String defaultValue, FieldParameterType type) {
 		this.defaultValue = defaultValue;
 		this.type = type;
 	}

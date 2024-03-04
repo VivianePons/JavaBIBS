@@ -10,7 +10,7 @@ import fr.upsaclay.bibs.fieldsystem.sheepfield.Field;
 import fr.upsaclay.bibs.fieldsystem.sheepfield.FieldElement;
 
 /**
- * A customized implementation of JPanel to draw the on going simulation
+ * A customized implementation of JPanel to draw the ongoing simulation
  * 
  * @author Viviane Pons
  *
