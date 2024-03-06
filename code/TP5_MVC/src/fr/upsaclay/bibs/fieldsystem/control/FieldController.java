@@ -39,10 +39,10 @@ public class FieldController  {
 	public void initialize() {
 		view.setController(this);
 		view.initialize();
+		view.setViewState(ViewState.SIMULATION_INIT);
 		/// BEGIN SOLUTION
 		current_delay = INITIAL_DELAY;
 		view.setLoopDelay(current_delay);
-		view.setViewState(ViewState.SIMULATION_INIT);
 		simulationStarted = false;
 		view.update();
 		/// END SOLUTION
@@ -120,7 +120,7 @@ public class FieldController  {
 
 	/**
 	 * Receives an action with no extra parameter
-	 * @param action, the action to be perfoermed
+	 * @param action, the action to be performed
 	 */
 	public void receiveAction(FieldAction action) {
 		switch (action) {
@@ -144,11 +144,15 @@ public class FieldController  {
 				break;
 			/// END SOLUTION
 		}
-		/// BEGIN SOLUTION
 		view.update();
-		/// END SOLUTION
 	}
 
+	/**
+	 * Receives an action with an extra string parameter
+	 * The string must be a verified string which will be directly converted into the wanted parameter value
+	 * @param action, the action to be performed
+	 * @param v, the sent value
+	 */
 	public void receiveAction(FieldAction action, String v) {
 		/* Write your code here */
 		/// BEGIN SOLUTION

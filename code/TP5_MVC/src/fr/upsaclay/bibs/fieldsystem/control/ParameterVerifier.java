@@ -14,5 +14,13 @@ public interface ParameterVerifier {
 	 * @return true if it is a correct string, false if not
 	 */
 	boolean verify(String value);
+
+	public static ParameterVerifier getVerifier(FieldParameterType type) {
+		switch (type) {
+			case PROBA: return new ProbaVerifier();
+			case INT: return new NonNegativeIntVerifier();
+		}
+		return null;
+	}
 	
 }

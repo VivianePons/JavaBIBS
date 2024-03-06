@@ -44,8 +44,8 @@
 </ul></li>
 <li><a href="#mise-à-jour-des-paramètres">Mise à jour des paramètres</a>
 <ul>
-<li><a href="#dans-la-vue">Dans la vue</a></li>
-<li><a href="#dans-le-contrôleur">Dans le contrôleur</a></li>
+<li><a href="#ajouter-les-paramètres-à-la-vue">Ajouter les paramètres à la vue</a></li>
+<li><a href="#implanter-laction-correspondante">Implanter l’action correspondante</a></li>
 </ul></li>
 <li><a href="#tout-le-reste">Tout le reste</a></li>
 </ul>
@@ -54,10 +54,9 @@
 <h2 id="objectif">Objectif</h2>
 <p>Dans ce TP, nous allons reprendre le modèle développé lors du TP4 (avec les moutons) et créer une interface graphique permettant contrôler les différents paramètres de la simulation. On se basera sur le principe de “Modèle – Vue – Contrôleur” vu en cours.</p>
 <h2 id="récupération-du-code">Récupération du code</h2>
-<p>L’ensemble du code est disponible dans un <a href="https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP5_MVC">repo indépendant</a>. Vous pouvez le récupérer en cliquant sur le bouton de téléchargement à côté de “Clone” (où en effectuant un clone avec <em>git</em> si vous savez faire).</p>
-<p>Ensuite, avec Eclipse, vous pouvez créer un nouveau projet en utilisant le dossier téléchargé comme source. Ainsi, l’ensmeble de l’architecture de classes et packages seront déjà créés.</p>
+<p>L’ensemble du code est disponible dans un <a href="https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP5_MVC">repo indépendant</a>. Vous pouvez le récupérer directement avec IntelliJ avec “New Project from version control” ou en le téléchargeant depuis gitlab.</p>
 <h2 id="architecture-générale">Architecture générale</h2>
-<p>L’architecture du projet est déjà fournie. Le package <code>fr.upsaclay.bibs.fieldsystem.sheepfield</code> est globalement la correction du TP4. (On a très légèrement changé la classe <code>Grass</code> pour utiliser la même probabilié pour toutes les instances).</p>
+<p>L’architecture du projet est déjà fournie. Le package <code>fr.upsaclay.bibs.fieldsystem.sheepfield</code> est globalement la correction du TP4. (On a très légèrement changé la classe <code>Grass</code> pour utiliser la même probabilité pour toutes les instances).</p>
 <h3 id="nouveaux-packages">Nouveaux packages</h3>
 <p>L’application contient deux nouveaux packages :</p>
 <ul>
@@ -66,60 +65,63 @@
 </ul>
 <h3 id="le-contrôleur">Le contrôleur</h3>
 <p>La classe principale est <code>FieldController</code> qui sera en charge de créer la vue, de l’initialiser, de créer et de paramétrer le modèle en fonction des actions reçues par l’utilisateur.</p>
-<p>Le package contient aussi deux autres classes qui sont en fait des enum :</p>
+<p>Le package contient aussi quelques autres classes :</p>
 <ul>
-<li><p><code>FieldAction</code> contient la liste des actions possibles. Comme de nombreuses actions consistent à mettre à jour des paramètres, les actions possèdent une valeur par défaut (sous forme de <code>String</code>) ainsi qu’un type de paramètres.</p></li>
-<li><p><code>FieldParameterType</code> : les différents type de paramètres possibles</p></li>
+<li><code>FieldAction</code> est un <code>enum</code> qui contient la liste des actions possibles. Comme de nombreuses actions consistent à mettre à jour des paramètres, les actions possèdent une valeur par défaut (sous forme de <code>String</code>) ainsi qu’un type de paramètres.</li>
+<li><code>FieldParameterType</code> : <code>enum</code> des différents type de paramètres possibles</li>
+<li>L’interface <code>ParamaterVerfier</code> et deux implémentations <code>NonNegativeIntVerfier</code> et <code>ProbaVerifier</code> : ce sont des contrôleur de paramètre. Le but de ces classes est de vérifier qu’une valeur de paramètre sous forme de <code>String</code> correspond à une valeur correcte. On verra plus tard où sont utilisées ces classes.</li>
 </ul>
 <h3 id="la-vue">La Vue</h3>
 <ul>
 <li>L’interface principale est <code>FieldView</code> qui est implémentée dans <code>SwingFieldView</code> : elle contient différentes méthodes que nous allons implémenter au fur et à mesure en développant en parallèle notre contrôleur.</li>
+<li><code>ViewState</code> la liste des états que peut prendre l’interface, correspondant à différentes phases de l’application</li>
 <li><code>DrawPanel</code> est le panneau qui sert à dessiner le champs. Il est déjà implémenté et fonctionnel</li>
-<li><code>FieldActionComponent</code> est l’interface spécifique pour les composants chargés d’envoyer des actions au contrôleur (les boutons)</li>
-<li><code>FieldButton</code> est l’implantation de <code>FieldActionComponent</code>qui hérite de <code>JButton</code> : tout est déjà fait, mais vous pouvez jeter un oeil (c’est assez simple) car vous pourriez utilsier un système similaire pour votre projet.</li>
-<li><code>FieldParameter</code> est un composant personnalisé que je vous fournis pour gérer la mise à jour d’un paramètre.</li>
-<li><code>ParameterVerifier</code> est une interface utilisée pour vérifier le texte entré dans les champs des paramètres</li>
+<li><code>FieldParameter</code> est un composant personnalisé que je vous fournis pour les paramètres à mettre à jour avec un champs texte relié à un bouton.</li>
+<li><code>ButtonListener</code> et <code>ParameterListener</code> des “écouteurs” pour nos composants que nous allons compléter au fur et à mesure.</li>
 </ul>
 <h2 id="démarrage-et-affichage">Démarrage et affichage</h2>
 <h3 id="premier-lancement">Premier lancement</h3>
 <p>Lancez l’application : vous devez voir apparaître la fenêtre principale avec un panneau de contrôle sur la droite.</p>
-<p>Le panneau contient un bouton “Start” ainsi que des champs pour mettre à jour le nombre initial de moutons et de loups. Essayez le changer les valeurs et voyez ce qui se passe.</p>
-<p>Enfin, si vous cliquez sur “Start” rien ne se passe.</p>
+<p>Le panneau contient un bouton “Start”. Si vous cliquez sur “Start” rien ne se passe.</p>
 <h3 id="comprendre">Comprendre</h3>
 <p>Notre but pour l’instant est de faire disparaître le panneau de management initial quand on clique sur “Start”. Pour cela, il faut déjà comprendre qui crée les éléments et où.</p>
-<p>Regardez la classe <code>SwingFieldView</code> et répondez à ces questions (pour vous, dans votre tête, sur un papier, comme vous voulez) : * où est déclarés le panneau <code>initialPanel</code> ? * où est-il créé ? * où est-il ajouté à la fenêtre principale ? (Est-il ajouté directement ? Est-il ajouté à u autre panneau ?) * Même question pour <code>initialStartButton</code> et pour les paramètres du nombre de moutons et nombre de loup.</p>
+<p>Regardez la classe <code>SwingFieldView</code> et répondez à ces questions (pour vous, dans votre tête, sur un papier, comme vous voulez) : * où est déclarés le panneau <code>initialPanel</code> ? * où est-il créé ? * où est-il ajouté à la fenêtre principale ? (Est-il ajouté directement ? Est-il ajouté à u autre panneau ?) * Même question pour <code>initialStartButton</code></p>
 <p>Enfin, regardez la méthode <code>drawSimulationInitView</code> : par qui est-elle appelée et quand ? Que se passe-t-il si vous changez la visibilité de <code>initialPanel</code> à <code>false</code> ? (Remettez à <code>true</code> après)</p>
+<p><strong>Exercice</strong> Implémenter une méthode <code>private void drawSimulationPlayView()</code> dans <code>SwingFieldView</code> qui ne contient qu’une seule ligne mettant la visibilité de <code>initialPanel</code> à <code>false</code>. Complétez la méthode <code>setViewState</code> pour appeler cette méthode lorsque l’on reçoit l’état <code>SIMULATION_PLAY</code>. Vérifiez que cela fonctionne en modifiant l’état dessiné dans la méthode <code>initialize</code> du contrôleur. (Puis remettez l’ancienne initialisation)</p>
 <h3 id="agir">Agir</h3>
-<p>Faîtes disparaître le panneau quand on appui sur “Start”, pour cela il faut :</p>
+<p>Faîtes en sorte que le panneau contenant “Start” disparaisse quand on appuie sur le bouton, pour cela il faut :</p>
 <ul>
-<li>Dans <code>SwingFieldView</code> : implanter la méthode <code>setFieldActionListener</code> pour ajouter un listener au bouton <code>initialStartButton</code></li>
-<li>Dans <code>SwingFieldView</code> : implanter la méthode <code>drawSimulationPlayView</code> de sorte que <code>initialPanel</code> soit rendu non visible</li>
-<li>Dans <code>FieldController</code> : dans la méthode <code>initiliaze</code> après l’initialisation de la vue, appeler la méthode <code>setFieldActionListener</code> en s’ajoutant soi-même (<code>this</code>) comme listener.</li>
-<li>Dans <code>FieldController</code> : dans la méthode <code>actionPerformed</code>, appeler <code>view.drawSimulationPlayView()</code> en cas d’action <code>INITIAL_START</code>.</li>
+<li>Dans <code>SwingFieldView</code> : ajouter un <code>ButtonListener</code> au bouton <code>initialStartButton</code> lors de l’initialisation correspondant à l’action que l’on veut réaliser (<code>INITIAL_START</code>)</li>
+<li>Dans la classe <code>ButtonListener</code> : implémenter la méthode <code>actionPerformed</code> pour envoyer l’action au contrôleur</li>
+<li>Dans la classe <code>FieldController</code> : implémenter la méthode <code>initial_start</code> qui doit demander à la vue d’afficher l’état <code>SIMULATION_PLAY</code>, (elle est appelée par <code>receiveAction</code> quand elle reçoit l’action correspondante).</li>
 </ul>
 <h2 id="gestion-des-affichages">Gestion des affichages</h2>
 <p>En vous inspirant ce qui a été fait :</p>
 <ul>
 <li>créez un panneau <code>playPanel</code> qui contient uniquement un bouton “Pause”</li>
-<li>créez un panneau <code>pausePanel</code> qui contient deux boutons : “Start” (mais utilisez une instance différente même si le texte est le même) et “Quit”</li>
+<li>créez un panneau <code>pausePanel</code> qui contient deux boutons : “Start” et “Quit”</li>
 </ul>
 <p>Le fonctionnement est le suivant :</p>
 <p>Au départ on voit le <code>initPanel</code>. Quand on clique sur “Start”, le <code>playPanel</code> s’affiche. Quand on clique sur “Pause”, le <code>pausePanel</code> s’affiche. Si on clique sur “Start”, on revient au <code>playPanel</code>, si on clique sur “Quit”, on revient à <code>initPanel</code>.</p>
-<p>Pour cela, il faut implanter les méthodes <code>drawSimulationPlayView</code> et <code>drawSimulationPauseView</code>, les appeler depuis le contrôleur et s’assurer que le contrôleur a bien été ajouté aux boutons et que les boutons sont liés à la bonne action.</p>
-<p>(Pour l’instant, on ne fait rien pour <code>drawManagementView</code> et <code>eraseMAnagementView</code>)</p>
+<p>Pour cela, il faut</p>
+<ul>
+<li>créer une nouvelle méthode <code>drawSimulationPauseView</code> et compléter les méthodes <code>draw...</code> existantes avec les bonnes visibilités pour les 3 panneaux.</li>
+<li>appeler les méthodes correspondant aux états dans <code>setViewState</code></li>
+<li>ajouter les écouteurs adéquats aux nouveaux boutons avec les bonnes actions de l’enum <code>FieldAction</code></li>
+<li>compléter la méthode <code>receiveAction</code> du contrôleur pour réagir aux nouvelles actions et appeler les méthodes correspondantes dans la vue.</li>
+</ul>
 <h2 id="lancement-de-la-simulation">Lancement de la simulation</h2>
 <h3 id="création-du-champ">Création du champ</h3>
-<p>Le modèle, c’est à dire l’instance de <code>Field</code>, n’est pas créé par défaut à la création du contrôleur : en effet, on veut se laisser la possibilité de modifier certains paramètres avant la création de l’objet.</p>
+<p>Le modèle, c’est à dire l’instance de <code>Field</code>, n’est pas créée par défaut à la création du contrôleur : en effet, on veut se laisser la possibilité de modifier certains paramètres avant la création de l’objet.</p>
 <p>En fait, on veut créer le modèle au moment du lancement quand on appuie sur “Start”. Pour cela, dans le contrôleur, on va rajouter des actions au moment de l’évènement <code>INITIAL_START</code> :</p>
 <ul>
-<li><p>fabriquer une instance de <code>Field</code> dans le cham <code>field</code> du contrôleur (en utilisant la largeur et la hauteur définie par le contrôleur)</p></li>
+<li><p>fabriquer une instance de <code>Field</code> dans le champs <code>field</code> du contrôleur (en utilisant la largeur et la hauteur définie par le contrôleur)</p></li>
 <li><p>associer le modèle à la vue avec <code>setField</code></p></li>
 <li><p>ajouter les moutons et les loups au modèle. Rappel du dernier TP, voici la commande pour rajouter 10 moutons</p>
 <pre><code>  field.addRandomFieldElements(10, () -&gt; new Sheep());</code></pre>
-<p>Le nombre de moutons (i.e. nombre de loups) doit utiliser le nombre <code>initialNumberOfSheeps</code> définit dans le contrôleur.</p></li>
-<li><p>mettre à jour la vue</p></li>
+<p>Le nombre de moutons (i.e. nombre de loups) doit utiliser le nombre <code>initialNumberOfSheeps</code> défini dans le contrôleur.</p></li>
 </ul>
-<p>Si vous faites tout ça, vous devez voir apparaître votre champ quand vous appuyez sur “Start” (notez que pour l’instant, malgré les paramètres qui s’affichent, la vue ne sait pas encore contrôler le nombre initial de moutons / loups)</p>
+<p>Si vous faites tout ça, vous devez voir apparaître votre champ quand vous appuyez sur “Start”</p>
 <h3 id="suppression-du-champ">Suppression du champ</h3>
 <p>De la même façon, on veut que quand on clique sur “Quit” le système soit réinitialisé (supprimé) pour qu’on puisse relancer la simulation avec de nouveau paramètres.</p>
 <p>Adaptez l’action correspondante pour que :</p>
@@ -127,28 +129,46 @@
 <li><code>field</code> soit égal à <code>null</code></li>
 <li>la vue reçoive une variable <code>field</code> nulle et soit mise à jour</li>
 </ul>
+<p>(vous pouvez utiliser la méthode <code>quit</code> de <code>FieldController</code> et l’appeler depuis <code>receiveAction</code></p>
 <p>Vous devez voir le champ disparaître quand vous cliquez sur “Quit” et de nouveau avoir un rectangle blanc.</p>
 <h3 id="lancer-la-simulation">Lancer la simulation</h3>
 <p>Rappel : le modèle de simulation est un champ contenant des éléments (l’herbe, les moutons, les loups) qui évoluent par étape. Pour observer les évolutions, il faut donc pouvoir appeler la méthode d’évolution du système à intervalle régulier.</p>
-<p>Pour ce faire, la vue utilise un objet <code>Timer</code> défini par <code>Swing</code> L’interface de la vue définit plusieurs méthodes de gestion de cet objet : en particulier les méthodes <code>startActionLoop</code> et <code>stopActionLoop</code></p>
-<p>L’action exécutée par le timer est lancée avec un <code>ActionListner</code>. Pour différencier cette action du lancement de celui d’un bouton / paramètre, on utilise une classe interne spécifique pour écouter le timer : la classe <code>UpdateActionListener</code> qui à chaque appel fait évoluer le système et met à jour la vue.</p>
+<p>Pour ce faire, la vue utilise un objet <code>Timer</code> défini par <code>Swing</code> . On a déjà déclaré l’objet <code>timer</code> dans <code>SwingFieldView</code> et on l’a instancié dans le constructeur.</p>
+<p>Un <code>Timer</code> est en fait relié à un <code>ActionListener</code> (comme un bouton), l’action sera envoyée à intervalles régulier (comme si quelqu’un appuyait sur un bouton toutes les x millisecondes). On a défini l’action <code>EVOLVE</code> dans la liste des <code>FieldAction</code> qui correspond à ce que l’on veut. Pour que ça marche, il faut</p>
+<p>Côté vue :</p>
 <ul>
-<li><p>Dans la méthode d’initialisation du contrôleur, ajouter l’appel suivant :</p>
-<pre><code>  view.setLoopAction(new UpdateActionListener());</code></pre></li>
-<li><p>De même, rajouter un appel à <code>view.setLoopDelay</code> pour lui donner le délai initial défini par le contrôleur (500 ms)</p></li>
-<li><p>Enfin, ajoutez les appells nécessaires à <code>view.startLoopAction()</code> et <code>view.stopLoopAction()</code> au niveau des action <code>INITIAL_START</code>, <code>PAUSE</code>, <code>START</code>, et <code>QUIT</code> .</p></li>
+<li>dans le <code>initialize</code> de <code>SwingFieldView</code> : ajouter un <code>ButtonListner</code> au timer avec l’action <code>EVOLVE</code></li>
+<li>implanter la méthode <code>setTimerDelay</code> dans <code>SwingFieldView</code> (qui appelle simplement <code>timer.setDelay</code> avec le bon paramètre)</li>
+<li>lancer le timer lorsqu’on lance la simulation (<code>drawSimulationPlayView</code>) avec <code>timer.start()</code></li>
+<li>arrêter le timer quand on met sur pause avec <code>timer.stop()</code></li>
+</ul>
+<p>Côté contrôleur :</p>
+<ul>
+<li>initialiser le délai initial du timer avec <code>INITIAL_DELAY</code> dans la fonction d’initialisation en appelant <code>view.setLoopDelay</code></li>
+<li>agir quand on reçoit l’action <code>EVOLVE</code> en faisant évoluer le modèle (<code>field.evolve()</code>)</li>
 </ul>
 <h2 id="mise-à-jour-des-paramètres">Mise à jour des paramètres</h2>
-<p>Comme on l’a remarqué, pour l’instant le nombre de moutons et loups initiaux n’est pas contrôlé par les nombres entrés par l’utilisateur. En effet : les éléments graphiques ont été créés mais n’ont pas été reliés au contrôleur.</p>
-<h3 id="dans-la-vue">Dans la vue</h3>
-<p>Les paramètres font partie d’une liste “initialParamters” créés au moment de la création de la vue et ajouter au panneau initial. Ce sont des éléments de type <code>FieldParameter</code> qui est en fait un panneau customisé prenant en charge l’affichage et la sauvegarde d’un paramètre. Comme pour un bouton, on peut lui ajouter un <code>ActionListener</code></p>
+<p>On souhaite rajouter des paramètres à l’initialisation pour contrôler le nombre de moutons et de loups. Pour cela, on va utiliser la classe <code>FieldParameter</code> que j’ai écrite : c’est un <code>JPanel</code> un peu améliorer pour gérer l’interaction entre un champ de texte et un bouton.</p>
+<h3 id="ajouter-les-paramètres-à-la-vue">Ajouter les paramètres à la vue</h3>
+<p><strong>Etape 1</strong> Implanter la méthode <code>createParameter</code> dans <code>SwingFieldView</code> : la méthode reçoit un texte à afficher (par exemple “Nombre de moutons”) et une action correspondante. Il faut utiliser ces deux entrées pour créer les 3 paramètres du constructeur de <code>FieldParameter</code> : <code>label</code>, <code>defaultValue</code>, et <code>verifier</code></p>
 <ul>
-<li>dans la méthode <code>setFieldActionListener</code> de la vue, ajouter le <code>listener</code> à tous les <code>FieldParameter</code> de la liste</li>
+<li><code>label</code> est la valeur reçue par <code>createParameter</code></li>
+<li><code>defaultValue</code> est obtenue avec <code>action.getDefaultValue()</code></li>
+<li><code>verifier</code> est un “vérifieur de paramètre” qui implémente l’interface <code>ParameterVerifier</code>. Cette interface contient par ailleurs une méthode statique pour créer des vérifieurs en fonction du type de paramètre action.getType()`</li>
 </ul>
-<h3 id="dans-le-contrôleur">Dans le contrôleur</h3>
+<p><strong>Etape 2</strong> : Ajouter deux <code>FieldParameter</code>, un pour les moutons, un pour les loups, à <code>initPanel</code> au moment de l’initialisation. Les deux actions correspondantes sont <code>INITIAL_SHEEPS</code> et <code>INITIAL_WOLVES</code>.</p>
+<p>Vous devriez voir des champs de texte avec des boutons “ok” apparaître au début de l’application. Si vous modifiez le texte, il passe en rouge. Le bouton ne devient actif que quand le texte a été modifié ET que la valeur est un entier correct.</p>
+<p>Cependant, rien ne se passe quand on clique sur “ok” (le nombre de moutons / loups au lancement de la simulation n’est pas modifié). On va corriger ça</p>
+<h3 id="implanter-laction-correspondante">Implanter l’action correspondante</h3>
+<p>Côté contrôleur :</p>
 <ul>
-<li>Ajoutez deux cas au <code>switch case</code> de la méthode <code>actionPerformed</code> qui correspondent aux deux actions <code>INITIAL_SHEEPS</code> et <code>INITIAL_WOLVES</code></li>
-<li>récupérer la valeur du paramètre avec <code>comp.getActionCommand()</code> (qui vous renvoie une chaîne), transformez la en <code>int</code> et mettez à jour le paramètre du contrôleur qui correspond (soit <code>numberOfInitialSheeps</code> , soit <code>numberOfInitialWolves</code>).</li>
+<li>implémenter la méthode <code>receiveAction(FieldAction action, String v)</code> qui prend à la fois une action et une chaîne de caractère correspondant à une valeur. Il faut effectuer les actions correspondant à <code>INITIAL_SHEEPS</code> et <code>INITIAL_WOLVES</code> (pour les autres actions, il ne se passe rien). La chaîne peut être directement transformée en entier avec <code>Integer.parseInt(v)</code> car la valeur de la chaîne a déjà été vérifiée.</li>
+</ul>
+<p>Côté vue :</p>
+<ul>
+<li>Dans <code>createParameter</code>, il faut ajouter un écouteur de type <code>ParameterListener</code> au paramètre avec l’action correspondante (notez que l’écouteur prend aussi un pointeur vers le paramètre lui-même)</li>
+<li>implémenter la méthode <code>actionPerformed</code> de <code>ParameterListener</code> , elle doit appeler la méthode <code>receiveAction(FieldAction action, String v)</code> du contrôleur en utilisant la valeur du paramètre <code>param.getValue()</code></li>
+<li>Par ailleurs, pour redonner au champs texte son aspect par défaut, il faut appeler la méthode <code>param.entrySaved()</code> dans l’écouteur après avoir signalé l’action au contrôleur.</li>
 </ul>
 <h2 id="tout-le-reste">Tout le reste</h2>
 <p>En vous inspirant de tout ce qui est déjà implanté, ajouter de quoi contrôler l’ensemble des paramètres de la simulation :</p>

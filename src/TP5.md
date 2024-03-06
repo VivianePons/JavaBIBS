@@ -9,13 +9,12 @@ Dans ce TP, nous allons reprendre le modèle développé lors du TP4 (avec les m
 
 ## Récupération du code
 
-L'ensemble du code est disponible dans un [repo indépendant](https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP5_MVC). Vous pouvez le récupérer en cliquant sur le bouton de téléchargement à côté de "Clone" (où en effectuant un clone avec *git* si vous savez faire). 
+L'ensemble du code est disponible dans un [repo indépendant](https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP5_MVC). Vous pouvez le récupérer directement avec IntelliJ avec "New Project from version control" ou en le téléchargeant depuis gitlab.
 
-Ensuite, avec Eclipse, vous pouvez créer un nouveau projet en utilisant le dossier téléchargé comme source. Ainsi, l'ensmeble de l'architecture de classes et packages seront déjà créés.
 
 ## Architecture générale
 
-L'architecture du projet est déjà fournie. Le package `fr.upsaclay.bibs.fieldsystem.sheepfield` est globalement la correction du TP4. (On a très légèrement changé la classe `Grass` pour utiliser la même probabilié pour toutes les instances). 
+L'architecture du projet est déjà fournie. Le package `fr.upsaclay.bibs.fieldsystem.sheepfield` est globalement la correction du TP4. (On a très légèrement changé la classe `Grass` pour utiliser la même probabilité pour toutes les instances). 
 
 ### Nouveaux packages
 
@@ -28,20 +27,20 @@ L'application contient deux nouveaux packages :
 
 La classe principale est `FieldController` qui sera en charge de créer la vue, de l'initialiser, de créer et de paramétrer le modèle en fonction des actions reçues par l’utilisateur.
 
-Le package contient aussi deux autres classes qui sont en fait des enum :
+Le package contient aussi quelques autres classes :
 
-* `FieldAction` contient la liste des actions possibles. Comme de nombreuses actions consistent à mettre à jour des paramètres, les actions possèdent une valeur par défaut (sous forme de `String`) ainsi qu'un type de paramètres.
-
-* `FieldParameterType` : les différents type de paramètres possibles
+* `FieldAction` est un `enum` qui contient la liste des actions possibles. Comme de nombreuses actions consistent à mettre à jour des paramètres, les actions possèdent une valeur par défaut (sous forme de `String`) ainsi qu'un type de paramètres.
+* `FieldParameterType` : `enum` des différents type de paramètres possibles 
+* L'interface `ParamaterVerfier` et deux implémentations `NonNegativeIntVerfier` et `ProbaVerifier` : ce sont des contrôleur de paramètre. Le but de ces classes est de vérifier qu'une valeur de paramètre sous forme de `String` correspond à une valeur correcte. On verra plus tard où sont utilisées ces classes.
 
 ### La Vue
 
 * L'interface principale est `FieldView` qui est implémentée dans `SwingFieldView` : elle contient différentes méthodes que nous allons implémenter au fur et à mesure en développant en parallèle notre contrôleur.
+* `ViewState` la liste des états que peut prendre l'interface, correspondant à différentes phases de l'application
 * `DrawPanel` est le panneau qui sert à dessiner le champs. Il est déjà implémenté et fonctionnel
-* `FieldActionComponent` est l'interface spécifique pour les composants chargés d'envoyer des actions au contrôleur (les boutons)
-* `FieldButton` est l'implantation de `FieldActionComponent`qui hérite de `JButton` : tout est déjà fait, mais vous pouvez jeter un oeil (c'est assez simple) car vous pourriez utilsier un système similaire pour votre projet.
-* `FieldParameter` est un composant personnalisé que je vous fournis pour gérer la mise à jour d'un paramètre.
-* `ParameterVerifier` est une interface utilisée pour vérifier le texte entré dans les champs des paramètres
+* `FieldParameter` est un composant personnalisé que je vous fournis pour les paramètres à mettre à jour avec un champs texte relié à un bouton.
+* `ButtonListener` et `ParameterListener` des "écouteurs" pour nos composants que nous allons compléter au fur et à mesure.
+
 
 ## Démarrage et affichage
 
@@ -49,9 +48,7 @@ Le package contient aussi deux autres classes qui sont en fait des enum :
 
 Lancez l'application : vous devez voir apparaître la fenêtre principale avec un panneau de contrôle sur la droite.
 
-Le panneau contient un bouton "Start" ainsi que des champs pour mettre à jour le nombre initial de moutons et de loups. Essayez le changer les valeurs et voyez ce qui se passe.
-
-Enfin, si vous cliquez sur "Start" rien ne se passe.
+Le panneau contient un bouton "Start". Si vous cliquez sur "Start" rien ne se passe.
 
 ### Comprendre
 
@@ -61,53 +58,56 @@ Regardez la classe `SwingFieldView` et répondez à ces questions (pour vous, da
 * où est déclarés le panneau `initialPanel` ?
 * où est-il créé ?
 * où est-il ajouté à la fenêtre principale ? (Est-il ajouté directement ? Est-il ajouté à u autre panneau ?)
-* Même question pour `initialStartButton` et pour les paramètres du nombre de moutons et nombre de loup.
+* Même question pour `initialStartButton`
 
 Enfin, regardez la méthode `drawSimulationInitView` : par qui est-elle appelée et quand ? Que se passe-t-il si vous changez la visibilité de `initialPanel` à `false` ? (Remettez à `true` après)
 
+**Exercice** Implémenter une méthode `private void drawSimulationPlayView()` dans `SwingFieldView` qui ne contient qu'une seule ligne mettant la visibilité de `initialPanel` à `false`. Complétez la méthode `setViewState` pour appeler cette méthode lorsque l'on reçoit l'état `SIMULATION_PLAY`. Vérifiez que cela fonctionne en modifiant  l'état dessiné dans la méthode `initialize` du contrôleur. (Puis remettez l'ancienne initialisation)
+
 ### Agir
 
-Faîtes disparaître le panneau quand on appui sur "Start", pour cela il faut :
+Faîtes en sorte que le panneau contenant "Start" disparaisse quand on appuie sur le bouton, pour cela il faut :
 
-* Dans `SwingFieldView` : implanter la méthode `setFieldActionListener` pour ajouter un listener au bouton `initialStartButton`
-* Dans `SwingFieldView` : implanter la méthode `drawSimulationPlayView` de sorte que `initialPanel` soit rendu non visible
-* Dans `FieldController` : dans la méthode `initiliaze` après l'initialisation de la vue, appeler la méthode `setFieldActionListener` en s'ajoutant soi-même (`this`) comme listener.
-* Dans `FieldController` : dans la méthode `actionPerformed`, appeler `view.drawSimulationPlayView()` en cas d'action `INITIAL_START`.
+* Dans `SwingFieldView` : ajouter un `ButtonListener` au bouton `initialStartButton` lors de l'initialisation correspondant à l'action que l'on veut réaliser (`INITIAL_START`) 
+* Dans la classe `ButtonListener` : implémenter la méthode `actionPerformed` pour envoyer l'action au contrôleur
+* Dans la classe `FieldController` : implémenter la méthode `initial_start` qui doit demander à la vue d'afficher l'état `SIMULATION_PLAY`, (elle est appelée par `receiveAction` quand elle reçoit l'action correspondante).
 
 ## Gestion des affichages
 
 En vous inspirant ce qui a été fait :
 
 * créez un panneau `playPanel` qui contient uniquement un bouton "Pause"
-* créez un panneau `pausePanel` qui contient deux boutons : "Start" (mais utilisez une instance différente même si le texte est le même) et "Quit"
+* créez un panneau `pausePanel` qui contient deux boutons : "Start" et "Quit"
 
 Le fonctionnement est le suivant :
 
 Au départ on voit le `initPanel`. Quand on clique sur "Start", le `playPanel` s'affiche. Quand on clique sur "Pause", le `pausePanel` s'affiche. Si on clique sur "Start", on revient au `playPanel`, si on clique sur "Quit", on revient à `initPanel`. 
 
-Pour cela, il faut implanter les méthodes `drawSimulationPlayView` et `drawSimulationPauseView`, les appeler depuis le contrôleur et s'assurer que le contrôleur a bien été ajouté aux boutons et que les boutons sont liés à la bonne action. 
+Pour cela, il faut 
 
-(Pour l'instant, on ne fait rien pour `drawManagementView` et `eraseMAnagementView`)
+* créer une nouvelle méthode `drawSimulationPauseView` et compléter les méthodes `draw...` existantes avec les bonnes visibilités pour les 3 panneaux. 
+* appeler les méthodes correspondant aux états dans `setViewState`
+* ajouter les écouteurs adéquats aux nouveaux boutons avec les bonnes actions de l'enum `FieldAction`
+* compléter la méthode `receiveAction` du contrôleur pour réagir aux nouvelles actions et appeler les méthodes correspondantes dans la vue.
+
 
 ## Lancement de la simulation
 
 ### Création du champ
 
-Le modèle, c'est à dire l'instance de  `Field`, n'est pas créé par défaut à la création du contrôleur : en effet, on veut se laisser la possibilité de modifier certains paramètres avant la création de l'objet.
+Le modèle, c'est à dire l'instance de  `Field`, n'est pas créée par défaut à la création du contrôleur : en effet, on veut se laisser la possibilité de modifier certains paramètres avant la création de l'objet.
 
 En fait, on veut créer le modèle au moment du lancement quand on appuie sur "Start". Pour cela, dans le contrôleur, on va rajouter des actions au moment de l'évènement `INITIAL_START` :
 
-* fabriquer une instance de `Field` dans le cham `field` du contrôleur (en utilisant la largeur et la hauteur définie par le contrôleur)
+* fabriquer une instance de `Field` dans le champs `field` du contrôleur (en utilisant la largeur et la hauteur définie par le contrôleur)
 * associer le modèle à la vue avec `setField`
 * ajouter les moutons et les loups au modèle. Rappel du dernier TP, voici la commande pour rajouter 10 moutons
    
         field.addRandomFieldElements(10, () -> new Sheep());
         
-  Le nombre de moutons (i.e. nombre de loups) doit utiliser le nombre `initialNumberOfSheeps` définit dans le contrôleur.
+  Le nombre de moutons (i.e. nombre de loups) doit utiliser le nombre `initialNumberOfSheeps` défini dans le contrôleur.
 
-* mettre à jour la vue
-
-Si vous faites tout ça, vous devez voir apparaître votre champ quand vous appuyez sur "Start" (notez que pour l'instant, malgré les paramètres qui s'affichent, la vue ne sait pas encore contrôler le nombre initial de moutons / loups)
+Si vous faites tout ça, vous devez voir apparaître votre champ quand vous appuyez sur "Start"
 
 ### Suppression du champ
 
@@ -118,50 +118,74 @@ Adaptez l'action correspondante pour que :
 * `field` soit égal à `null`
 * la vue reçoive une variable `field` nulle et soit mise à jour
 
+(vous pouvez utiliser la méthode `quit` de `FieldController` et l'appeler depuis `receiveAction`
+
 Vous devez voir le champ disparaître quand vous cliquez sur "Quit" et de nouveau avoir un rectangle blanc.
 
 ### Lancer la simulation
 
 Rappel : le modèle de simulation est un champ contenant des éléments (l'herbe, les moutons, les loups) qui évoluent par étape. Pour observer les évolutions, il faut donc pouvoir appeler la méthode d'évolution du système à intervalle régulier.
 
-Pour ce faire, la vue utilise un objet `Timer` défini par `Swing` L'interface de la vue définit plusieurs méthodes de gestion de cet objet : en particulier les méthodes `startActionLoop` et `stopActionLoop`
+Pour ce faire, la vue utilise un objet `Timer` défini par `Swing` . On a déjà déclaré l'objet `timer` dans `SwingFieldView` et on l'a instancié dans le constructeur.
 
-L'action exécutée par le timer est lancée avec un `ActionListner`. Pour différencier cette action du lancement de celui d'un bouton / paramètre, on utilise une classe interne spécifique pour écouter le timer : la classe `UpdateActionListener` qui à chaque appel fait évoluer le système et met à jour la vue.
+Un `Timer` est en fait relié à un `ActionListener` (comme un bouton), l'action sera envoyée à intervalles régulier (comme si quelqu'un appuyait sur un bouton toutes les x millisecondes). On a défini l'action `EVOLVE` dans la liste des `FieldAction` qui correspond à ce que l'on veut. Pour que ça marche, il faut
 
-* Dans la méthode d'initialisation du contrôleur, ajouter l'appel suivant :
+Côté vue :
 
-        view.setLoopAction(new UpdateActionListener());
-        
-* De même, rajouter un appel à `view.setLoopDelay` pour lui donner le délai initial défini par le contrôleur (500 ms)
+* dans le `initialize` de `SwingFieldView` : ajouter un `ButtonListner` au timer avec l'action `EVOLVE`
+* implanter la méthode `setTimerDelay` dans `SwingFieldView` (qui appelle simplement `timer.setDelay` avec le bon paramètre)
+* lancer le timer lorsqu'on lance la simulation (`drawSimulationPlayView`) avec `timer.start()` 
+* arrêter le timer quand on met sur pause avec `timer.stop()`
 
-* Enfin, ajoutez les appells nécessaires à `view.startLoopAction()` et `view.stopLoopAction()` au niveau des action `INITIAL_START`, `PAUSE`, `START`, et `QUIT` .
+Côté contrôleur :
+
+* initialiser le délai initial du timer avec `INITIAL_DELAY` dans la fonction d'initialisation en appelant `view.setLoopDelay`
+* agir quand on reçoit l'action `EVOLVE` en faisant évoluer le modèle (`field.evolve()`)
+
 
 ## Mise à jour des paramètres
 
-Comme on l'a remarqué, pour l'instant le nombre de moutons et loups initiaux n'est pas contrôlé par les nombres entrés par l'utilisateur. En effet : les éléments graphiques ont été créés mais n'ont pas été reliés au contrôleur.
+On souhaite rajouter des paramètres à l'initialisation pour contrôler le nombre de moutons et de loups. Pour cela, on va utiliser la classe `FieldParameter` que j'ai écrite : c'est un `JPanel` un peu améliorer pour gérer l'interaction entre un champ de texte et un bouton.
 
-### Dans la vue
+### Ajouter les paramètres à la vue
 
-Les paramètres font partie d'une liste "initialParamters" créés au moment de la création de la vue et ajouter au panneau initial. Ce sont des éléments de type `FieldParameter` qui est en fait un panneau customisé prenant en charge l'affichage et la sauvegarde d'un paramètre. Comme pour un bouton, on peut lui ajouter un `ActionListener`
+**Etape 1** Implanter la méthode `createParameter` dans `SwingFieldView` : la méthode reçoit un texte à afficher (par exemple "Nombre de moutons") et une action correspondante. Il faut utiliser ces deux entrées pour créer les 3 paramètres du constructeur de `FieldParameter` : `label`,  `defaultValue`, et `verifier`
 
-* dans la méthode `setFieldActionListener` de la vue, ajouter le `listener` à tous les `FieldParameter` de la liste
+* `label` est la valeur reçue par `createParameter`
+* `defaultValue` est obtenue avec `action.getDefaultValue()`
+* `verifier` est un "vérifieur de paramètre" qui implémente l'interface `ParameterVerifier`. Cette interface contient par ailleurs une méthode statique pour créer des vérifieurs en fonction du type de paramètre action.getType()`
 
-### Dans le contrôleur
 
-* Ajoutez deux cas au `switch case` de la méthode `actionPerformed` qui correspondent aux deux actions `INITIAL_SHEEPS` et `INITIAL_WOLVES`
-* récupérer la valeur du paramètre avec `comp.getActionCommand()` (qui vous renvoie une chaîne), transformez la en `int` et mettez à jour le paramètre du contrôleur qui correspond (soit `numberOfInitialSheeps` , soit `numberOfInitialWolves`).
+**Etape 2** : Ajouter deux `FieldParameter`, un pour les moutons, un pour les loups, à `initPanel` au moment de l'initialisation. Les deux actions correspondantes sont `INITIAL_SHEEPS` et `INITIAL_WOLVES`. 
+
+Vous devriez voir des champs de texte avec des boutons "ok" apparaître au début de l'application. Si vous modifiez le texte, il passe en rouge. Le bouton ne devient actif que quand le texte a été modifié ET que la valeur est un entier correct. 
+
+Cependant, rien ne se passe quand on clique sur "ok" (le nombre de moutons / loups au lancement de la simulation n'est pas modifié). On va corriger ça
+
+### Implanter l'action correspondante
+
+Côté contrôleur :
+
+* implémenter la méthode `receiveAction(FieldAction action, String v)` qui prend à la fois une action et une chaîne de caractère correspondant à une valeur. Il faut effectuer les actions correspondant à `INITIAL_SHEEPS` et `INITIAL_WOLVES` (pour les autres actions, il ne se passe rien). La chaîne peut être directement transformée en entier avec `Integer.parseInt(v)` car la valeur de la chaîne a déjà été vérifiée.
+
+Côté vue :
+
+* Dans `createParameter`, il faut ajouter un écouteur de type `ParameterListener` au paramètre avec l'action correspondante (notez que l'écouteur prend aussi un pointeur vers le paramètre lui-même)
+* implémenter la méthode `actionPerformed` de `ParameterListener` , elle doit appeler la méthode `receiveAction(FieldAction action, String v)` du contrôleur en utilisant la valeur du paramètre `param.getValue()`
+* Par ailleurs, pour redonner au champs texte son aspect par défaut, il faut appeler la méthode `param.entrySaved()` dans l'écouteur après avoir signalé l'action au contrôleur.
+
 
 ## Tout le reste
 
 En vous inspirant de tout ce qui est déjà implanté, ajouter de quoi contrôler l'ensemble des paramètres de la simulation :
 
-* En phase d'initialisation et en phase de pause : tous les paramètres statiques des classes `Grass` `Sheep` et `Wolf`. Comme ces paramètres sont nombreux, on les affichera à la place du plateau de jeu en appuyant sur un bouton. On utilisera pour ça les méthode `drawManagementView` et `eraseManagementView`.
+* En phase d'initialisation et en phase de pause : tous les paramètres statiques des classes `Grass` `Sheep` et `Wolf`. Comme ces paramètres sont nombreux, on les affichera à la place du plateau de jeu en appuyant sur un bouton. 
 
 * En phase de jeu : des boutons pour augmenter la vitesse, diminuer la vitesse (attention, le délai minimum est 1ms)
 
 * En phase de pause : en plus des paramètres statiques, de quoi ajouter des loups / moutons dans la simulation
 
-Pour cela, il vous faut ajouter les actions nécessaires dans `FieldAction`, les composants nécessaires dans la vue, les réactions nécessaires dans le contrôleur et relier tout ça.
+Pour cela, il vous faut ajouter les actions nécessaires dans `FieldAction`, les composants nécessaires dans la vue, un état supplémentaire de la vue pour le panneau de management, les réactions nécessaires dans le contrôleur et relier tout ça.
 
 
 

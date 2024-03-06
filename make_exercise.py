@@ -8,7 +8,7 @@ DEST = "exercices"
 
 NOTINC = "// NOT INCLUDED"
 
-IGNORES = {"bin", ".settings", "output", ".idea", "out"}
+IGNORES = {"bin", ".settings", "output", ".idea", "out",".run"}
 SIMPLE_COPY = {"txt"}
 SOLUTION_COPY = {"java"}
 

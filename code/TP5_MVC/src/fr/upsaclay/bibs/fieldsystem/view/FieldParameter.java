@@ -103,11 +103,12 @@ public class FieldParameter extends JPanel implements KeyListener, FocusListener
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		textField.setForeground(Color.RED);
 		if(verifier.verify(textField.getText())) {
 			okButton.setEnabled(true);
+			textField.setForeground(new Color(0, 200, 0));
 		} else {
 			okButton.setEnabled(false);
+			textField.setForeground(Color.RED);
 		}
 	}
 	@Override

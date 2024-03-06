@@ -9,6 +9,7 @@ import javax.swing.*;
 import fr.upsaclay.bibs.fieldsystem.control.FieldAction;
 import fr.upsaclay.bibs.fieldsystem.control.FieldController;
 import fr.upsaclay.bibs.fieldsystem.control.FieldParameterType;
+import fr.upsaclay.bibs.fieldsystem.control.ParameterVerifier;
 import fr.upsaclay.bibs.fieldsystem.sheepfield.Field;
 
 /**
@@ -28,35 +29,12 @@ public class SwingFieldView extends JFrame implements FieldView {
 	JPanel controlPanel;
 	Timer timer;
 	
-	final List<FieldParameter> initialParameters;
-	JButton initialStartButton;
-
-	/// BEGIN SOLUTION
-
-	JButton startButton;
-	JButton pauseButton;
-	JButton quitButton;
-
-
-	JButton managementButton1;
-	JButton managementButton2;
-	JButton resumeButton;
-	JButton speedPlus;
-	JButton speedMinus;
-
-
-	/// END SOLUTION
-	
 	JPanel initialPanel;
-	/// BEGIN SOLUTION
 
+	/// BEGIN SOLUTION
 	JPanel playPanel;
 	JPanel pausePanel;
 	JPanel managementPanel;
-
-	final List<FieldParameter> staticParameters;
-	final List<FieldParameter> addButtons;
-
 	/// END SOLUTION
 	
 
@@ -73,14 +51,6 @@ public class SwingFieldView extends JFrame implements FieldView {
 		
 		// Create the loop timer
 		timer = new Timer(1, null);
-		
-		// Create the parameter lists
-		initialParameters = new ArrayList<>();
-
-		/// BEGIN SOLUTION
-		staticParameters = new ArrayList<>();
-		addButtons = new ArrayList<>();
-		/// END SOLUTION
 	}
 
 	/**
@@ -91,7 +61,7 @@ public class SwingFieldView extends JFrame implements FieldView {
 	 */
 	private FieldParameter createParameter(String label, FieldAction action) {
 		/// BEGIN SOLUTION
-		FieldParameter param = new FieldParameter(label, action.getDefaultValue(), FieldParameterType.getVerifier(action.getType()));
+		FieldParameter param = new FieldParameter(label, action.getDefaultValue(), ParameterVerifier.getVerifier(action.getType()));
 		param.addActionListener(new ParameterListener(controller, action, param));
 		return param;
 		/// END SOLUTION
@@ -113,11 +83,13 @@ public class SwingFieldView extends JFrame implements FieldView {
 		// The initial panel
 		initialPanel = new JPanel();
 		initialPanel.setPreferredSize(new Dimension(controlPanel.getPreferredSize().width, drawPanel.getPreferredSize().height));
+		JButton initialStartButton;
 		initialStartButton = new JButton("Start");
 		initialPanel.add(initialStartButton);
 
 		// Add the initial parameters to the list
 		/// BEGIN SOLUTION
+		List<FieldParameter> initialParameters = new ArrayList<>();
 		initialParameters.add(createParameter("Initial number of sheep", FieldAction.INITIAL_SHEEPS));
 		initialParameters.add(createParameter("Initial number of wolves", FieldAction.INITIAL_WOLVES));
 
@@ -127,6 +99,18 @@ public class SwingFieldView extends JFrame implements FieldView {
 		/// END SOLUTION
 
 		/// BEGIN SOLUTION
+
+
+		JButton startButton;
+		JButton pauseButton;
+		JButton quitButton;
+
+
+		JButton managementButton1;
+		JButton managementButton2;
+		JButton resumeButton;
+		JButton speedPlus;
+		JButton speedMinus;
 		initialStartButton.addActionListener(new ButtonListener(controller, FieldAction.INITIAL_START));
 
 		managementButton1 = new JButton("Manage options");
@@ -179,6 +163,9 @@ public class SwingFieldView extends JFrame implements FieldView {
 
 		managementButton2 = new JButton("Manage Options");
 		managementButton2.addActionListener(new ButtonListener(controller, FieldAction.MANAGEMENT_START));
+
+		List<FieldParameter> staticParameters = new ArrayList<>();
+		List<FieldParameter> addButtons = new ArrayList<>();
 
 		pausePanel.add(startButton);
 		pausePanel.add(quitButton);
