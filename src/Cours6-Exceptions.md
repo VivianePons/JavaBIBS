@@ -14,7 +14,7 @@ Compilation / excécution
 * erreur de syntaxe
 * erreur de type 
 
-Ces erreurs peuvent être repérées de façon "statique" : sans exécuter le code. Elles sont repérées par Eclipse et vous empèchent de lancer l'application.
+Ces erreurs peuvent être repérées de façon "statique" : sans exécuter le code. Elles sont repérées par IntellIJ et vous empêchent de lancer l'application.
 
 ----
 
@@ -101,7 +101,7 @@ System.out.println("I am still here");
 
 ----
 
-Typiquement : si le programme veut charger un fichier (par exemple, une partie de Tétris) mais n'arrive pas à lire le fichier. On veut :
+Typiquement : si le programme veut charger un fichier (par exemple un jeu sauvegardé) mais n'arrive pas à lire le fichier. On veut :
 
 1. afficher un message à l'utilisateur "Le fichier ne marche pas !"
 2. continuer à faire fonctionner le jeu (par exemple pour essayer avec un autre fichier)
