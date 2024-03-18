@@ -44,8 +44,8 @@ dans un terminal
 ## Projet
 
 * [Cours Git](CoursProjet-git.html)
+* [Mise en place](TP-Projet.html)
 
-A venir
 
 ## Autrice 
 

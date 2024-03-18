@@ -15,7 +15,7 @@ Se connecter sur [https://gitlab.dsi.universite-paris-saclay.fr/](https://gitlab
 
 **Une personne par groupe**
 
-[Le sujet sur gitlab](https://gitlab.dsi.universite-paris-saclay.fr/javabibs/Projet_Tetris)
+[Le sujet sur gitlab](https://gitlab.dsi.universite-paris-saclay.fr/javabibs/Projet_Pacman)
 
 Cliquez en haut à droite sur "Fork" 
 
@@ -26,13 +26,13 @@ Project Informations >> Membres
 Ajouter : les autres membres du groupe ainsi que les deux enseignants 
 
 * Viviane Pons
-* Balthazar Charles
+* Quentin Chuet
 
 ### Etape 4 : configuration de git
 
 Si vous n'avez pas git, [installer git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-Vous n'avez jamais utilisé git ? Confirguration avant la première utilisation [Plus d'explications ici](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Param%C3%A9trage-%C3%A0-la-premi%C3%A8re-utilisation-de-Git)
+Vous n'avez jamais utilisé git ? Configuration avant la première utilisation [Plus d'explications ici](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Param%C3%A9trage-%C3%A0-la-premi%C3%A8re-utilisation-de-Git)
 
     $ git config --global user.name "John Doe"
     $ git config --global user.email johndoe@example.com
@@ -52,12 +52,12 @@ L'adresse à cloner se trouve dans `gitlab` dans le nouveau projet créé après
 
 **A faire par tous les membres du groupe, chacun son tour**
 
-* Un membre modifie le fichier `README.md` en rajoutant son nom dans la liste des membres
+* Un membre modifie le fichier `rapport.md` en rajoutant son nom dans la liste des membres
 * Puis lance les commandes `git` suivantes
-  - `git add README.md`
+  - `git add rapport.md`
   - `git commit -m "ajout de mon nom"`
   - `git push`
-* Tous les autres membres lancent `git pull` et doivent ainsi récuperer le fichier modifié
+* Tous les autres membres lancent `git pull` et doivent ainsi récupérer le fichier modifié
 
 ## Les principales commandes git dont on a besoin
 

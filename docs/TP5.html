@@ -173,11 +173,11 @@
 <h2 id="tout-le-reste">Tout le reste</h2>
 <p>En vous inspirant de tout ce qui est déjà implanté, ajouter de quoi contrôler l’ensemble des paramètres de la simulation :</p>
 <ul>
-<li><p>En phase d’initialisation et en phase de pause : tous les paramètres statiques des classes <code>Grass</code> <code>Sheep</code> et <code>Wolf</code>. Comme ces paramètres sont nombreux, on les affichera à la place du plateau de jeu en appuyant sur un bouton. On utilisera pour ça les méthode <code>drawManagementView</code> et <code>eraseManagementView</code>.</p></li>
+<li><p>En phase d’initialisation et en phase de pause : tous les paramètres statiques des classes <code>Grass</code> <code>Sheep</code> et <code>Wolf</code>. Comme ces paramètres sont nombreux, on les affichera à la place du plateau de jeu en appuyant sur un bouton.</p></li>
 <li><p>En phase de jeu : des boutons pour augmenter la vitesse, diminuer la vitesse (attention, le délai minimum est 1ms)</p></li>
 <li><p>En phase de pause : en plus des paramètres statiques, de quoi ajouter des loups / moutons dans la simulation</p></li>
 </ul>
-<p>Pour cela, il vous faut ajouter les actions nécessaires dans <code>FieldAction</code>, les composants nécessaires dans la vue, les réactions nécessaires dans le contrôleur et relier tout ça.</p>
+<p>Pour cela, il vous faut ajouter les actions nécessaires dans <code>FieldAction</code>, les composants nécessaires dans la vue, un état supplémentaire de la vue pour le panneau de management, les réactions nécessaires dans le contrôleur et relier tout ça.</p>
 </section>
 </body>
 </html>
