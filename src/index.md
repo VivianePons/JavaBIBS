@@ -32,11 +32,6 @@ Toutes les sources (en partciluer les codes java et les exercices corrigés) son
   
 Tout ce qu'on n'a pas vu : les modules, les classes et méthodes génériques, les itérateurs, les classes anonymes, les expressions lambdas, les streams
 
-## Corrigé TP Noté
-
-[Corrigé TP Noté Amazones](https://gitlab.dsi.universite-paris-saclay.fr/javabibs/corrige_amazones)
-
-(nécessite un compte upsaclay)
 
 ## Mémo salle de TP
 
@@ -50,7 +45,7 @@ dans un terminal
 ## Projet
 
 * [Cours Git](CoursProjet-git.html)
-* [Mise en place](TP-Projet.html)
+* Sujet : A venir
 
 
 ## Autrice 

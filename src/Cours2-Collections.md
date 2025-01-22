@@ -172,7 +172,7 @@ Ce sont des blocs de documentation. Ils suivent un formalisme particulier (par e
 
 La documentation **Javadoc** de l'API Java est disponible [sur le site d'Oracle](https://docs.oracle.com/en/java/javase/17/docs/api/)
 
-On peut aussi y accéder **directement depuis Eclipse**. Tout comme on peut accéder à **sa propre javadoc**.
+On peut aussi y accéder **directement depuis l'IDE**. Tout comme on peut accéder à **sa propre javadoc**.
 
 ----
 
