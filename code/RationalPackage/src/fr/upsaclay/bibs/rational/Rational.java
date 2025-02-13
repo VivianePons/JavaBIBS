@@ -50,6 +50,9 @@ public class Rational implements Comparable<Rational> {
 		if(d == 0) {
 			throw new IllegalArgumentException("division by 0");
 		}
+		if (n == 0) {
+			d = 1;
+		}
 		if(d < 0) {
 			n = -n;
 			d = -d;

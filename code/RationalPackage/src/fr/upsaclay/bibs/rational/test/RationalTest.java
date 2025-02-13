@@ -18,6 +18,7 @@ class RationalTest {
 		assertEquals(new Rational(-1,-2), new Rational(1,2));
 		assertEquals(new Rational(3), new Rational(3,1));
 		assertEquals(new Rational(), new Rational(0));
+		assertEquals(new Rational(), new Rational(0, 3));
 		assertEquals(new Rational(0,1), new Rational(0,2));
 		assertEquals(new Rational(-0,1), new Rational());
 		assertThrows(IllegalArgumentException.class, () -> new Rational(1,0));
