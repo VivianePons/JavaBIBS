@@ -583,7 +583,11 @@ Les tests unitaires ne pourront **jamais vous assurer** que votre programme fonc
 Cependant, ils permettent de détecter de nombreuses erreurs et facilitent la maintenance du code.
 
 
+----
 
+## Pour finir
+
+Nous avons vu les concepts objets illustrés avec le Java. Tout ça est aussi possible en python avec quelques différences, voyez l'exemple [de la classe Rational en python](https://github.com/VivianePons/JavaBIBS/tree/main/code/RationalPython)
 
 
 
