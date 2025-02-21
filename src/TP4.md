@@ -11,7 +11,9 @@ L'objectif de ce TP est d'implanter un **système dynamique**, c'est-à-dire un 
 
 ## Récupération du code
 
-L'ensemble du code est disponible dans un [repo indépendant](https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP4_Heritage). A partir d'IntelliJ, vous pouvez le récupérer directement en choisissant "New Project from version controll" et en donnant l'URL du repo : `https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP4_Heritage`.
+L'ensemble du code est disponible dans un [repo indépendant](https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP4_Heritage) (uniquement accessible depuis le réseau de l'université). A partir d'IntelliJ, vous pouvez le récupérer directement en choisissant "New Project from version controll" et en donnant l'URL du repo : `https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP4_Heritage`.
+
+Si vous n'avez pas accès au réseau de l'université, voici [un lien pour récupérer le code dans un .zip](media/TP4_Heritage-master.zip)
 
 Sinon, il est aussi possible de le télécharger (bouton téléchargement à côté de "Clone" ou d'effectuer un clone avec *git* si vous savez faire (Remarque : nous aurons une séance spéciale sur le fonctionnement de git au début de l'UE Projet de Programmation, pour l'instant ce n'est pas nécessaire).
 
