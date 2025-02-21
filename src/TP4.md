@@ -15,7 +15,7 @@ L'ensemble du code est disponible dans un [repo indépendant](https://gitlab.dsi
 
 Si vous n'avez pas accès au réseau de l'université, voici [un lien pour récupérer le code dans un .zip](media/TP4_Heritage-master.zip)
 
-Sinon, il est aussi possible de le télécharger (bouton téléchargement à côté de "Clone" ou d'effectuer un clone avec *git* si vous savez faire (Remarque : nous aurons une séance spéciale sur le fonctionnement de git au début de l'UE Projet de Programmation, pour l'instant ce n'est pas nécessaire).
+Il est aussi possible d'effectuer un clone avec *git* si vous savez faire (Remarque : nous aurons une séance spéciale sur le fonctionnement de git au début de l'UE Projet de Programmation, pour l'instant ce n'est pas nécessaire).
 
 ## Mise à jour du projet dans Intellij
 
