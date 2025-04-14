@@ -11,6 +11,8 @@ Dans ce TP, nous allons reprendre le modèle développé lors du TP4 (avec les m
 
 L'ensemble du code est disponible dans un [repo indépendant](https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP5_MVC). Vous pouvez le récupérer directement avec IntelliJ avec "New Project from version control" ou en le téléchargeant depuis gitlab.
 
+Si vous n'avez pas accès au réseau de l'université, voici [un lien pour récupérer le code dans un .zip](media/TP5_MVC-master.zip)
+
 
 ## Architecture générale
 

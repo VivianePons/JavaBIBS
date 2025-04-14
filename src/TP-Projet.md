@@ -23,16 +23,15 @@ Cliquez en haut à droite sur "Fork"
 
 Project Informations >> Membres
 
-Ajouter : les autres membres du groupe ainsi que les deux enseignants 
+Ajouter : les autres membres du groupe ainsi que l'enseignante
 
 * Viviane Pons
-* Quentin Chuet
 
 ### Etape 4 : configuration de git
 
 Si vous n'avez pas git, [installer git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-Vous n'avez jamais utilisé git ? Configuration avant la première utilisation [Plus d'explications ici](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Param%C3%A9trage-%C3%A0-la-premi%C3%A8re-utilisation-de-Git)
+Vous n'avez jamais utilisé git ? Configuration avant la première utilisation [Plus d'explications ici](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Param%C3%A9trage-%C3%A0-la-premi%C3%A8re-utilisation-de-Git) . Voici par exemple les instructions sur une machine Linux
 
     $ git config --global user.name "John Doe"
     $ git config --global user.email johndoe@example.com
