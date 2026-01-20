@@ -21,7 +21,7 @@ Toutes les sources (en partciluer les codes java et les exercices corrigés) son
   - [Slides version html](Cours4-Heritage.html)
   - [Slides en version pdf](pdf/Cours4-Heritage.pdf)
   - [TP4](TP4.html)
-* TP Noté : (séance 6) -- [Le Corrigé du TP Noté](https://gitlab.dsi.universite-paris-saclay.fr/javabibs/corrige_tamagotchi/) 
+* TP Noté : (séance 6)
 * Cours 5 : Applications graphiques et design MVC (séances 7 et 8)
   - [Slides version html](Cours5-Graphique.html)
   - [Slides en version pdf](pdf/Cours5-Graphique.pdf)

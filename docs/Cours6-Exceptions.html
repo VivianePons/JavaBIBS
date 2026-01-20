@@ -11,13 +11,24 @@
   <style type="text/css">
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
     div.sourceCode { margin: 1em 0; }
     pre.sourceCode { margin: 0; }
@@ -52,7 +63,7 @@
     code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
     code span.at { color: #7d9029; } /* Attribute */
     code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { } /* BuiltIn */
+    code span.bu { color: #008000; } /* BuiltIn */
     code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #4070a0; } /* Char */
     code span.cn { color: #880000; } /* Constant */
@@ -65,7 +76,7 @@
     code span.ex { } /* Extension */
     code span.fl { color: #40a070; } /* Float */
     code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
     code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
     code span.kw { color: #007020; font-weight: bold; } /* Keyword */
     code span.op { color: #666666; } /* Operator */
@@ -94,7 +105,8 @@ Viviane Pons
   </p>
   <p class="date">Master BIBS Université Paris-Saclay</p>
 </div>
-<div id="sortes-derreurs-quand-on-programme" class="slide section level1">
+<div id="sortes-derreurs-quand-on-programme"
+class="slide section level1">
 <h1>2 sortes d’erreurs quand on programme</h1>
 <p>Compilation / excécution</p>
 <h2 id="erreurs-à-la-compilation">Erreurs à la compilation</h2>
@@ -102,30 +114,46 @@ Viviane Pons
 <li>erreur de syntaxe</li>
 <li>erreur de type</li>
 </ul>
-<p>Ces erreurs peuvent être repérées de façon “statique” : sans exécuter le code. Elles sont repérées par IntellIJ et vous empêchent de lancer l’application.</p>
+<p>Ces erreurs peuvent être repérées de façon “statique” : sans exécuter
+le code. Elles sont repérées par IntellIJ et vous empêchent de lancer
+l’application.</p>
 </div>
 <div class="slide section level1">
 
 <h2 id="erreurs-à-lexécution">Erreurs à l’exécution</h2>
-<p>Ces erreurs se produisent au moment où on exécute le programme. Elles sont plus difficiles à repérer car elles dépendent du contexte dans lequel le programme est exécuté. Souvent, elles sont plus embêtantes.</p>
-<p>Note : il est IMPOSSIOBLE d’écrire un programme qui pourrait décider dans tous les cas si un autre programme quelconque crée une erreur ou non. (C’est ce qu’on appelle un problème indécidable)</p>
-<p><strong>Remarque :</strong> Il existe aussi d’autres erreurs, les erreurs de logique ou fonctionnelles. Le programme s’exécute sans problème mais ne fait pas ce qu’on veut. C’est les plus pénibles !</p>
+<p>Ces erreurs se produisent au moment où on exécute le programme. Elles
+sont plus difficiles à repérer car elles dépendent du contexte dans
+lequel le programme est exécuté. Souvent, elles sont plus
+embêtantes.</p>
+<p>Note : il est IMPOSSIOBLE d’écrire un programme qui pourrait décider
+dans tous les cas si un autre programme quelconque crée une erreur ou
+non. (C’est ce qu’on appelle un problème indécidable)</p>
+<p><strong>Remarque :</strong> Il existe aussi d’autres erreurs, les
+erreurs de logique ou fonctionnelles. Le programme s’exécute sans
+problème mais ne fait pas ce qu’on veut. C’est les plus pénibles !</p>
 </div>
 <div class="slide section level1">
 
 <h3 id="comment-ça-se-passe-en-c">Comment ça se passe en C</h3>
-<p>Quand un programme C rencontre une erreur à l’exécution … Il plante.</p>
+<p>Quand un programme C rencontre une erreur à l’exécution … Il
+plante.</p>
 <p>Exemple courant : <code>Segmentation Fault</code></p>
-<p>Une erreur d’exécution en C termine le programme et nous donne en général assez peu d’information (à quelle ligne s’est produite l’erreur ? Dans quel contexte ? Qui avait appelé cette fonction ?)</p>
+<p>Une erreur d’exécution en C termine le programme et nous donne en
+général assez peu d’information (à quelle ligne s’est produite l’erreur
+? Dans quel contexte ? Qui avait appelé cette fonction ?)</p>
 </div>
 <div class="slide section level1">
 
-<h3 id="comment-ça-se-passe-en-java-et-en-python">Comment ça se passe en Java (et en python)</h3>
-<p>Il y a une couche supplémentaire qui supervise l’exécution et permet “d’encapsuler” les erreurs d’exécution. C’est ce qu’on appelle les “Exceptions”</p>
+<h3 id="comment-ça-se-passe-en-java-et-en-python">Comment ça se passe en
+Java (et en python)</h3>
+<p>Il y a une couche supplémentaire qui supervise l’exécution et permet
+“d’encapsuler” les erreurs d’exécution. C’est ce qu’on appelle les
+“Exceptions”</p>
 </div>
 <div id="les-exceptions-en-java" class="slide section level1">
 <h1>Les Exceptions en Java</h1>
-<p>Une <code>Exception</code> est un objet qui contient toute l’information sur l’erreur :</p>
+<p>Une <code>Exception</code> est un objet qui contient toute
+l’information sur l’erreur :</p>
 <ul>
 <li>le type d’erreur</li>
 <li>le message</li>
@@ -141,123 +169,155 @@ Viviane Pons
 <div class="slide section level1">
 
 <h2 id="différents-types-derreurs">Différents types d’erreurs</h2>
-<p>Il y a plusieurs classes qui représentent des erreurs d’exécution :</p>
+<p>Il y a plusieurs classes qui représentent des erreurs d’exécution
+:</p>
 <ul>
-<li><code>Throwable</code> (du verbe <em>throw</em>, lancer – en français, on dit “lever” une exception) : la superclasse de toutes les erreurs en Java</li>
-<li><code>Error</code> : une sous-classe qui correspond aux erreurs “graves” où on ne peut “rien faire” (ça plante…). Exemple <code>StackOverflowError</code></li>
+<li><code>Throwable</code> (du verbe <em>throw</em>, lancer – en
+français, on dit “lever” une exception) : la superclasse de toutes les
+erreurs en Java</li>
+<li><code>Error</code> : une sous-classe qui correspond aux erreurs
+“graves” où on ne peut “rien faire” (ça plante…). Exemple
+<code>StackOverflowError</code></li>
 <li><code>Exception</code> : les erreurs “normales”</li>
 </ul>
-<p>En tant que développeur / développeuse, on doit s’occuper des “erreurs normales”, c’est-à-dire des objets qui héritent de <code>Exception</code></p>
+<p>En tant que développeur / développeuse, on doit s’occuper des
+“erreurs normales”, c’est-à-dire des objets qui héritent de
+<code>Exception</code></p>
 </div>
 <div class="slide section level1">
 
-<h2 id="plein-plein-plein-dexceptions-différentes">Plein, plein, plein d’Exceptions différentes</h2>
-<p>Chaque type d’erreur à sa propre classe qui hérite de <code>Exception</code> : <code>NumberFormatException</code>, <code>FileNotFoundException</code>, <code>IOException</code></p>
+<h2 id="plein-plein-plein-dexceptions-différentes">Plein, plein, plein
+d’Exceptions différentes</h2>
+<p>Chaque type d’erreur à sa propre classe qui hérite de
+<code>Exception</code> : <code>NumberFormatException</code>,
+<code>FileNotFoundException</code>, <code>IOException</code></p>
 <p>Elles se rangent en 2 catégories :</p>
 <ul>
-<li><p>celles qui héritent de <code>RunTimeException</code> : en général liées à une <em>erreur de conception</em> dans le programme. Exemple : <code>NumberFormatException</code>, <code>NullPointerException</code>, <code>IndexOutOfBoundException</code></p></li>
-<li><p>toutes les autres : liées au contexte d’utilisation du programme. Par exemple, les interactions avec l’utilisateur. Ces erreurs là doivent être <em>gérées par le programme</em>.</p></li>
+<li><p>celles qui héritent de <code>RunTimeException</code> : en général
+liées à une <em>erreur de conception</em> dans le programme. Exemple :
+<code>NumberFormatException</code>, <code>NullPointerException</code>,
+<code>IndexOutOfBoundException</code></p></li>
+<li><p>toutes les autres : liées au contexte d’utilisation du programme.
+Par exemple, les interactions avec l’utilisateur. Ces erreurs là doivent
+être <em>gérées par le programme</em>.</p></li>
 </ul>
 </div>
 <div id="gestion-des-exception" class="slide section level1">
 <h1>Gestion des exception</h1>
 <h2 id="try-catch"><code>try</code> … <code>catch</code></h2>
-<p>On peut “attraper” les exceptions pour décider de la suite à donner.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="bu">File</span> f = <span class="kw">new</span> <span class="bu">File</span>(<span class="st">&quot;IDontExist&quot;</span>);</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">try</span> {</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    <span class="bu">Scanner</span> scan = <span class="kw">new</span> <span class="bu">Scanner</span>(f);</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>} <span class="kw">catch</span> (<span class="bu">FileNotFoundException</span> e) {</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>    e.<span class="fu">printStackTrace</span>();</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>}</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;I am still here&quot;</span>);</span></code></pre></div>
+<p>On peut “attraper” les exceptions pour décider de la suite à
+donner.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="bu">File</span> f <span class="op">=</span> <span class="kw">new</span> <span class="bu">File</span><span class="op">(</span><span class="st">&quot;IDontExist&quot;</span><span class="op">);</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    <span class="bu">Scanner</span> scan <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">FileNotFoundException</span> e<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>    e<span class="op">.</span><span class="fu">printStackTrace</span><span class="op">();</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;I am still here&quot;</span><span class="op">);</span></span></code></pre></div>
 </div>
 <div class="slide section level1">
 
-<p>Typiquement : si le programme veut charger un fichier (par exemple un jeu sauvegardé) mais n’arrive pas à lire le fichier. On veut :</p>
+<p>Typiquement : si le programme veut charger un fichier (par exemple un
+jeu sauvegardé) mais n’arrive pas à lire le fichier. On veut :</p>
 <ol style="list-style-type: decimal">
-<li>afficher un message à l’utilisateur “Le fichier ne marche pas !”</li>
-<li>continuer à faire fonctionner le jeu (par exemple pour essayer avec un autre fichier)</li>
+<li>afficher un message à l’utilisateur “Le fichier ne marche pas
+!”</li>
+<li>continuer à faire fonctionner le jeu (par exemple pour essayer avec
+un autre fichier)</li>
 </ol>
 </div>
 <div class="slide section level1">
 
-<h2 id="si-on-on-ne-les-attrape-pas-on-doit-les-signaler">Si on on ne les attrape pas, on doit les signaler</h2>
-<p>La méthode qui utilise une action “dangereuse” doit signaler l’exception qui peut être levée.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">readNumbers</span>(<span class="bu">String</span> filename) <span class="kw">throws</span> <span class="bu">FileNotFoundException</span> {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>        <span class="bu">File</span> f = <span class="kw">new</span> <span class="bu">File</span>(filename);</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>        <span class="bu">Scanner</span> scan = <span class="kw">new</span> <span class="bu">Scanner</span>(f);</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>        <span class="kw">while</span>(scan.<span class="fu">hasNext</span>()) {</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>            <span class="dt">int</span> v = scan.<span class="fu">nextInt</span>();</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>            <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(v);</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>        }</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>    }</span></code></pre></div>
+<h2 id="si-on-on-ne-les-attrape-pas-on-doit-les-signaler">Si on on ne
+les attrape pas, on doit les signaler</h2>
+<p>La méthode qui utilise une action “dangereuse” doit signaler
+l’exception qui peut être levée.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">readNumbers</span><span class="op">(</span><span class="bu">String</span> filename<span class="op">)</span> <span class="kw">throws</span> <span class="bu">FileNotFoundException</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>        <span class="bu">File</span> f <span class="op">=</span> <span class="kw">new</span> <span class="bu">File</span><span class="op">(</span>filename<span class="op">);</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>        <span class="bu">Scanner</span> scan <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(</span>scan<span class="op">.</span><span class="fu">hasNext</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>            <span class="dt">int</span> v <span class="op">=</span> scan<span class="op">.</span><span class="fu">nextInt</span><span class="op">();</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>            <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
 </div>
 <div class="slide section level1">
 
-<h2 id="on-peut-aussi-lever-ses-propres-exceptions">On peut aussi lever ses propres exceptions</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">try</span> {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>    <span class="dt">int</span> v = scan.<span class="fu">nextInt</span>();</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>    <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(v);</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>} <span class="kw">catch</span>(<span class="bu">InputMismatchException</span> e)  {</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>    <span class="kw">throw</span> <span class="kw">new</span> <span class="bu">IOException</span>(e);</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>}</span></code></pre></div>
+<h2 id="on-peut-aussi-lever-ses-propres-exceptions">On peut aussi lever
+ses propres exceptions</h2>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>    <span class="dt">int</span> v <span class="op">=</span> scan<span class="op">.</span><span class="fu">nextInt</span><span class="op">();</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="op">}</span> <span class="cf">catch</span><span class="op">(</span><span class="bu">InputMismatchException</span> e<span class="op">)</span>  <span class="op">{</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IOException</span><span class="op">(</span>e<span class="op">);</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="slide section level1">
 
 <h2 id="un-exemple-plus-complet">Un exemple plus complet</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">readNumbers</span>(<span class="bu">String</span> filename) <span class="kw">throws</span> <span class="bu">FileNotFoundException</span>, <span class="bu">IOException</span> {</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>        <span class="bu">File</span> f = <span class="kw">new</span> <span class="bu">File</span>(filename);</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>        <span class="bu">Scanner</span> scan = <span class="kw">new</span> <span class="bu">Scanner</span>(f);</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>        <span class="kw">while</span>(scan.<span class="fu">hasNext</span>()) {</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>            <span class="kw">try</span> {</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>                <span class="dt">int</span> v = scan.<span class="fu">nextInt</span>();</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>                <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(v);</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a>            } <span class="kw">catch</span>(<span class="bu">InputMismatchException</span> e)  {</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a>                <span class="kw">throw</span> <span class="kw">new</span> <span class="bu">IOException</span>(e);</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a>            }</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>        } </span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a>        scan.<span class="fu">close</span>();</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true"></a>    }</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true"></a>    </span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">safeRead</span>(<span class="bu">String</span> filename) {</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true"></a>        <span class="kw">try</span> {</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true"></a>            <span class="fu">readNumbers</span>(filename);</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true"></a>        } <span class="kw">catch</span>(<span class="bu">FileNotFoundException</span> e) {</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true"></a>            <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;I cannot open this file : &quot;</span> + filename);</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true"></a>        } <span class="kw">catch</span>(<span class="bu">IOException</span> e) {</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true"></a>            <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;This file does not contain numbers : &quot;</span> + filename);</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true"></a>        }</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">readNumbers</span><span class="op">(</span><span class="bu">String</span> filename<span class="op">)</span> <span class="kw">throws</span> <span class="bu">FileNotFoundException</span><span class="op">,</span> <span class="bu">IOException</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>        <span class="bu">File</span> f <span class="op">=</span> <span class="kw">new</span> <span class="bu">File</span><span class="op">(</span>filename<span class="op">);</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>        <span class="bu">Scanner</span> scan <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(</span>scan<span class="op">.</span><span class="fu">hasNext</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>            <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>                <span class="dt">int</span> v <span class="op">=</span> scan<span class="op">.</span><span class="fu">nextInt</span><span class="op">();</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>                <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>v<span class="op">);</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>            <span class="op">}</span> <span class="cf">catch</span><span class="op">(</span><span class="bu">InputMismatchException</span> e<span class="op">)</span>  <span class="op">{</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>                <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IOException</span><span class="op">(</span>e<span class="op">);</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>        <span class="op">}</span> </span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>        scan<span class="op">.</span><span class="fu">close</span><span class="op">();</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>    </span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">safeRead</span><span class="op">(</span><span class="bu">String</span> filename<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>        <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>            <span class="fu">readNumbers</span><span class="op">(</span>filename<span class="op">);</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">catch</span><span class="op">(</span><span class="bu">FileNotFoundException</span> e<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>            <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;I cannot open this file : &quot;</span> <span class="op">+</span> filename<span class="op">);</span></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">catch</span><span class="op">(</span><span class="bu">IOException</span> e<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>            <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;This file does not contain numbers : &quot;</span> <span class="op">+</span> filename<span class="op">);</span></span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
 </div>
 <div class="slide section level1">
 
-<h2 id="enfin-on-peut-créer-ses-propres-exceptions">Enfin : on peut créer ses propres exceptions</h2>
-<p>Le but est de lever l’exception appropriée pour chaque problème rencontré par le programme.</p>
-<p>La librairie java offre déjà de nombreuses exceptions qu’on peut réutiliser quand on en a besoin.</p>
-<p>Si on souhaite être plus précis : on peut aussi créer nos propres objets qui héritent de la classe <code>Exception</code> (ou d’une de ses sous classes)</p>
+<h2 id="enfin-on-peut-créer-ses-propres-exceptions">Enfin : on peut
+créer ses propres exceptions</h2>
+<p>Le but est de lever l’exception appropriée pour chaque problème
+rencontré par le programme.</p>
+<p>La librairie java offre déjà de nombreuses exceptions qu’on peut
+réutiliser quand on en a besoin.</p>
+<p>Si on souhaite être plus précis : on peut aussi créer nos propres
+objets qui héritent de la classe <code>Exception</code> (ou d’une de ses
+sous classes)</p>
 </div>
 <div class="slide section level1">
 
 <h2 id="exemple">Exemple</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> MyProblemException <span class="kw">extends</span> <span class="bu">IOException</span> {</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>    <span class="kw">public</span> <span class="fu">MyProblemException</span>()  </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>       {  </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>           <span class="kw">super</span>();  </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>       }  </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a>       <span class="kw">public</span> <span class="fu">MyProblemException</span>(<span class="bu">String</span> message)  </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a>       {  </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a>           <span class="kw">super</span>(message);  </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true"></a>       }  </span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true"></a>       <span class="kw">public</span> <span class="fu">MyProblemException</span>(<span class="bu">Throwable</span> cause)  </span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true"></a>       {  </span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true"></a>           <span class="kw">super</span>(cause);  </span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true"></a>       }  </span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true"></a>       <span class="kw">public</span> <span class="fu">MyProblemException</span>(<span class="bu">String</span> message, <span class="bu">Throwable</span> cause) </span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true"></a>       {  </span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true"></a>           <span class="kw">super</span>(message, cause);  </span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true"></a>       }  </span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> MyProblemException <span class="kw">extends</span> <span class="bu">IOException</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">MyProblemException</span><span class="op">()</span>  </span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>       <span class="op">{</span>  </span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>           <span class="kw">super</span><span class="op">();</span>  </span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>       <span class="op">}</span>  </span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>       <span class="kw">public</span> <span class="fu">MyProblemException</span><span class="op">(</span><span class="bu">String</span> message<span class="op">)</span>  </span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>       <span class="op">{</span>  </span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>           <span class="kw">super</span><span class="op">(</span>message<span class="op">);</span>  </span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>       <span class="op">}</span>  </span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>       <span class="kw">public</span> <span class="fu">MyProblemException</span><span class="op">(</span><span class="bu">Throwable</span> cause<span class="op">)</span>  </span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>       <span class="op">{</span>  </span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>           <span class="kw">super</span><span class="op">(</span>cause<span class="op">);</span>  </span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>       <span class="op">}</span>  </span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>       <span class="kw">public</span> <span class="fu">MyProblemException</span><span class="op">(</span><span class="bu">String</span> message<span class="op">,</span> <span class="bu">Throwable</span> cause<span class="op">)</span> </span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>       <span class="op">{</span>  </span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>           <span class="kw">super</span><span class="op">(</span>message<span class="op">,</span> cause<span class="op">);</span>  </span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>       <span class="op">}</span>  </span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 </body>
 </html>

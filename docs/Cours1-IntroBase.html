@@ -11,13 +11,24 @@
   <style type="text/css">
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
     div.sourceCode { margin: 1em 0; }
     pre.sourceCode { margin: 0; }
@@ -52,7 +63,7 @@
     code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
     code span.at { color: #7d9029; } /* Attribute */
     code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { } /* BuiltIn */
+    code span.bu { color: #008000; } /* BuiltIn */
     code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #4070a0; } /* Char */
     code span.cn { color: #880000; } /* Constant */
@@ -65,7 +76,7 @@
     code span.ex { } /* Extension */
     code span.fl { color: #40a070; } /* Float */
     code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
     code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
     code span.kw { color: #007020; font-weight: bold; } /* Keyword */
     code span.op { color: #666666; } /* Operator */
@@ -94,25 +105,47 @@ Viviane Pons
   </p>
   <p class="date">Master BIBS Université Paris-Saclay</p>
 </div>
-<div id="introduction-la-programmation-objet" class="slide section level1">
+<div id="introduction-la-programmation-objet"
+class="slide section level1">
 <h1>Introduction : la programmation objet</h1>
 <p>Quoi, comment, pourquoi</p>
-<h2 id="que-signifie-programmation-orientée-objet">Que signifie “Programmation Orientée Objet” ?</h2>
-<div class="incremental">
-<p>C’est un <strong>paradigme de programmation</strong> c’est à dire une façon d’approcher la programmation informatique et la résolution de problèmes</p>
-</div>
-<div class="incremental">
-<p>Exemples d’autres paradigme : programmation impérative (C, Pascal, Basic, …) , programmation fonctionnelle (Lisp, Haskell, OCaml, …)</p>
-</div>
+<h2 id="que-signifie-programmation-orientée-objet">Que signifie
+“Programmation Orientée Objet” ?</h2>
+<p>. . .</p>
+<p>C’est un <strong>paradigme de programmation</strong> c’est à dire une
+façon d’approcher la programmation informatique et la résolution de
+problèmes</p>
+<p>. . .</p>
+<p>Exemples d’autres paradigme : programmation impérative (C, Pascal,
+Basic, …) , programmation fonctionnelle (Lisp, Haskell, OCaml, …)</p>
 </div>
 <div class="slide section level1">
 
 <h2 id="quand">Quand ?</h2>
-<p>Vers la fin des années 60, sur les travaux d’<a href="https://fr.wikipedia.org/wiki/Alan_Kay">Alan Kay</a> et avec l’apparition du langage <a href="https://fr.wikipedia.org/wiki/Smalltalk">Smalltalk</a> rendu public en 1980</p>
-<p><img src="media/Alan_Kay.jpg" class="image" height="50" alt="Picture of Alan Kay" /> <img src="media/Dan_Ingalls.jpg" class="image" height="50" alt="Picture of Dan Ingalls" /> <img src="media/Adele_Goldberg.jpg" class="image" height="50" alt="Picture of Adele Goldberg" /></p>
-<p>3 des créateurs-trices du langage Smalltalk : Alan Kay, Dan Ingalls et Adele Goldberg</p>
+<p>Vers la fin des années 60, sur les travaux d’<a
+href="https://fr.wikipedia.org/wiki/Alan_Kay">Alan Kay</a> et avec
+l’apparition du langage <a
+href="https://fr.wikipedia.org/wiki/Smalltalk">Smalltalk</a> rendu
+public en 1980</p>
+<p><img src="media/Alan_Kay.jpg" class="image" height="50"
+alt="Picture of Alan Kay" /> <img src="media/Dan_Ingalls.jpg"
+class="image" height="50" alt="Picture of Dan Ingalls" /> <img
+src="media/Adele_Goldberg.jpg" class="image" height="50"
+alt="Picture of Adele Goldberg" /></p>
+<p>3 des créateurs-trices du langage Smalltalk : Alan Kay, Dan Ingalls
+et Adele Goldberg</p>
 <div class="small">
-<p><em><a href="https://commons.wikimedia.org/wiki/File:Alan_Kay_-_Receiving_the_Kyoto_Prize.jpg">Alan Kay receiving the Kyoto Prize</a> by Ryan Johnson under <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC-BY-SA-4.0</a> – <a href="https://commons.wikimedia.org/wiki/File:Dan_Ingalls.jpg">Dan Ingalls</a> under <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">CC-BY-SA-3.0</a> – <a href="https://commons.wikimedia.org/wiki/File:Adele_Goldberg_at_PyCon_2007.jpg">Adele Goldberg at PyCon 2007</a> by Terry Hancock under <a href="https://creativecommons.org/licenses/by-sa/2.5/deed.en">CC-BY-SA-2.5</a></em></p>
+<p><em><a
+href="https://commons.wikimedia.org/wiki/File:Alan_Kay_-_Receiving_the_Kyoto_Prize.jpg">Alan
+Kay receiving the Kyoto Prize</a> by Ryan Johnson under <a
+href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC-BY-SA-4.0</a>
+– <a href="https://commons.wikimedia.org/wiki/File:Dan_Ingalls.jpg">Dan
+Ingalls</a> under <a
+href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">CC-BY-SA-3.0</a>
+– <a
+href="https://commons.wikimedia.org/wiki/File:Adele_Goldberg_at_PyCon_2007.jpg">Adele
+Goldberg at PyCon 2007</a> by Terry Hancock under <a
+href="https://creativecommons.org/licenses/by-sa/2.5/deed.en">CC-BY-SA-2.5</a></em></p>
 </div>
 </div>
 <div class="slide section level1">
@@ -121,7 +154,8 @@ Viviane Pons
 <ul>
 <li>Organisation de l’information</li>
 <li>Une conception proche de l’humain (plus haut niveau)</li>
-<li><strong>encapsulation</strong> : séparée la structure interne de la donnée et sa manipulation externe</li>
+<li><strong>encapsulation</strong> : séparée la structure interne de la
+donnée et sa manipulation externe</li>
 </ul>
 </div>
 <div class="slide section level1">
@@ -134,7 +168,8 @@ Viviane Pons
         
     return ??
 }</code></pre>
-<p>Quel type de valeur renvoyer ? Comment s’assurer de la cohérence du programme ? Où faire la simplification ?</p>
+<p>Quel type de valeur renvoyer ? Comment s’assurer de la cohérence du
+programme ? Où faire la simplification ?</p>
 </div>
 <div class="slide section level1">
 
@@ -152,27 +187,36 @@ Viviane Pons
 <div class="slide section level1">
 
 <p>La solution objet</p>
-<p><a href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/code/Rational.java">le fichier code ici</a></p>
+<p><a
+href="https://raw.githubusercontent.com/VivianePons/JavaBIBS/main/code/Rational.java">le
+fichier code ici</a></p>
 <p><img src="media/rational.png" style="height:50.0%" /></p>
 </div>
 <div class="slide section level1">
 
 <h2 id="quels-langages">Quels Langages ?</h2>
-<p>Smalltalk (1980), Common List (1984), C++ (1985), Object Pascal (1986), Python (1991), PHP (1994), <strong>Java (1995)</strong>, JavaScript (1996), C# (2001), …</p>
+<p>Smalltalk (1980), Common List (1984), C++ (1985), Object Pascal
+(1986), Python (1991), PHP (1994), <strong>Java (1995)</strong>,
+JavaScript (1996), C# (2001), …</p>
 </div>
 <div id="java" class="slide section level1">
 <h1>Java</h1>
 <h2 id="petit-historique">Petit historique</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
-<p><img src="media/java.png" style="width:50.0%" alt="Logo Java" /><br />
+<p><img src="media/java.png" style="width:50.0%"
+alt="Logo Java" /><br />
 </p>
 </div><div class="column" style="width:70%;">
 <ul>
-<li>Développé en 1995 par Sun pour répondre à des questions de <strong>portabilité</strong> et <strong>sécurité</strong> puis racheté par Oracle (2009)</li>
+<li>Développé en 1995 par Sun pour répondre à des questions de
+<strong>portabilité</strong> et <strong>sécurité</strong> puis racheté
+par Oracle (2009)</li>
 <li>Langage de programmation libre depuis 2006</li>
 <li>Syntaxe inspirée du C</li>
-<li>Un des langages les plus utilisés d’après le <a href="https://redmonk.com/sogrady/2022/10/20/language-rankings-6-22/">classement RedMonk</a></li>
+<li>Un des langages les plus utilisés d’après le <a
+href="https://redmonk.com/sogrady/2022/10/20/language-rankings-6-22/">classement
+RedMonk</a></li>
 </ul>
 </div>
 </div>
@@ -180,28 +224,35 @@ Viviane Pons
 <div class="slide section level1">
 
 <h2 id="comment-ça-marche">Comment ça marche ?</h2>
-<p>Rappel : un processeur ne sait exécuter que des <strong>fichiers binaires</strong> qui correspondent à des instructions machines</p>
-<p><strong>Comment passer d’un programme à des instructions machines ?</strong></p>
-<div class="incremental">
+<p>Rappel : un processeur ne sait exécuter que des <strong>fichiers
+binaires</strong> qui correspondent à des instructions machines</p>
+<p><strong>Comment passer d’un programme à des instructions machines
+?</strong></p>
+<p>. . .</p>
 <ul>
 <li>En compilant ! (Cobol, Fortran, C, C++, Pascal, OCaml)</li>
-<li>En interprétant ! (Langages de scripts tels que : bash, pearl, python, PHP)</li>
+<li>En interprétant ! (Langages de scripts tels que : bash, pearl,
+python, PHP)</li>
 </ul>
-</div>
-<div class="incremental">
+<p>. . .</p>
 <p><strong>Et Java alors ?</strong></p>
-</div>
 </div>
 <div class="slide section level1">
 
-<h2 id="java-est-un-langage-intermédiaire">Java est un langage intermédiaire :</h2>
+<h2 id="java-est-un-langage-intermédiaire">Java est un langage
+intermédiaire :</h2>
 <div>
 <ul class="incremental">
-<li><p>Étape 1 : code écrit dans un fichier <code>mycode.java</code></p></li>
-<li><p>Étape 2 : code <strong>compilé</strong> par <code>javac</code></p>
+<li><p>Étape 1 : code écrit dans un fichier
+<code>mycode.java</code></p></li>
+<li><p>Étape 2 : code <strong>compilé</strong> par
+<code>javac</code></p>
 <p><code>javac mycode.java</code></p>
-<p>Le compilateur produit un fichier <code>mycode.class</code> en <strong>Byte code</strong> (spécifique à Java). Ce n’est pas un exécutable</p></li>
-<li><p>Étape 3 : Byte code <strong>interprété</strong> par la <strong>machine Java</strong></p>
+<p>Le compilateur produit un fichier <code>mycode.class</code> en
+<strong>Byte code</strong> (spécifique à Java). Ce n’est pas un
+exécutable</p></li>
+<li><p>Étape 3 : Byte code <strong>interprété</strong> par la
+<strong>machine Java</strong></p>
 <p><code>java mycode</code></p></li>
 </ul>
 </div>
@@ -213,18 +264,27 @@ Viviane Pons
 <div class="column" style="width:50%;">
 <h3 id="avantages-portabilité">Avantages : portabilité</h3>
 <ul>
-<li><strong>langage interprété</strong> : Un code unique quelque soit la plateforme : allocations mémoires, sécurité, spécificités des plateformes gérées par la machine java</li>
-<li><strong>langage interprété</strong> : Des fichiers “compilés” <code>.class</code> similaires d’une plateforme à l’autre</li>
-<li><strong>langage compilé</strong> : contrairement à un langage purement interprété, on ne partage cependant pas le code</li>
-<li><strong>langage compilé</strong> : vérification statique de la cohérence du code</li>
+<li><strong>langage interprété</strong> : Un code unique quelque soit la
+plateforme : allocations mémoires, sécurité, spécificités des
+plateformes gérées par la machine java</li>
+<li><strong>langage interprété</strong> : Des fichiers “compilés”
+<code>.class</code> similaires d’une plateforme à l’autre</li>
+<li><strong>langage compilé</strong> : contrairement à un langage
+purement interprété, on ne partage cependant pas le code</li>
+<li><strong>langage compilé</strong> : vérification statique de la
+cohérence du code</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <h3 id="inconvénients">Inconvénients :</h3>
 <ul>
-<li><strong>langage interprété</strong> : moins de contrôle bas niveau</li>
-<li><strong>langage interprété</strong> : moins rapide qu’un langage directement compilé</li>
-<li><strong>langage interprété</strong> : nécessite une installation sur la machine cliente</li>
-<li><strong>langage compilé</strong> : pas la souplesse d’un langage interprété</li>
+<li><strong>langage interprété</strong> : moins de contrôle bas
+niveau</li>
+<li><strong>langage interprété</strong> : moins rapide qu’un langage
+directement compilé</li>
+<li><strong>langage interprété</strong> : nécessite une installation sur
+la machine cliente</li>
+<li><strong>langage compilé</strong> : pas la souplesse d’un langage
+interprété</li>
 </ul>
 </div>
 </div>
@@ -232,23 +292,29 @@ Viviane Pons
 <div class="slide section level1">
 
 <h2 id="démo-mon-premier-code-java">Démo : mon premier code Java</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">public</span> <span class="kw">class</span> HelloWorld {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;Hello World !&quot;</span>);</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>    }</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> HelloWorld <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;Hello World !&quot;</span><span class="op">);</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="slide section level1">
 
-<h2 id="environnement-dexécution-de-développement">Environnement d’exécution / de développement</h2>
-<div class="incremental">
+<h2 id="environnement-dexécution-de-développement">Environnement
+d’exécution / de développement</h2>
+<p>. . .</p>
 <h3 id="pour-exécuter-du-java">Pour exécuter du Java</h3>
-<p>Il faut <strong>JRE</strong> = “Java Runtime Environnement”: contient la machine Java (JVM) et l’API Java de base que nous verrons plus en détail</p>
-<h3 id="pour-compiler-du-java-développer-en-java">Pour compiler du java (développer en Java)</h3>
-<p>Il faut <strong>JDK</strong> = Java Development Kit : contient compilateur <code>javac</code>, javadoc, JRE, …</p>
-</div>
+<p>Il faut <strong>JRE</strong> = “Java Runtime Environnement”: contient
+la machine Java (JVM) et l’API Java de base que nous verrons plus en
+détail</p>
+<p>. . .</p>
+<h3 id="pour-compiler-du-java-développer-en-java">Pour compiler du java
+(développer en Java)</h3>
+<p>Il faut <strong>JDK</strong> = Java Development Kit : contient
+compilateur <code>javac</code>, javadoc, JRE, …</p>
 </div>
 <div class="slide section level1">
 
@@ -256,7 +322,8 @@ Viviane Pons
 <p>Integrated Development Environment</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><img src="media/IntelliJ.png" style="width:40.0%" alt="IntelliJ" /><br />
+<p><img src="media/IntelliJ.png" style="width:40.0%"
+alt="IntelliJ" /><br />
 </p>
 </div><div class="column" style="width:50%;">
 <p>On utilisera <strong>IntelliJ</strong></p>
@@ -273,7 +340,8 @@ Viviane Pons
 </div>
 <div class="slide section level1">
 
-<h2 id="refaisons-hello-world-avec-intellij">Refaisons “Hello World” avec IntelliJ</h2>
+<h2 id="refaisons-hello-world-avec-intellij">Refaisons “Hello World”
+avec IntelliJ</h2>
 <p><em>Démo</em></p>
 <p>Pour lancer InteliJ : tapez la commande</p>
 <pre><code>idea.sh</code></pre>
@@ -289,7 +357,8 @@ Viviane Pons
 <li>les blocs de code sont entre { }</li>
 <li>il y a des ; à la fin des lignes</li>
 </ul>
-<p>Pour le reste… Apprenons par l’exemple, <a href="TP1.html">faisons le TP</a> !</p>
+<p>Pour le reste… Apprenons par l’exemple, <a href="TP1.html">faisons le
+TP</a> !</p>
 </div>
 </body>
 </html>
