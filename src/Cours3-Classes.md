@@ -11,7 +11,11 @@ Comment créer nos propres classes ?
 
 Dans ce cours, on va voir les étapes de création d'une classe en suivant étape par étape [l'exemple suivant](https://github.com/VivianePons/JavaBIBS/tree/main/code/RationalPackage).
 
+::: wrapper
+
 ## Où ? Les packages
+
+:::
 
 . . .
 
@@ -27,9 +31,13 @@ Il pourrait tout à fait exister une autre classe appelée `Scanner` dans un aut
 
 ----
 
+::: wrapper
+
 ## Créer nos propres packages
 
 Jusqu'à présent, nous avons toujours créé une **unique classe** (contenant le main) dans le "default package" (pas de package). **On va arrêter !**
+
+:::
 
 . . .
 

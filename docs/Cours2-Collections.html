@@ -109,12 +109,15 @@ Viviane Pons
 <div id="premiers-objets" class="slide section level1">
 <h1>Premiers Objets</h1>
 <p>Question</p>
-<h2 id="avez-vous-déjà-vu-un-objet">Avez-vous déjà vu un objet ?</h2>
-<p>. . .</p>
+<div id="avez-vous-déjà-vu-un-objet" class="wrapper">
+<h2>Avez-vous déjà vu un objet ?</h2>
+</div>
+<div class="incremental">
 <p>Réponse : OUI, quand vous utilisez un <code>Scanner</code>, une
 chaîne de caractère <code>String</code> ou encore
 <code>System.out</code> , vous utilisez des objets !</p>
 <p><strong>Mais un objet, c’est quoi ?</strong></p>
+</div>
 </div>
 <div class="slide section level1">
 
@@ -375,7 +378,8 @@ donné</li>
 </div>
 <div class="slide section level1">
 
-<h3 id="comment-on-crée-une-liste">Comment on crée une liste ?</h3>
+<div id="comment-on-crée-une-liste" class="wrapper">
+<h3>Comment on crée une liste ?</h3>
 <p><code>Collection</code> et <code>List</code> sont des interfaces, La
 Javadoc nous indique les classes qui les implémentent. Par exemple
 <code>ArrayList</code>.</p>
@@ -383,7 +387,8 @@ Javadoc nous indique les classes qui les implémentent. Par exemple
 <div class="sourceCode" id="cb12"><pre
 class="sourceCode java"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="bu">List</span><span class="op">&lt;</span><span class="bu">Integer</span><span class="op">&gt;</span> maListe <span class="op">=</span> <span class="kw">new</span> <span class="bu">ArrayList</span><span class="op">&lt;</span><span class="bu">Integer</span><span class="op">&gt;();</span></span></code></pre></div>
 <p><strong>Que remarquez vous ?</strong></p>
-<p>. . .</p>
+</div>
+<div class="incremental">
 <ul>
 <li>Les collections sont écrites de façon <strong>générique</strong>, on
 doit spécifier le type d’objet entre <code>&lt;...&gt;</code></li>
@@ -394,6 +399,7 @@ doit spécifier le type d’objet entre <code>&lt;...&gt;</code></li>
 Parce que <code>int</code> n’est pas un objet, on utilise un type
 <strong>wrapper</strong></li>
 </ul>
+</div>
 </div>
 <div class="slide section level1">
 
@@ -435,7 +441,8 @@ class="sourceCode java"><code class="sourceCode java"><span id="cb19-1"><a href=
 </div>
 <div class="slide section level1">
 
-<h3 id="un-détail-très-important">Un “détail” très important</h3>
+<div id="un-détail-très-important" class="wrapper">
+<h3>Un “détail” très important</h3>
 <p>En Java, les variables stockent non pas les objets mais <strong>la
 référence à l’objet</strong> – i.e. l’adresse mémoire.</p>
 <p><strong>Qu’affiche ce code ?</strong></p>
@@ -444,7 +451,8 @@ class="sourceCode java"><code class="sourceCode java"><span id="cb20-1"><a href=
 <span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="bu">List</span><span class="op">&lt;</span><span class="bu">Integer</span><span class="op">&gt;</span> maListe2 <span class="op">=</span> maListe<span class="op">;</span></span>
 <span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>maListe<span class="op">.</span><span class="fu">set</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">4</span><span class="op">);</span></span>
 <span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>maListe2<span class="op">);</span></span></code></pre></div>
-<p>. . .</p>
+</div>
+<div class="incremental">
 <pre><code>[4, 2, 3]</code></pre>
 <p><strong>Pourquoi ?</strong> <code>maListe</code> et
 <code>maListe2</code> sont des <strong>références</strong> au même objet
@@ -455,6 +463,7 @@ class="sourceCode java"><code class="sourceCode java"><span id="cb22-1"><a href=
 <span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>maListe2 <span class="op">=</span> <span class="bu">List</span><span class="op">.</span><span class="fu">copyOf</span><span class="op">(</span>maListe<span class="op">);</span></span>
 <span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>maListe<span class="op">.</span><span class="fu">set</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">4</span><span class="op">);</span></span>
 <span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>maListe2<span class="op">);</span></span></code></pre></div>
+</div>
 </div>
 <div class="slide section level1">
 

@@ -9,7 +9,11 @@ date: Master BIBS Université Paris-Saclay
 
 Question 
 
+::: wrapper
+
 ## Avez-vous déjà vu un objet ?
+
+:::
 
 . . .
 
@@ -280,6 +284,8 @@ Quelques méthodes :
 
 ----
 
+::: wrapper
+
 ### Comment on crée une liste ?
 
 `Collection` et `List` sont des interfaces, La Javadoc nous indique les classes qui les implémentent. Par exemple `ArrayList`.
@@ -291,6 +297,8 @@ List<Integer> maListe = new ArrayList<Integer>();
 ~~~~
 
 **Que remarquez vous ?**
+
+:::
 
 . . .
 
@@ -357,6 +365,8 @@ List<Integer> maListe3 = Arrays.asList(1, 2, 3);
 
 ---- 
 
+::: wrapper
+
 ### Un "détail" très important 
 
 En Java, les variables stockent non pas les objets mais **la référence à l'objet** -- i.e. l'adresse mémoire. 
@@ -369,6 +379,8 @@ List<Integer> maListe2 = maListe;
 maListe.set(0, 4);
 System.out.println(maListe2);
 ~~~~
+
+:::
 
 . . .
 
