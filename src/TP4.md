@@ -13,7 +13,7 @@ L'objectif de ce TP est d'implanter un **système dynamique**, c'est-à-dire un 
 
 L'ensemble du code est disponible dans un [repo indépendant](https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP4_Heritage) (uniquement accessible depuis le réseau de l'université). A partir d'IntelliJ, vous pouvez le récupérer directement en choisissant "New Project from version controll" et en donnant l'URL du repo : `https://gitlab.dsi.universite-paris-saclay.fr/javabibs/TP4_Heritage`.
 
-Si vous n'avez pas accès au réseau de l'université, voici [un lien pour récupérer le code dans un .zip](media/TP4_Heritage-master.zip)
+<!-- Si vous n'avez pas accès au réseau de l'université, voici [un lien pour récupérer le code dans un .zip](media/TP4_Heritage-master.zip) -->
 
 Il est aussi possible d'effectuer un clone avec *git* si vous savez faire (Remarque : nous aurons une séance spéciale sur le fonctionnement de git au début de l'UE Projet de Programmation, pour l'instant ce n'est pas nécessaire).
 
@@ -23,7 +23,7 @@ Une fois le projet récupéré, vous devez avoir un Projet ouvert "TP4_Heritage"
 
 Ouvrez une classe du package `test` : une erreur apparaît. Faites bouton droit sur le mot `junit` écrit en rouge, puis `More actions` et ajoutez **JUnit 5** (attention !! Pas JUnit4 qui est proposé par défaut)
 
-Parfois, l'erreur continue d'être soulignée. Refermez et réouvrez la classe. Si elle est toujours là, ouvrez la classe `FieldSystem` et tentée de l'exécuter. Normalement, l'exécution doit se passer normalement et vous ouvrir une fenêtre blanche avant de lever une exception "Not implemented yet". 
+Parfois, l'erreur continue d'être soulignée. Refermez et réouvrez la classe. Si elle est toujours là, ouvrez la classe `FieldSystem` et tentez de l'exécuter. Normalement, l'exécution doit se passer normalement et vous ouvrir une fenêtre blanche avant de lever une exception "Not implemented yet". 
 
 
 ## Architecture générale

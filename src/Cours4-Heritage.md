@@ -94,7 +94,11 @@ public class PersonWithEmail extends Person {
 
 ----
 
+::: wrapper
+
 ## Polymorphisme
+
+:::
 
 ~~~~{.java}
 Person p1 = new Person("Bob");
