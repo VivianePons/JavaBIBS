@@ -152,7 +152,7 @@ Elle contient aussi des méthodes pour déplacer et redimensionner le rectangle 
 
 L'objectif est maintenant de construire la "vue" et le "contrôleur" qui vont correspondre à ce modèle.
 
-Pour la vue, on commencer par créer une interface `RectangleAppView` qui va lister les méthodes spécifiques dont on aura besoin. Cela va permettre de séparer ce qui correspond à *notre* architecture spécifique et ce qui vient des éléments `Swing`. On garde ainsi un code plus modulaire.
+Pour la vue, on commence par créer une interface `RectangleAppView` qui va lister les méthodes spécifiques dont on aura besoin. Cela va permettre de séparer ce qui correspond à *notre* architecture spécifique et ce qui vient des éléments `Swing`. On garde ainsi un code plus modulaire.
 
 
 ----
