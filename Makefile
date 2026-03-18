@@ -1,10 +1,10 @@
 
 OUTPUTDIR=docs
 
-SSH_HOST=serveur-galac.lisn.upsaclay.fr
+SSH_HOST=pperso.lisn.upsaclay.fr
 SSH_PORT=22
 SSH_USER=pons
-SSH_TARGET_DIR=WWW/static/JavaBIBS
+SSH_TARGET_DIR=webvol/static/JavaBIBS
 
 OUTPUTDIR = docs
 SRC = src
