@@ -2,7 +2,7 @@
 title: 'Cours de Programmation Orientée Objet -- M1 BIBS'
 ---
 
-Toutes les sources (en partciluer les codes java et les exercices corrigés) sont disponibles sur le [depo git](https://github.com/VivianePons/JavaBIBS). 
+Toutes les sources (en particulier les codes java et les exercices corrigés) sont disponibles sur le [depo git](https://github.com/VivianePons/JavaBIBS). 
 
 
 * Cours 1 : intro et bases du langages (séance 1)
