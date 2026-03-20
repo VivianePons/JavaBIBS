@@ -135,7 +135,7 @@ Un `Timer` est en fait relié à un `ActionListener` (comme un bouton), l'action
 Côté vue :
 
 * dans le `initialize` de `SwingFieldView` : ajouter un `ButtonListner` au timer avec l'action `EVOLVE`
-* implanter la méthode `setTimerDelay` dans `SwingFieldView` (qui appelle simplement `timer.setDelay` avec le bon paramètre)
+* implanter la méthode `setLoopDelay` dans `SwingFieldView` (qui appelle simplement `timer.setDelay` avec le bon paramètre)
 * lancer le timer lorsqu'on lance la simulation (`drawSimulationPlayView`) avec `timer.start()` 
 * arrêter le timer quand on met sur pause avec `timer.stop()`
 
