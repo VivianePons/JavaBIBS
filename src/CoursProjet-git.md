@@ -7,7 +7,7 @@ date: Master BIBS Université Paris-Saclay
 
 ## Qu'est-ce que `git` ?
 
-Réponse : un système de gestion de versions. A chaque étape, ce qui est sauvegardé est la *différence* par rapport à la version précédente. On peut donc *revenir en arrière*.
+Réponse : un système de gestion de versions. A chaque étape, on peut voir la *différence* par rapport à la version précédente. On peut *revenir en arrière*.
 
 ## Qu'est-ce que permet `git` ?
 

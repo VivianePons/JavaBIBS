@@ -23,7 +23,7 @@ Cliquez en haut à droite sur "Fork"
 
 Project Informations >> Membres
 
-Ajouter : les autres membres du groupe ainsi que l'enseignante
+Ajouter : les autres membres du groupe ainsi que l'enseignante. Leur donner à tous des droits "Maintainer".
 
 * Viviane Pons
 

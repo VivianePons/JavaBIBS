@@ -21,7 +21,7 @@ Toutes les sources (en particulier les codes java et les exercices corrigés) so
   - [Slides version html](Cours4-Heritage.html)
   - [Slides en version pdf](pdf/Cours4-Heritage.pdf)
   - [TP4](TP4.html)
-* TP Noté : (séance 6)
+* TP Noté : (séance 6) [Corrigé](https://gitlab.dsi.universite-paris-saclay.fr/javabibs/corrige_amazones)
 * Cours 5 : Applications graphiques et design MVC (séances 7 et 8)
   - [Slides version html](Cours5-Graphique.html)
   - [Slides en version pdf](pdf/Cours5-Graphique.pdf)
